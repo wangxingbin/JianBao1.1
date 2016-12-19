@@ -24,7 +24,7 @@
             android:text="拍照"
             android:drawableTop="@mipmap/xiangji"
             android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textSize="18sp"  />
 
         <TextView
             android:layout_margin="10dp"
