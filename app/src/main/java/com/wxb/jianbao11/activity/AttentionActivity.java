@@ -75,7 +75,7 @@ public class AttentionActivity extends Activity {
                                 recyclerview.setVisibility(View.GONE);
                             }
                         });
-                    } else {
+          ``````````          } else {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
