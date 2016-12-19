@@ -9,11 +9,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.wxb.jianbao.R;
-
-import static com.wxb.jianbao11.R.id.btn_pick_photo;
-import static com.wxb.jianbao11.R.id.btn_take_photo;
+import com.wxb.jianbao11.R;
 
 /**
  * Created by Administrator on 2016/12/1.
