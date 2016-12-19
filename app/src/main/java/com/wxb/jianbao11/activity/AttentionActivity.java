@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 public class AttentionActivity extends Activity {
     private TextView barName;
     private ImageView backImage;
-    private RecyclerView recyclerview;
+    //private RecyclerView recyclerview;
     private ImageView iv;
     private ArrayList<ShowBean.DataBean.ListBean> list;
     private Handler mHandler = new Handler();
@@ -35,6 +34,7 @@ public class AttentionActivity extends Activity {
         SharedPreferences sp = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
         token = sp.getString("token", "");
         //initView();
+
         //initData();
         initBack();
         //测试
