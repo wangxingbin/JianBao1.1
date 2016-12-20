@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,8 @@ public class Login extends Activity implements View.OnClickListener{
     private String username;
     private String password;
     private String token;
+    private TextView toolname;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +184,10 @@ public class Login extends Activity implements View.OnClickListener{
 
     }
     private void initview() {
+        toolname = (TextView) findViewById(R.id.bar_tv_name);
+        toolname.setText("登陆");
+        back = (ImageView) findViewById(R.id.bar_iv_back);
+        back.setOnClickListener(this);
         register = (TextView) findViewById(R.id.register);
         register.setOnClickListener(this);
         land = (Button) findViewById(R.id.signin_button);
@@ -215,6 +222,9 @@ public class Login extends Activity implements View.OnClickListener{
                 break;
             case R.id.register:
                 jumpregister();
+                break;
+            case R.id.bar_iv_back:
+                finish();
                 break;
         }
     }
