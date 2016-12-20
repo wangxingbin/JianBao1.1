@@ -1,7 +1,6 @@
 package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -192,7 +191,7 @@ public class Login extends Activity implements View.OnClickListener{
 
 
     private void jumpregister() {
-        startActivity(new Intent(this, Register.class));
+//        startActivity(new Intent(this, Register.class));
     }
 
 

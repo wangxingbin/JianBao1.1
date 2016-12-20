@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wxb.jianbao11.R;
+
 
 /**
  * Created by 诺古 on 2016/12/19.

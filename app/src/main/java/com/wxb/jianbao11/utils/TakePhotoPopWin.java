@@ -9,10 +9,6 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-<<<<<<< HEAD
-
-=======
->>>>>>> bf5cfa4c6218185a98c6281c1cbb72a49fb1e8f0
 import com.wxb.jianbao11.R;
 
 /**
