@@ -42,12 +42,12 @@ public class PhotoPostUtils {
     private static MultipartBody.Builder requestBody;
     private static CacheControl.Builder cacheBuilder=new CacheControl.Builder();
 
-    public static void upLoad(File file, final Context context, String  path, HashMap<String ,String>map, final Type clas){
+    public static void upLoad(File file, final Context context, String  path, String type, HashMap<String ,String>map, final Type clas){
         RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpg"), file);
 
         requestBody = new MultipartBody.Builder();
         requestBody.setType(MultipartBody.FORM);
-        requestBody.addFormDataPart("photo",file.getName(),fileBody);
+        requestBody.addFormDataPart(type,file.getName(),fileBody);
 
         Set<Map.Entry<String ,String>>entries= map.entrySet();
         for (Map.Entry<String,String>entry:entries){
@@ -81,51 +81,5 @@ public class PhotoPostUtils {
                     }
             }
         });
-
-
-    }
-
-
-    public static void upLoadNoCache(File file, final Context context, String  path, HashMap<String ,String>map, final Type clas){
-        RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpg"), file);
-        cacheBuilder.noCache();
-        cacheBuilder.noStore();
-        requestBody = new MultipartBody.Builder();
-        requestBody.setType(MultipartBody.FORM);
-        requestBody.addFormDataPart("photo",file.getName(),fileBody);
-
-        Set<Map.Entry<String ,String>>entries= map.entrySet();
-        for (Map.Entry<String,String>entry:entries){
-            requestBody.addFormDataPart(entry.getKey(),entry.getValue());
-        }
-        MultipartBody build = requestBody.build();
-        Request request = new Request.Builder()
-                .cacheControl(cacheBuilder.build())
-                .url(path)
-                .post(build)
-                .build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()){
-                    String string = response.body().string();
-                    Object o = gson.fromJson(string, clas);
-                    data.setRegisterData(o);
-
-                }
-                else
-                {
-                    Log.e(TAG, "onResponse: "+response.code());
-                }
-            }
-        });
-
-
     }
 }
