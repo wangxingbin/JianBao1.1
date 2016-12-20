@@ -3,7 +3,6 @@
     android:id="@+id/line"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffc"
     android:orientation="vertical">
 
     <FrameLayout
@@ -20,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="5dp">
+        android:paddingTop="5dp" >
 
         <RadioButton
             android:drawablePadding="10dp"
