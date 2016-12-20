@@ -54,7 +54,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_goods,null);
 
         initView(view);
-        initData();
+        initData();//kjckmb
 
         SPZSAdapter adapter=new SPZSAdapter(getActivity(),arrayList);
         listView.setAdapter(adapter);
