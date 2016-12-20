@@ -25,11 +25,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".activity.GuidePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".activity.Camera"></activity>
         <activity android:name=".activity.Login"></activity>
@@ -38,6 +42,7 @@
         <activity android:name=".activity.AttentionActivity"/>
         <activity android:name=".activity.PublishedActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
+
 
     </application>
 
