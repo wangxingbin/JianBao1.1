@@ -18,12 +18,15 @@ public class Contant {
     public static final String TouXiang = MAIN + "/app/user/upload.json";
     // 图片前缀
     public static final String IMGQZ = "http://192.168.4.188/Goods/uploads/";
-
+    //商品列表查询
     public static  final String CHAXUN=MAIN+"/app/item/list.json";
-
+    //商品详情
     public static  final String XIANGQING=MAIN+"/app/item/detail.json";
-
+    //关注
     public static  final String GUANZHU=MAIN+"/app/item/follow.json";
+    //商品状态变更
+    public static  final String BIANGENG=MAIN+"/app/item/modify.json";
+
 
     public static  final  String LAND=MAIN+"/app/common/login.json";
     public  static  final String RESGISTER=MAIN+"/app/common/register.json";
