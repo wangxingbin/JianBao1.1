@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -79,12 +79,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="7dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="2dp" />
+            android:layout_height="5dp" />
 
         <LinearLayout
             android:id="@+id/mine_ll_message"
@@ -105,7 +100,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="个人信息：" />
+                android:text="个人信息" />
 
             <View
                 android:layout_width="0dp"
@@ -123,8 +118,9 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="2dp"
             android:layout_marginTop="2dp" />
 
         <LinearLayout
@@ -146,7 +142,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="我发布的：" />
+                android:text="我发布的" />
 
             <View
                 android:layout_width="0dp"
@@ -165,7 +161,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="2dp"
             android:layout_marginTop="2dp" />
 
         <LinearLayout
@@ -183,11 +179,12 @@
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="我关注的：" />
+                android:text="我关注的" />
 
             <View
                 android:layout_width="0dp"
@@ -203,9 +200,10 @@
                 android:src="@mipmap/ic_launcher" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="2dp"
             android:layout_marginTop="2dp" />
 
         <LinearLayout
@@ -227,7 +225,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="设    置：" />
+                android:text="设    置" />
 
             <View
                 android:layout_width="0dp"
@@ -243,10 +241,12 @@
                 android:src="@mipmap/ic_launcher" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="2dp"
             android:layout_marginTop="2dp" />
+
         <LinearLayout
             android:id="@+id/mine_ll_yindao"
             android:layout_width="match_parent"
@@ -273,21 +273,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <!--<ImageView
-                android:layout_width="30dp"
-
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/ic_launcher" />-->
-
         </LinearLayout>
-
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="2dp"
             android:layout_marginTop="2dp" />
 
         <LinearLayout
@@ -319,12 +309,16 @@
                 android:text="点击显示邀请码" />
         </LinearLayout>
 
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="2dp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="2dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#fff" />
     </LinearLayout>
 
 </ScrollView>
