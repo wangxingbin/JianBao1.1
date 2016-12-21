@@ -1,13 +1,16 @@
 package com.wxb.jianbao11;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.wxb.jianbao11.activity.PublishActivity;
 import com.wxb.jianbao11.fragment.GoodsFragment;
 import com.wxb.jianbao11.fragment.MineFragment;
 
@@ -29,6 +32,13 @@ public class MainActivity extends FragmentActivity {
         transaction.replace(R.id.main_container, contentFragment);
         transaction.commit();
         initEvent();
+        rb_add.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Intent intent = new Intent(MainActivity.this, PublishActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -74,5 +84,7 @@ public class MainActivity extends FragmentActivity {
         rb_goods.setTextColor(Color.parseColor("#a9b7b7"));
         rb_mine.setTextColor(Color.parseColor("#000000"));
     }
+
+
 
 }

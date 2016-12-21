@@ -43,6 +43,9 @@
         <activity android:name=".activity.PublishedActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
 
+        <!--跳转发布界面-->
+        <activity android:name=".activity.PublishActivity"></activity>
+
 
     </application>
 
