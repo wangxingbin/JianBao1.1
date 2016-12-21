@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.LandBeen;
 import com.wxb.jianbao11.contants.Contant;
@@ -45,6 +46,8 @@ public class Login extends Activity implements View.OnClickListener{
     private String token;
     private TextView toolname;
     private ImageView back;
+    private TextView suiyi;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +134,7 @@ public class Login extends Activity implements View.OnClickListener{
                         public void run() {
                             CustomProgress.dissPrgress();
                             ShowToastUtils.showToast(Login.this,"登陆成功");
+                            startActivity(new Intent(Login.this, MainActivity.class));
                             finish();
                         }
                     });
@@ -165,10 +169,10 @@ public class Login extends Activity implements View.OnClickListener{
                 LandBeen.DataBean data = landBeen.getData();
 
                 int state = data.getState();
-                String token = landBeen.getToken();
+                token = landBeen.getToken();
                 SharedPreferences share= getSharedPreferences("TOKEN",MODE_PRIVATE);
                 SharedPreferences.Editor edit = share.edit();
-                edit.putString("token", Login.this.token);
+                edit.putString("token", token);
                 edit.commit();
 
             }
@@ -182,6 +186,8 @@ public class Login extends Activity implements View.OnClickListener{
 
     }
     private void initview() {
+        suiyi = (TextView) findViewById(R.id.suiyi);
+        suiyi.setOnClickListener(this);
         toolname = (TextView) findViewById(R.id.bar_tv_name);
         toolname.setText("登陆");
         back = (ImageView) findViewById(R.id.bar_iv_back);
@@ -223,6 +229,9 @@ public class Login extends Activity implements View.OnClickListener{
                 break;
             case R.id.bar_iv_back:
                 finish();
+                break;
+            case R.id.suiyi:
+               startActivity(new Intent(Login.this, MainActivity.class));
                 break;
         }
     }

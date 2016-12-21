@@ -1,7 +1,9 @@
 package com.wxb.jianbao11.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
@@ -28,6 +31,7 @@ import com.wxb.jianbao11.activity.AttentionActivity;
 import com.wxb.jianbao11.activity.MessageActivity;
 import com.wxb.jianbao11.activity.PublishedActivity;
 import com.wxb.jianbao11.activity.SettingsActivity;
+import com.wxb.jianbao11.bean.CodeBeen;
 import com.wxb.jianbao11.bean.GeRenXinxi;
 import com.wxb.jianbao11.bean.Uphoto;
 import com.wxb.jianbao11.contants.Contant;
@@ -70,7 +74,7 @@ public class MineFragment extends Fragment {
     LinearLayout mineLlYindao;
     @InjectView(R.id.mine_tv_invitationCode)
     TextView mineTvInvitationCode;
-    private String token = "6DB42CEA16AD40758981F39042082CE4";
+    private String token;
     private TakePhotoPopWin photoPopWin;
     private String facePath;
     private String TouXPath = Contant.TouXiang;
@@ -93,9 +97,11 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.inject(this, view);
-        //SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
-        //token = sp.getString("token", "");
-        CustomProgress.getPrgressDolilog(getActivity(),"正在加载","请稍后...");
+        SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        token = sp.getString("token", "");
+        map = new HashMap<>();
+        map.put("token", token);
+        CustomProgress.getPrgressDolilog(getActivity(), "正在加载", "请稍后...");
         initData();
         facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
         return view;
@@ -109,37 +115,38 @@ public class MineFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        map = new HashMap<>();
-        map.put("token",token);
         // 拍照后获取返回值，这里获取到的是原始图片。
-        if (requestCode == PHOTO_REQUEST_CAREMA && resultCode == Activity.RESULT_OK){
-           /* mHandler.postDelayed(new Runnable() {
+        if (requestCode == PHOTO_REQUEST_CAREMA && resultCode == Activity.RESULT_OK) {
+  /*          mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {*/
-                    File file = new File(facePath);
-                    Uri uri = Uri.fromFile(file);
-                    mineIvPhoto.setImageURI(uri);
-                    upLoadFaceIcon(file);
-              /*  }
+            File file = new File(facePath);
+            Uri uri = Uri.fromFile(file);
+            mineIvPhoto.setImageURI(uri);
+            upLoadFaceIcon(file);
+/*                }
             }, 500);*/
-        }else if (requestCode == PHOTO_REQUEST_GALLERY && requestCode == Activity.RESULT_OK){
-            if (photoPopWin.isShowing()){
+        } else if (requestCode == PHOTO_REQUEST_GALLERY) {
+            if (photoPopWin.isShowing()) {
                 photoPopWin.dismiss();
             }
-            if (data != null){
+            if (data != null) {
                 originalUri = data.getData();
                 selecImaPath = originalUri.toString();
-            }else {
-                String[] proj = {MediaStore.Images.Media.DATA};
-                Cursor cursor = getActivity().managedQuery(originalUri, proj, null, null, null);
-                if (cursor != null && cursor.moveToFirst()){
-                    String string = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
-                    //按我个人理解 这个是获得用户选择的图片的索引值
-                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    //将光标移至开头 ，这个很重要，不小心很容易引起越界
-                    cursor.moveToFirst();
-                    //最后根据索引值获取图片路径
-                    selecImaPath = cursor.getString(column_index);
+                if (selecImaPath.startsWith("file:///s")) {
+
+                } else {
+                    String[] proj = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = getActivity().managedQuery(originalUri, proj, null, null, null);
+                    if (cursor != null && cursor.moveToFirst()) {
+                        String string = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+                        //按我个人理解 这个是获得用户选择的图片的索引值
+                        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                        //将光标移至开头 ，这个很重要，不小心很容易引起越界
+                        cursor.moveToFirst();
+                        //最后根据索引值获取图片路径
+                        selecImaPath = cursor.getString(column_index);
+                    }
                 }
                 mHandler.postDelayed(new Runnable() {
                     @Override
@@ -151,7 +158,11 @@ public class MineFragment extends Fragment {
                     }
                 }, 500);
             }
-        }else if (requestCode == PHOTO_REQUEST_CUT) {
+
+        } else if (requestCode == PHOTO_REQUEST_CUT) {
+            if (photoPopWin.isShowing()) {
+                photoPopWin.dismiss();
+            }
             mineIvPhoto.setImageURI(imageFile.getAbsolutePath());
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -179,6 +190,7 @@ public class MineFragment extends Fragment {
                 //startActivity(new Intent(getActivity(),));
                 break;
             case R.id.mine_tv_invitationCode:
+                initIn();
                 break;
         }
     }
@@ -186,8 +198,6 @@ public class MineFragment extends Fragment {
     // 个人信息
     private void initData() {
         final String path = Contant.GeRenXinXi;
-        HashMap<String, String> map = new HashMap<>();
-        map.put("token", token);
         MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
 
             private String mobile;
@@ -203,7 +213,6 @@ public class MineFragment extends Fragment {
             @Override
             public void onFailure() {
 
-
             }
 
             @Override
@@ -214,7 +223,7 @@ public class MineFragment extends Fragment {
 
                 GeRenXinxi geRenXinxi = (GeRenXinxi) o;
                 // progressbar dismiss
-                if (geRenXinxi.getStatus().equals("200")){
+                if (geRenXinxi.getStatus().equals("200")) {
                     CustomProgress.dissPrgress();
                 }
                 mobile = geRenXinxi.getData().getMobile();
@@ -223,9 +232,9 @@ public class MineFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (photo ==null || photo.isEmpty()){
+                        if (photo == null || photo.isEmpty()) {
                             mineIvPhoto.setImageResource(R.mipmap.ic_launcher);
-                        }else if (!photo.isEmpty() || photo != null) {
+                        } else if (!photo.isEmpty() || photo != null) {
                             String path = Contant.IMGQZ + photo;
                             Uri imgurl = Uri.parse(path);
                             clearCache(imgurl);
@@ -256,15 +265,16 @@ public class MineFragment extends Fragment {
 
         imagePipeline.clearCaches();
     }
+
     // 相册
     private void pictureschose() {
         Intent intent = new Intent();
-         //开启Pictures画面Type设定为image
-        intent.setType("image");
-         //使用Intent.ACTION_GET_CONTENT这个Action
+        /* 开启Pictures画面Type设定为image */
+        intent.setType("image/*");
+        /* 使用Intent.ACTION_GET_CONTENT这个Action */
         intent.setAction(Intent.ACTION_GET_CONTENT);
 
-         //取得相片后返回本画面
+        /* 取得相片后返回本画面 */
         startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
     }
 
@@ -295,19 +305,7 @@ public class MineFragment extends Fragment {
                 }
             }
         });
-        PhotoPostUtils.upLoad(file, getActivity(), TouXPath, "photo",map, Uphoto.class);
-    }
-
-    /*
-  * 判断sdcard是否存在
-  */
-    private boolean hasSdcard() {
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            return true;
-        } else {
-            return false;
-        }
+        PhotoPostUtils.upLoad(file, getActivity(), TouXPath, "photo", map, Uphoto.class);
     }
 
     private void requestImage(String url) {
@@ -342,5 +340,84 @@ public class MineFragment extends Fragment {
             }
         }
     };
+
+    // 邀请码
+    public void initIn() {
+        String path = Contant.InvitationCode;
+        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack()  {
+
+            private int state;
+            private String code;
+
+            @Override
+            public void loading() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void onSuccess(Object o) {
+                if (o == null || !(o instanceof CodeBeen)) {
+                    return;
+                }
+                CodeBeen codeBeen = (CodeBeen) o;
+                String status = codeBeen.getStatus();
+                if (status.equals("200")) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "获取邀请码成功", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "获取邀请码失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+                CodeBeen.DataBean data = codeBeen.getData();
+                if (data == null) {
+                    return;
+                }
+
+                code = data.getCode();
+
+                state = data.getState();
+
+                if (state == 0) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mineTvInvitationCode.setText(code);
+                            mineTvInvitationCode.setTextColor(getResources().getColor(R.color.black));
+                            mineTvInvitationCode.setTextIsSelectable(true);
+                        }
+                    });
+                } else if (state == 1) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mineTvInvitationCode.setText(code + " 已失效");
+                            mineTvInvitationCode.setTextColor(getResources().getColor(R.color.red));
+                            mineTvInvitationCode.setTextIsSelectable(false);
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        },CodeBeen.class);
+    }
 
 }
