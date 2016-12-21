@@ -48,6 +48,7 @@ public class Login extends Activity implements View.OnClickListener{
     private ImageView back;
     private TextView suiyi;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,10 +169,10 @@ public class Login extends Activity implements View.OnClickListener{
                 LandBeen.DataBean data = landBeen.getData();
 
                 int state = data.getState();
-                String token = landBeen.getToken();
+                token = landBeen.getToken();
                 SharedPreferences share= getSharedPreferences("TOKEN",MODE_PRIVATE);
                 SharedPreferences.Editor edit = share.edit();
-                edit.putString("token", Login.this.token);
+                edit.putString("token", token);
                 edit.commit();
 
             }
