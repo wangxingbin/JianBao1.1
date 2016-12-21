@@ -42,6 +42,8 @@
         <activity android:name=".activity.AttentionActivity"/>
         <activity android:name=".activity.PublishedActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
+        <activity android:name=".activity.SousuoActivity"/>
+        <activity android:name=".activity.SSLBActivity"/>
 
 
     </application>
