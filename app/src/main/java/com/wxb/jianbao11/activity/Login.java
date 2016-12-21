@@ -53,8 +53,6 @@ public class Login extends Activity implements View.OnClickListener{
         initview();
         remberpsna();
         checklister();
-
-
     }
 
     private void checklister() {

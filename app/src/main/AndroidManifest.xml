@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
     <application
+        android:name=".app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -37,6 +38,10 @@
         <activity android:name=".activity.Camera"></activity>
         <activity android:name=".activity.Login"></activity>
         <activity android:name=".activity.Register"></activity>
+        <activity android:name=".activity.MessageActivity"/>
+        <activity android:name=".activity.AttentionActivity"/>
+        <activity android:name=".activity.PublishedActivity"/>
+        <activity android:name=".activity.SettingsActivity"/>
 
 
     </application>
