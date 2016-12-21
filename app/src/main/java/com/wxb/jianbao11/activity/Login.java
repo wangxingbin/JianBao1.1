@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.LandBeen;
 import com.wxb.jianbao11.contants.Contant;
@@ -45,6 +46,7 @@ public class Login extends Activity implements View.OnClickListener{
     private String token;
     private TextView toolname;
     private ImageView back;
+    private TextView suiyi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,6 +184,8 @@ public class Login extends Activity implements View.OnClickListener{
 
     }
     private void initview() {
+        suiyi = (TextView) findViewById(R.id.suiyi);
+        suiyi.setOnClickListener(this);
         toolname = (TextView) findViewById(R.id.bar_tv_name);
         toolname.setText("登陆");
         back = (ImageView) findViewById(R.id.bar_iv_back);
@@ -223,6 +227,9 @@ public class Login extends Activity implements View.OnClickListener{
                 break;
             case R.id.bar_iv_back:
                 finish();
+                break;
+            case R.id.suiyi:
+               startActivity(new Intent(Login.this, MainActivity.class));
                 break;
         }
     }

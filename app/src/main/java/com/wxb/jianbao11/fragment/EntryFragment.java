@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.activity.GuidePageActivity;
 import com.wxb.jianbao11.R;
+import com.wxb.jianbao11.activity.Login;
 
 /**
  * Created by 诺古 on 2016/12/20.
@@ -25,7 +26,7 @@ public class EntryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 GuidePageActivity activity = (GuidePageActivity) getActivity();
-                Intent intent = new Intent(activity,MainActivity.class);
+                Intent intent = new Intent(activity,Login.class);
                 startActivity(intent);
                 activity.entryApp();
             }
