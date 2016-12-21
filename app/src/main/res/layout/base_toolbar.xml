@@ -5,7 +5,8 @@
     android:orientation="horizontal"
     android:gravity="center"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:background="@color/white">
     <ImageView
         android:clickable="true"
         android:id="@+id/bar_iv_back"
