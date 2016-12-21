@@ -77,11 +77,11 @@ public class ImageCompressUtil {
 
         if (TextUtils.isEmpty(filePath))
             return filePath;
-//判断路径是否存在
+        //判断路径是否存在
         File file = new File(filePath);
         if (!file.exists())
             return filePath;
-//文件是否为空
+        //文件是否为空
         if (file.length() < 1)
             return null;
 
