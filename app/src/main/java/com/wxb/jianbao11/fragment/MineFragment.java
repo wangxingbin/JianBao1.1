@@ -1,7 +1,9 @@
 package com.wxb.jianbao11.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -72,7 +74,7 @@ public class MineFragment extends Fragment {
     LinearLayout mineLlYindao;
     @InjectView(R.id.mine_tv_invitationCode)
     TextView mineTvInvitationCode;
-    private String token = "8E48A07D01094459A83E1D7214599E64";
+    private String token;
     private TakePhotoPopWin photoPopWin;
     private String facePath;
     private String TouXPath = Contant.TouXiang;
@@ -95,8 +97,8 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.inject(this, view);
-        //SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
-        //token = sp.getString("token", "");
+        SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        token = sp.getString("token", "");
         map = new HashMap<>();
         map.put("token", token);
         CustomProgress.getPrgressDolilog(getActivity(), "正在加载", "请稍后...");

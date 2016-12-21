@@ -1,6 +1,8 @@
 package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,7 +44,7 @@ public class MessageActivity extends Activity {
     @InjectView(R.id.message_tv_time)
     TextView messageTvTime;
     private Map map;
-    private String token = "8E48A07D01094459A83E1D7214599E64";
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,8 @@ public class MessageActivity extends Activity {
         setContentView(R.layout.activity_message);
         ButterKnife.inject(this);
         barTvName.setText("个人信息");
-        //SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
-        //token = sp.getString("token", "");
+        SharedPreferences sp = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        token = sp.getString("token", "");
         map = new HashMap<>();
         map.put("token", token);
         initData();
