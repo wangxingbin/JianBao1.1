@@ -133,6 +133,7 @@ public class Login extends Activity implements View.OnClickListener{
                         public void run() {
                             CustomProgress.dissPrgress();
                             ShowToastUtils.showToast(Login.this,"登陆成功");
+                            startActivity(new Intent(Login.this, MainActivity.class));
                             finish();
                         }
                     });
