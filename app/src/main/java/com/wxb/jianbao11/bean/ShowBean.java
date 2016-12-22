@@ -1,7 +1,5 @@
 package com.wxb.jianbao11.bean;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2016/12/19.
  */
@@ -16,7 +14,7 @@ public class ShowBean {
 
     private String status;
     private String info;
-    private DataBean data;
+    private Goods data;
 
     public String getStatus() {
         return status;
@@ -34,103 +32,13 @@ public class ShowBean {
         this.info = info;
     }
 
-    public DataBean getData() {
+    public Goods getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setData(Goods data) {
         this.data = data;
     }
 
-    public static class DataBean {
-        /**
-         * size : 1
-         * list : [{"id":111,"title":"1","image":"111_0.jpg","price":"1","issue_time":"2016-12-06 11:23:12","state":0}]
-         */
-
-        private int size;
-        private List<ListBean> list;
-
-        public int getSize() {
-            return size;
-        }
-
-        public void setSize(int size) {
-            this.size = size;
-        }
-
-        public List<ListBean> getList() {
-            return list;
-        }
-
-        public void setList(List<ListBean> list) {
-            this.list = list;
-        }
-
-        public static class ListBean {
-            /**
-             * id : 111
-             * title : 1
-             * image : 111_0.jpg
-             * price : 1
-             * issue_time : 2016-12-06 11:23:12
-             * state : 0
-             */
-
-            private int id;
-            private String title;
-            private String image;
-            private String price;
-            private String issue_time;
-            private int state;
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public String getImage() {
-                return image;
-            }
-
-            public void setImage(String image) {
-                this.image = image;
-            }
-
-            public String getPrice() {
-                return price;
-            }
-
-            public void setPrice(String price) {
-                this.price = price;
-            }
-
-            public String getIssue_time() {
-                return issue_time;
-            }
-
-            public void setIssue_time(String issue_time) {
-                this.issue_time = issue_time;
-            }
-
-            public int getState() {
-                return state;
-            }
-
-            public void setState(int state) {
-                this.state = state;
-            }
-        }
-    }
+    
 }

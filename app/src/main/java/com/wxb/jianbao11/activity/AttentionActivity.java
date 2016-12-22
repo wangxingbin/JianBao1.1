@@ -5,15 +5,24 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wxb.jianbao11.R;
-import com.wxb.jianbao11.bean.ShowBean;
+import com.wxb.jianbao11.adapter.MyRecyclerAdapter;
+import com.wxb.jianbao11.bean.CheckPublished;
+import com.wxb.jianbao11.contants.Contant;
+import com.wxb.jianbao11.utils.MyCallBack;
+import com.wxb.jianbao11.utils.MyOkhttp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2016/11/30.
@@ -24,7 +33,7 @@ public class AttentionActivity extends Activity {
     private ImageView backImage;
     private RecyclerView recyclerview;
     private ImageView iv;
-    private ArrayList<ShowBean.DataBean.ListBean> list;
+    private ArrayList<CheckPublished> list;
     private Handler mHandler = new Handler();
     private String token;
 
@@ -34,8 +43,8 @@ public class AttentionActivity extends Activity {
         setContentView(R.layout.activity_attention);
         SharedPreferences sp = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
         token = sp.getString("token", "");
-        //initView();
-        //initData();
+        initView();
+        initData();
         initBack();
         //测试
     }
@@ -49,23 +58,73 @@ public class AttentionActivity extends Activity {
         });
     }
 
-    /*private void initData() {
+    private void initData() {
         String curPage = "1";
-        String PATH = Contant.GuznZhu;
+        String PATH = Contant.GuanZhuList;
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
         map.put("curPage", curPage);
+        MyOkhttp.getInstance().doRequest(PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+            @Override
+            public void loading() {
 
-        OkhttpUtils.setGetEntiydata(new OkhttpUtils.EntiyData() {
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public void onSuccess(Object o) {
+                if (o == null) {
+                    Toast.makeText(AttentionActivity.this, "网络异常，请检查您的网络", Toast.LENGTH_SHORT).show();
+                }
+                if (o != null && o instanceof CheckPublished) {
+                    //iv.setVisibility(View.GONE);
+                    CheckPublished checkPublished = (CheckPublished) o;
+
+                    list = (ArrayList) checkPublished.getData().getList();
+                    if (list.isEmpty()) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                iv.setImageResource(R.mipmap.shoucang);
+                                iv.setVisibility(View.VISIBLE);
+                                recyclerview.setVisibility(View.GONE);
+                            }
+                        });
+                    } else {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                initEvent();
+                                iv.setVisibility(View.GONE);
+                                recyclerview.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        },CheckPublished.class);
+
+
+        /*OkhttpUtils.setGetEntiydata(new OkhttpUtils.EntiyData() {
             @Override
             public void getEntiy(Object o) {
                 if (o == null) {
                     Toast.makeText(AttentionActivity.this, "网络异常，请检查您的网络", Toast.LENGTH_SHORT).show();
                 }
-                if (o != null && o instanceof ShowBean) {
+                if (o != null && o instanceof CheckPublished) {
                     //iv.setVisibility(View.GONE);
-                    ShowBean showBean = (ShowBean) o;
-                    list = (ArrayList) showBean.getData().getList();
+                    CheckPublished CheckPublished = (CheckPublished) o;
+                    list = (ArrayList) CheckPublished.getData().getList();
                     if (list.isEmpty()) {
                         runOnUiThread(new Runnable() {
                             @Override
@@ -88,26 +147,27 @@ public class AttentionActivity extends Activity {
                 }
             }
         });
-        OkhttpUtils.post(map, PATH, this, ShowBean.class);
-    }*/
+        OkhttpUtils.post(map, PATH, this, CheckPublished.class);*/
 
-    /*private void initEvent() {
+    }
+
+    private void initEvent() {
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        MyAttentionAdapter adapter = new MyAttentionAdapter(AttentionActivity.this, list);
+        MyRecyclerAdapter adapter = new MyRecyclerAdapter(AttentionActivity.this, list);
         recyclerview.setAdapter(adapter);
-        adapter.setOnClickListener(new MyAttentionAdapter.OnItemClickListener() {
+        adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void ItemClickListener(View view, int position) {
-                *//**//*startActivity(new Intent(getActivity(), SoldActivity.class));*//**//*
+                //startActivity(new Intent(AttentionActivity.this, SoldActivity.class));
                 Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
-                intent.putExtra("id",list.get(position).getId()+"");
-                startActivity(intent);
+                //Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
+               // intent.putExtra("id",list.get(position).getId()+"");
+               // startActivity(intent);
             }
         });
 
-    }*/
+    }
 
     private void initView() {
         barName = (TextView) findViewById(R.id.bar_tv_name);
