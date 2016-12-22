@@ -133,12 +133,11 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="20dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:layout_marginRight="20dp"
+                android:background="@mipmap/back_right"/>
 
         </LinearLayout>
 
@@ -175,12 +174,12 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="20dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:layout_marginRight="20dp"
+                android:background="@mipmap/back_right"
+                android:id="@+id/imageView2" />
 
         </LinearLayout>
 
@@ -217,12 +216,11 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="20dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:layout_marginRight="20dp"
+                android:background="@mipmap/back_right" />
 
         </LinearLayout>
 
@@ -258,12 +256,11 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="20dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:layout_marginRight="20dp"
+                android:background="@mipmap/back_right" />
 
         </LinearLayout>
 
