@@ -104,15 +104,13 @@ public class AttentionActivity extends Activity {
                         });
                     }
                 }
-
             }
 
             @Override
             public void onError() {
 
             }
-        },CheckPublished.class);
-
+        }, CheckPublished.class);
     }
 
     private void initEvent() {
@@ -126,8 +124,8 @@ public class AttentionActivity extends Activity {
                 //startActivity(new Intent(AttentionActivity.this, SoldActivity.class));
                 Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
                 //Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
-               // intent.putExtra("id",list.get(position).getId()+"");
-               // startActivity(intent);
+                //intent.putExtra("id",list.get(position).getList().get(position).getId()+"");
+                //startActivity(intent);
             }
         });
 
