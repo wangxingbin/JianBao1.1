@@ -110,7 +110,6 @@ public class MyOkhttp {
     public enum RequestType {
         GET,
         POST,
-        UPLOADFILE
     }
 
 }

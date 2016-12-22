@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ public class Login extends Activity implements View.OnClickListener{
 
 
 
-    private TextView register;
+    private LinearLayout register;
     private Button land;
     private EditText yonhuming;
     private EditText mima;
@@ -46,7 +47,6 @@ public class Login extends Activity implements View.OnClickListener{
     private String token;
     private TextView toolname;
     private ImageView back;
-    private TextView suiyi;
 
 
     @Override
@@ -186,13 +186,11 @@ public class Login extends Activity implements View.OnClickListener{
 
     }
     private void initview() {
-        suiyi = (TextView) findViewById(R.id.suiyi);
-        suiyi.setOnClickListener(this);
         toolname = (TextView) findViewById(R.id.bar_tv_name);
         toolname.setText("登陆");
         back = (ImageView) findViewById(R.id.bar_iv_back);
         back.setOnClickListener(this);
-        register = (TextView) findViewById(R.id.register);
+        register = (LinearLayout) findViewById(R.id.register);
         register.setOnClickListener(this);
         land = (Button) findViewById(R.id.signin_button);
         land.setOnClickListener(this);
@@ -229,9 +227,6 @@ public class Login extends Activity implements View.OnClickListener{
                 break;
             case R.id.bar_iv_back:
                 finish();
-                break;
-            case R.id.suiyi:
-               startActivity(new Intent(Login.this, MainActivity.class));
                 break;
         }
     }

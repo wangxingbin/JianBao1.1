@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dip"
-        android:background="@drawable/background_login_div_bg"
+        android:background="@drawable/btn_style"
         android:padding="15dip">
         <!-- 账号 -->
         <TextView
@@ -155,7 +155,7 @@
            android:layout_width="100dp"
            android:layout_height="wrap_content"
 
-           android:background="@drawable/button_back_land"
+           android:background="@drawable/btn_style"
            android:text="@string/register_string"
            android:textSize="20sp"
            />

@@ -7,7 +7,7 @@
     <string name="input_username">请输入手机号</string>
     <string name="input_password">请输入密码</string>
     <string name="login_register_link">没有账号?</string>
-    <string name="textlink"><u>注册</u></string>
+    <string name="textlink"><u>免费注册</u></string>
     <string name="confirm_password">请输入你的姓名</string>
     <string name="confirm_password_lable">姓名</string>
     <string name="invite_code_lable">邀请码</string>
