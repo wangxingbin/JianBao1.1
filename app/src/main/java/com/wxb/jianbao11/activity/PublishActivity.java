@@ -84,6 +84,8 @@ public class PublishActivity extends Activity implements View.OnClickListener {
     private ImageView iv_add = null;
     // 图片的路径
     private Uri originalUri;
+    private ImageView back;
+    private TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,16 @@ public class PublishActivity extends Activity implements View.OnClickListener {
 
     //初始化控件
     private void initView() {
+        back = (ImageView) findViewById(R.id.bar_iv_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        text = (TextView) findViewById(R.id.bar_tv_name);
+        text.setText("发布商品");
+
         et_jianbao_biaoti = (EditText) findViewById(R.id.et_jiianbao_biaoti); //标题
         et_jianbao_miaoshu = (EditText) findViewById(R.id.et_jianbao_miaoshu); //描述
         et_jianbao_number = (EditText) findViewById(R.id.et_jianbao_number);//手机号
@@ -126,6 +138,9 @@ public class PublishActivity extends Activity implements View.OnClickListener {
             xPictureList.add((ImageView) findViewById(xImageIds[i]));
             xPictureList.get(i).setOnClickListener(PublishActivity.this);
         }
+
+        //初始化iv_add
+        iv_add = pictureList.get(0);
     }
 
     // 相机相册的点击事件
