@@ -186,8 +186,7 @@ public class Login extends Activity implements View.OnClickListener{
 
     }
     private void initview() {
-        suiyi = (TextView) findViewById(R.id.suiyi);
-        suiyi.setOnClickListener(this);
+
         toolname = (TextView) findViewById(R.id.bar_tv_name);
         toolname.setText("登陆");
         back = (ImageView) findViewById(R.id.bar_iv_back);
@@ -230,9 +229,7 @@ public class Login extends Activity implements View.OnClickListener{
             case R.id.bar_iv_back:
                 finish();
                 break;
-            case R.id.suiyi:
-               startActivity(new Intent(Login.this, MainActivity.class));
-                break;
+
         }
     }
 }
