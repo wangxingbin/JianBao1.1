@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:gravity="center">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,34 +14,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:background="@color/white"
+            android:background="#ff4520"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/mine_denglued"
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
+                android:layout_height="160dp">
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/mine_iv_photo"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_gravity="center_vertical"
-                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
                     fresco:actualImageScaleType="centerCrop"
-                    fresco:backgroundImage="@mipmap/ic_launcher"
+                    fresco:backgroundImage="@mipmap/morentx"
                     fresco:roundAsCircle="true"
-                    fresco:roundingBorderColor="#000000"
-                    fresco:roundingBorderWidth="1dp"
-
-
-                    />
-                <!--fresco:failureImage="@mipmap/ic_launcher"-->
-                <!--fresco:failureImageScaleType="centerCrop"-->
+                    fresco:roundingBorderColor="#FE9182"
+                    fresco:roundingBorderWidth="2dp" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
                     android:orientation="vertical"
                     android:paddingLeft="5dp">
 
@@ -52,6 +49,7 @@
                         android:gravity="bottom"
                         android:paddingBottom="5dp"
                         android:text="hahahahahaha"
+                        android:textColor="@color/white"
                         android:textSize="20sp" />
 
                     <LinearLayout
@@ -64,6 +62,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="联系方式："
+                            android:textColor="@color/white"
                             android:textSize="14sp" />
 
                         <TextView
@@ -71,10 +70,29 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="123456789111"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mine_denglu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="亲，请点击此处登录"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <View
@@ -108,13 +126,12 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:id="@+id/imageView"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/d_login"
-                android:id="@+id/imageView" />
+                android:background="@mipmap/back_right"
+                android:clickable="true" />
 
         </LinearLayout>
 
@@ -151,12 +168,12 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:id="@+id/imageView2"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:background="@mipmap/back_right"
+                android:clickable="true" />
 
         </LinearLayout>
 
@@ -193,12 +210,11 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:background="@mipmap/back_right"
+                android:clickable="true" />
 
         </LinearLayout>
 
@@ -226,7 +242,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="设    置" />
+                android:text="关于我们" />
 
             <View
                 android:layout_width="0dp"
@@ -234,12 +250,11 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:background="@mipmap/back_right"
+                android:clickable="true" />
 
         </LinearLayout>
 
@@ -314,6 +329,13 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="2dp" />
+
+        <Button
+            android:id="@+id/mine_btn"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注销登录"/>
 
         <View
             android:layout_width="match_parent"
