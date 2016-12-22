@@ -235,6 +235,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/ll_gz"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -263,13 +264,32 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+        <Button
+            android:id="@+id/bt_xiajia"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="我要下架"
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="#ff4520"
+            android:layout_marginBottom="3dp"
+            android:visibility="invisible"
+            />
+
 
         <Button
+            android:id="@+id/bt_xiangyao"
             android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
             android:text="我想要"
+            android:padding="3dp"
             android:gravity="center"
-            android:background="#f00"
+            android:background="#ff4520"
             />
 
 

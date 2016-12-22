@@ -230,7 +230,6 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     //抽取的展示数据的方法
     private void displayData(LBZSbean o) {
         final LBZSbean lb = o;
-
         if (arrayList == null) {
 
             arrayList = (ArrayList<LBZSbean.DataBean.ListBean>) lb.getData().getList();
@@ -246,6 +245,11 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                         public void ItemClickListener(View view, int postion) {
                             if (token.equals("")) {
                                 Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+
+                            }
+                            else if(lb.getStatus().equals("301")){
+
+                                Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
 
                             }else {
 
@@ -278,6 +282,10 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                                 if (token.equals("")) {
 
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+
+                                } else if(lb.getStatus().equals("301")){
+
+                                    Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
 
                                 }else {
 
@@ -312,6 +320,10 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                                 if (token.equals("")) {
 
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+
+                                } else if(lb.getStatus().equals("301")){
+
+                                    Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
 
                                 }else {
 

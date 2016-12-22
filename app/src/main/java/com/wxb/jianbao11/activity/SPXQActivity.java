@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -22,6 +23,7 @@ import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.adapter.DGSPTPAdapter;
 import com.wxb.jianbao11.bean.GuanZhu;
 import com.wxb.jianbao11.bean.SPXQ;
+import com.wxb.jianbao11.bean.XiaJia;
 import com.wxb.jianbao11.contants.Contant;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
@@ -52,12 +54,16 @@ public class SPXQActivity extends Activity {
     private MyOkhttp myOkhttp;
     private HashMap<String, String> map = new HashMap<String, String>();
     private HashMap<String, String> map1 = new HashMap<String, String>();
+    private HashMap<String, String> map2 = new HashMap<String, String>();
     private boolean followed;
     private int follow;
     private SharedPreferences sp;
     private String token;
     private SimpleDraweeView iv_head;
     private LinearLayout ll_gz;
+    private Button bt_xiajia;
+    private Button bt_xiangyao;
+    private TextView bar_tv_name;
 
 
     @Override
@@ -212,13 +218,11 @@ public class SPXQActivity extends Activity {
         scrollView = (ScrollView) findViewById(R.id.scrollview);
         wpfbTime = (TextView) findViewById(R.id.wuping_time);
         wpPrice = (TextView) findViewById(R.id.wuping_jiaqian);
-        TextView bar_tv_name= (TextView) findViewById(R.id.bar_tv_name);
-        bar_tv_name.setText("商品详情");
+        bar_tv_name = (TextView) findViewById(R.id.bar_tv_name);
 
         tv_follownumber = (TextView) findViewById(R.id.tv_guanzhushuliang);
         wpgzFollow = (ImageView) findViewById(R.
                 id.wuping_shoucang);
-      /*  wpTitle = (TextView) findViewById(R.id.wuping_title);*/
         wpDescription = (TextView) findViewById(R.id.wuping_xiangqing);
         tv_person = (TextView) findViewById(R.id.tv_person);
         wpMobile = (TextView) findViewById(R.id.wuping_phone);
@@ -226,16 +230,14 @@ public class SPXQActivity extends Activity {
         wpQQ = (TextView) findViewById(R.id.wuping_qq);
         wpWechat = (TextView) findViewById(R.id.wuping_weixin);
         wpEmail = (TextView) findViewById(R.id.wuping_email);
-
         ll_gz = (LinearLayout) findViewById(R.id.ll_gz);
-
         dgsptp_rv = (RecyclerView) findViewById(R.id.dgsptp_rv);
-//        FullyGridLayoutManager manager=new FullyGridLayoutManager(SPXQActivity.this,3);
-//        manager.setOrientation(GridLayoutManager.VERTICAL);
         FullyLinearLayoutManager manager = new FullyLinearLayoutManager(SPXQActivity.this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         manager.setSmoothScrollbarEnabled(true);
         dgsptp_rv.setLayoutManager(manager);
+        bt_xiajia = (Button) findViewById(R.id.bt_xiajia);
+        bt_xiangyao = (Button) findViewById(R.id.bt_xiangyao);
 
 
     }
@@ -298,6 +300,8 @@ public class SPXQActivity extends Activity {
         final String email = sp.getData().getEmail();
         final String wecat = sp.getData().getWechat();
         final String head=sp.getData().getHead();
+        final int state=sp.getData().getState();
+        final boolean owned=sp.getData().isOwned();
         follow = sp.getData().getFollow();
         followed = sp.getData().isFollowed();
         final String Contact = sp.getData().getContact();
@@ -307,7 +311,7 @@ public class SPXQActivity extends Activity {
             public void run() {
 
                 wpfbTime.setText("" + time);
-//                wpTitle.setText(title);
+                bar_tv_name.setText(title);
                 wpDescription.setText(description);
                 wpPrice.setText("¥"+price);
                 tv_follownumber.setText("关注人数:"+follow );
@@ -350,11 +354,102 @@ public class SPXQActivity extends Activity {
                 } else {
                     wpgzFollow.setBackgroundResource(R.mipmap.scm);
                 }
+                if(owned){
+                    if(state==1){
+                        bt_xiajia.setVisibility(View.VISIBLE);
+                        bt_xiajia.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                xiajia();
+                            }
+                        });
+
+
+                    }else if(state==9||state==0||state==3){
+                        bt_xiajia.setVisibility(View.GONE);
+                    }
+
+                }else {
+                    bt_xiajia.setVisibility(View.GONE);
+                }
+
+
 
                 tianjiatupian(sp);
 
             }
         });
+
+
+    }
+
+    private void xiajia() {
+
+        map2.put("id", id);
+        map2.put("token", token);
+        map2.put("state",""+9);
+
+        Type type = new TypeToken<XiaJia>() {
+        }.getType();
+
+        myOkhttp.doRequest(Contant.BIANGENG,
+                MyOkhttp.RequestType.POST,
+                map2,
+                new MyCallBack() {
+                    @Override
+                    public void loading() {
+
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SPXQActivity.this, "联网失败", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onSuccess(Object o) {
+                        final XiaJia xj= (XiaJia) o;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(xj.getStatus().equals("200")){
+                                    Toast.makeText(SPXQActivity.this, "下架成功", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+
+                                    Toast.makeText(SPXQActivity.this, "下架失败是", Toast.LENGTH_SHORT).show();
+
+                                }
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onError() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SPXQActivity.this, "接口异常", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                    }
+                },type);
+
+
+
+
+
 
 
     }
