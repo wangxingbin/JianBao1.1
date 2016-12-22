@@ -2,6 +2,7 @@ package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +34,7 @@ public class AttentionActivity extends Activity {
     private ImageView backImage;
     private RecyclerView recyclerview;
     private ImageView iv;
-    private ArrayList<CheckPublished> list;
+    private ArrayList<CheckPublished.DataBean.ListBean> list;
     private Handler mHandler = new Handler();
     private String token;
 
@@ -121,11 +122,10 @@ public class AttentionActivity extends Activity {
         adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void ItemClickListener(View view, int position) {
-                //startActivity(new Intent(AttentionActivity.this, SoldActivity.class));
-                Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
-                //intent.putExtra("id",list.get(position).getList().get(position).getId()+"");
-                //startActivity(intent);
+                //Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
+                intent.putExtra("id",list.get(position).getId()+"");
+                startActivity(intent);
             }
         });
 

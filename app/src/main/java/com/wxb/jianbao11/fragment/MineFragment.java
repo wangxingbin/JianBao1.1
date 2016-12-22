@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.activity.AttentionActivity;
+import com.wxb.jianbao11.activity.Login;
 import com.wxb.jianbao11.activity.MessageActivity;
 import com.wxb.jianbao11.activity.PublishedActivity;
 import com.wxb.jianbao11.activity.SettingsActivity;
@@ -77,6 +79,8 @@ public class MineFragment extends Fragment {
     LinearLayout mineDenglu;
     @InjectView(R.id.mine_denglued)
     LinearLayout mineDenglued;
+    @InjectView(R.id.mine_btn)
+    Button mineBtn;
     private String token;
     private TakePhotoPopWin photoPopWin;
     private String facePath;
@@ -114,6 +118,7 @@ public class MineFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.reset(this);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // 拍照后获取返回值，这里获取到的是原始图片。
@@ -164,10 +169,12 @@ public class MineFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @OnClick({R.id.mine_denglu, R.id.mine_iv_photo, R.id.mine_ll_message, R.id.mine_ll_publish, R.id.mine_ll_attend, R.id.mine_ll_settings, R.id.mine_ll_yindao, R.id.mine_tv_invitationCode})
+    @OnClick({R.id.mine_btn, R.id.mine_iv_photo, R.id.mine_ll_message, R.id.mine_ll_publish, R.id.mine_ll_attend, R.id.mine_ll_settings, R.id.mine_ll_yindao, R.id.mine_tv_invitationCode})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.mine_denglu:
+            case R.id.mine_btn:
+                startActivity(new Intent(getActivity(), Login.class));
+                getActivity().finish();
                 break;
             case R.id.mine_iv_photo:
                 showPop(view);
