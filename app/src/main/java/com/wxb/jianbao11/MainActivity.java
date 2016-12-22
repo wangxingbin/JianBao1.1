@@ -1,5 +1,6 @@
 package com.wxb.jianbao11;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.wxb.jianbao11.activity.PublishActivity;
 import com.wxb.jianbao11.fragment.GoodsFragment;
 import com.wxb.jianbao11.fragment.MineFragment;
 import com.wxb.jianbao11.utils.TimeUtils;
@@ -22,6 +24,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+
     }
 
     private void initView() {
@@ -64,6 +67,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
         }
         fragmentTransaction.commit();
+
+        rb_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PublishActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

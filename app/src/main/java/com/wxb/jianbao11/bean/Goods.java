@@ -1,55 +1,45 @@
 package com.wxb.jianbao11.bean;
 
+import java.util.List;
+
 /**
- * Created by Administrator on 2016/12/6.
+ * Created by Administrator on 2016/12/21.
  */
 
-public class CheckPublished {
-
+public class Goods {
     /**
-     * status : 200
-     * info : 成功
-     * data : {"size":2,"list":[{"id":11,"title":"123","image":"","price":"123","issue_time":"2016-12-02 05:49:48","state":0},{"id":10,"title":"123","image":"","price":"123","issue_time":"2016-12-02 05:45:15","state":0}]}
+     * size : 1
+     * list : [{"id":111,"title":"1","image":"111_0.jpg","price":"1","issue_time":"2016-12-06 11:23:12","state":0}]
      */
 
-    private String status;
-    private String info;
-    private Goods data;
+    private int size;
+    private List<ListBean> list;
 
-    public String getStatus() {
-        return status;
+    public int getSize() {
+        return size;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSize(int size) {
+        this.size = size;
     }
 
-    public String getInfo() {
-        return info;
+    public List<ListBean> getList() {
+        return list;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setList(List<ListBean> list) {
+        this.list = list;
     }
 
-    public Goods getData() {
-        return data;
-    }
-
-    public void setData(Goods data) {
-        this.data = data;
-    }
-
-
-    /*public  class Goods {
-        *//**
-         * id : 11
-         * title : 123
-         * image :
-         * price : 123
-         * issue_time : 2016-12-02 05:49:48
+    public static class ListBean {
+        /**
+         * id : 111
+         * title : 1
+         * image : 111_0.jpg
+         * price : 1
+         * issue_time : 2016-12-06 11:23:12
          * state : 0
-         *//*
+         */
 
         private int id;
         private String title;
@@ -105,14 +95,13 @@ public class CheckPublished {
         public void setState(int state) {
             this.state = state;
         }
-    }*/
+    }
 
     @Override
     public String toString() {
-        return "CheckPublished{" +
-                "status='" + status + '\'' +
-                ", info='" + info + '\'' +
-                ", data=" + data +
+        return "Goods{" +
+                "size=" + size +
+                ", list=" + list +
                 '}';
     }
 }
