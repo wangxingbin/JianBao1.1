@@ -46,7 +46,6 @@ public class AttentionActivity extends Activity {
         initView();
         initData();
         initBack();
-        //测试
     }
 
     private void initBack() {
@@ -113,41 +112,6 @@ public class AttentionActivity extends Activity {
 
             }
         },CheckPublished.class);
-
-
-        /*OkhttpUtils.setGetEntiydata(new OkhttpUtils.EntiyData() {
-            @Override
-            public void getEntiy(Object o) {
-                if (o == null) {
-                    Toast.makeText(AttentionActivity.this, "网络异常，请检查您的网络", Toast.LENGTH_SHORT).show();
-                }
-                if (o != null && o instanceof CheckPublished) {
-                    //iv.setVisibility(View.GONE);
-                    CheckPublished CheckPublished = (CheckPublished) o;
-                    list = (ArrayList) CheckPublished.getData().getList();
-                    if (list.isEmpty()) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                iv.setImageResource(R.mipmap.shoucang);
-                                iv.setVisibility(View.VISIBLE);
-                                recyclerview.setVisibility(View.GONE);
-                            }
-                        });
-                    } else {
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                initEvent();
-                                iv.setVisibility(View.GONE);
-                                recyclerview.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    }
-                }
-            }
-        });
-        OkhttpUtils.post(map, PATH, this, CheckPublished.class);*/
 
     }
 
