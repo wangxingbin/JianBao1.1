@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:padding="3dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_mine" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,7 +113,8 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="20dp"
                 android:clickable="true"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_login"
+                android:id="@+id/imageView" />
 
         </LinearLayout>
 
@@ -135,7 +136,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:padding="3dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_add" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -155,7 +156,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="20dp"
                 android:clickable="true"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_login" />
 
         </LinearLayout>
 
@@ -176,7 +177,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:padding="3dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_guanzhu" />
 
             <TextView
                 android:id="@+id/textView"
@@ -197,7 +198,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="20dp"
                 android:clickable="true"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_login" />
 
         </LinearLayout>
 
@@ -218,7 +219,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:padding="3dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_shezhi" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -238,7 +239,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="20dp"
                 android:clickable="true"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_login" />
 
         </LinearLayout>
 
@@ -259,7 +260,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:padding="3dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_dahui" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -292,7 +293,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:padding="4dp"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/d_yaoqingma" />
 
             <TextView
                 android:layout_width="wrap_content"
