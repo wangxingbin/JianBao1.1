@@ -1,58 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    >
+    android:gravity="center">
 
     <LinearLayout
         android:id="@+id/pop_layout"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/btn_take_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:drawableLeft="@mipmap/chat_plus_camera"
             android:gravity="center"
             android:text="拍照"
-            android:drawableLeft="@mipmap/xiangji"
-            android:textSize="18sp"  />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/btn_pick_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="相册"
-            android:drawableLeft="@mipmap/xiangce"
+            android:layout_marginBottom="120dp"
+            android:drawableLeft="@mipmap/chat_plus_picture"
             android:gravity="center"
+            android:text="相册"
             android:textSize="18sp" />
-
-        <Button
-            android:layout_margin="10dp"
-            android:id="@+id/btn_cancel"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="15dp"
-            android:background="@mipmap/d_yaoqingma"
-            android:textStyle="bold" />
-    </LinearLayout>`
-
-
+    </LinearLayout>
+    `
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="请选择上传方式"
-        android:gravity="center"
-        android:textColor="#ff4520"
-        android:textSize="20sp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="52dp"
-        android:id="@+id/textView2" />
+        android:gravity="center"
+        android:text="请选择上传方式"
+        android:textColor="#ff4520"
+        android:textSize="20sp" />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_above="@+id/pop_layout"
+        android:layout_alignParentStart="true"
+        android:background="@mipmap/comui_bar_top_shadow" />
+    <!--阴影分割线 -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mainTabBar"
+        android:background="@mipmap/comui_bar_top_shadow"/>
+
+    <!--第一个LinearLayout 内有5个竖向LinearLayout-->
+    <LinearLayout
+        android:id="@+id/mainTabBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--第二个LinearLayout 内有凸起按钮-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:gravity="center|top"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/selector_off"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </RelativeLayout>
