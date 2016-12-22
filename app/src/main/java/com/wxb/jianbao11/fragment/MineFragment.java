@@ -35,7 +35,6 @@ import com.wxb.jianbao11.bean.CodeBeen;
 import com.wxb.jianbao11.bean.GeRenXinxi;
 import com.wxb.jianbao11.bean.Uphoto;
 import com.wxb.jianbao11.contants.Contant;
-import com.wxb.jianbao11.utils.CustomProgress;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
 import com.wxb.jianbao11.utils.PhotoPostUtils;
@@ -101,7 +100,7 @@ public class MineFragment extends Fragment {
         token = sp.getString("token", "");
         map = new HashMap<>();
         map.put("token", token);
-        CustomProgress.getPrgressDolilog(getActivity(), "正在加载", "请稍后...");
+        // CustomProgress.getPrgressDolilog(getActivity(), "正在加载", "请稍后...");
         initData();
         facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
         return view;
@@ -223,9 +222,9 @@ public class MineFragment extends Fragment {
 
                 GeRenXinxi geRenXinxi = (GeRenXinxi) o;
                 // progressbar dismiss
-                if (geRenXinxi.getStatus().equals("200")) {
-                    CustomProgress.dissPrgress();
-                }
+                //if (geRenXinxi.getStatus().equals("200")) {
+                //    CustomProgress.dissPrgress();
+                //}
                 mobile = geRenXinxi.getData().getMobile();
                 name = geRenXinxi.getData().getName();
                 photo = geRenXinxi.getData().getPhoto();
@@ -233,7 +232,7 @@ public class MineFragment extends Fragment {
                     @Override
                     public void run() {
                         if (photo == null || photo.isEmpty()) {
-                            mineIvPhoto.setImageResource(R.mipmap.ic_launcher);
+                            mineIvPhoto.setImageResource(R.mipmap.morentx);
                         } else if (!photo.isEmpty() || photo != null) {
                             String path = Contant.IMGQZ + photo;
                             Uri imgurl = Uri.parse(path);

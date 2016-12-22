@@ -13,24 +13,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:background="@color/white"
+            android:background="#ff4520"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
+                android:layout_height="160dp">
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/mine_iv_photo"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
                     android:layout_gravity="center_vertical"
-                    android:padding="5dp"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
                     fresco:actualImageScaleType="centerCrop"
-                    fresco:backgroundImage="@mipmap/ic_launcher"
+                    fresco:backgroundImage="@mipmap/morentx"
                     fresco:roundAsCircle="true"
-                    fresco:roundingBorderColor="#000000"
-                    fresco:roundingBorderWidth="1dp"
+                    fresco:roundingBorderColor="#FE9182"
+                    fresco:roundingBorderWidth="2dp"
 
 
                     />
@@ -39,7 +40,7 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="150dp"
+                    android:layout_height="160dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:paddingLeft="5dp">
@@ -52,7 +53,8 @@
                         android:gravity="bottom"
                         android:paddingBottom="5dp"
                         android:text="hahahahahaha"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textColor="@color/white"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -64,14 +66,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="联系方式："
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:id="@+id/mine_tv_phoneNum"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="123456789111"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:textColor="@color/white" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -226,7 +230,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="设    置" />
+                android:text="关于我们" />
 
             <View
                 android:layout_width="0dp"
