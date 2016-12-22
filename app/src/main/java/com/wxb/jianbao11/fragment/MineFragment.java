@@ -300,7 +300,7 @@ public class MineFragment extends Fragment {
                     String status = o1.getStatus();
                     if ("200".equals(status)) {
                         //Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
-                        System.out.println("上传成功");
+                        //System.out.println("上传成功");
                     }
                 }
             }
