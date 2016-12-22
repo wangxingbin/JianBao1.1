@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffc"
+        android:background="#ff4520"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/sslb_back"

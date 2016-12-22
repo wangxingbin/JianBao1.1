@@ -1,7 +1,7 @@
 package com.wxb.jianbao11.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -20,16 +20,18 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.google.gson.reflect.TypeToken;
 import com.wxb.jianbao11.R;
+import com.wxb.jianbao11.activity.SPXQActivity;
 import com.wxb.jianbao11.activity.SousuoActivity;
 import com.wxb.jianbao11.adapter.SPZSAdapter;
 import com.wxb.jianbao11.bean.LBZSbean;
 import com.wxb.jianbao11.contants.Contant;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by 诺古 on 2016/12/19.
@@ -45,17 +47,23 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     private int status = 1;
     private int curPage = 1;
     private RecyclerView rv;
-    private ArrayList<LBZSbean.DataBean.ListBean> arrayList=null;
+    private ArrayList<LBZSbean.DataBean.ListBean> arrayList = null;
     private MaterialRefreshLayout refresh;
     private SPZSAdapter myAdapter;
     private EditText et_sousuo;
     private ImageView iv_sousuo;
+    private String token;
+    private SharedPreferences sp;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_goods,null);
+        View view = inflater.inflate(R.layout.fragment_goods, null);
+
+        sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
+        token = sp.getString("token", "");
+
         initData();
         initView(view);
         initEvent();
@@ -68,7 +76,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         et_sousuo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), SousuoActivity.class);
+                Intent intent = new Intent(getActivity(), SousuoActivity.class);
                 getActivity().startActivity(intent);
 
             }
@@ -78,7 +86,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         iv_sousuo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),SousuoActivity.class);
+                Intent intent = new Intent(getActivity(), SousuoActivity.class);
                 getActivity().startActivity(intent);
 
             }
@@ -100,7 +108,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                         materialRefreshLayout.finishRefresh();
 
                     }
-                },1000);
+                }, 1000);
 
 
             }
@@ -119,7 +127,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                         materialRefreshLayout.finishRefreshLoadMore();
 
                     }
-                },200);
+                }, 200);
 
             }
 
@@ -137,7 +145,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                 initData();
                 break;
             case LOADMORE:
-                curPage = curPage + 1 ;
+                curPage = curPage + 1;
                 initData();
                 break;
             default:
@@ -152,21 +160,22 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        HorizontalDividerItemDecoration horizontal = new HorizontalDividerItemDecoration.Builder(getActivity())
-                .color(Color.YELLOW)//完成颜色的设置
-                .build();
-        rv.addItemDecoration(horizontal);
+//        HorizontalDividerItemDecoration horizontal = new HorizontalDividerItemDecoration.Builder(getActivity())
+//                .color(Color.YELLOW)//完成颜色的设置
+//                .build();
+//        rv.addItemDecoration(horizontal);
 
     }
 
     private void initData() {
 
-        MyOkhttp myOkhttp=MyOkhttp.getInstance();
-        Type type=new TypeToken<LBZSbean>(){}.getType();
+        MyOkhttp myOkhttp = MyOkhttp.getInstance();
+        Type type = new TypeToken<LBZSbean>() {
+        }.getType();
 
-        Log.e("sdhkfjsnl;kfdn", Contant.CHAXUN + "?curPage=" + curPage  );
+        Log.e("sdhkfjsnl;kfdn", Contant.CHAXUN + "?curPage=" + curPage);
         //封装的okhttp工具类
-        myOkhttp.doRequest(Contant.CHAXUN + "?curPage=" + curPage ,
+        myOkhttp.doRequest(Contant.CHAXUN + "?curPage=" + curPage,
                 MyOkhttp.RequestType.GET,
                 null,
                 new MyCallBack2(),
@@ -186,6 +195,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                 }
             });
         }
+
         @Override
         public void onFailure() {
             getActivity().runOnUiThread(new Runnable() {
@@ -196,12 +206,14 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                 }
             });
         }
+
         @Override
         public void onSuccess(Object o) {
 
             displayData((LBZSbean) o);
 
         }
+
         @Override
         public void onError() {
             getActivity().runOnUiThread(new Runnable() {
@@ -215,55 +227,67 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     }
 
 
-
     //抽取的展示数据的方法
     private void displayData(LBZSbean o) {
         final LBZSbean lb = o;
 
-        if(arrayList==null){
+        if (arrayList == null) {
 
-            arrayList=(ArrayList<LBZSbean.DataBean.ListBean>)lb.getData().getList();
+            arrayList = (ArrayList<LBZSbean.DataBean.ListBean>) lb.getData().getList();
 
-            System.out.println("集合的大小1"+arrayList.size()+"");
+            System.out.println("集合的大小1" + arrayList.size() + "");
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    myAdapter = new SPZSAdapter(getActivity(),arrayList);
+                    myAdapter = new SPZSAdapter(getActivity(), arrayList);
                     rv.setAdapter(myAdapter);//rv的点击事件
                     myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                         @Override
                         public void ItemClickListener(View view, int postion) {
-                            Toast.makeText(getActivity(),postion+"",Toast.LENGTH_SHORT).show();
+                            if (token.equals("")) {
+                                Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
 
-//                            Intent intent=new Intent(getActivity(), SPXQActivity.class);
-//                            System.out.println("jhgbkjklml;k,';l"+arrayList.get(postion).getId());
-//                            intent.putExtra("id",""+arrayList.get(postion).getId());
-//                            getActivity().startActivity(intent);
+                            }else {
 
+                                Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), SPXQActivity.class);
+                                System.out.println("jhgbkjklml;k,';l" + arrayList.get(postion).getId());
+                                intent.putExtra("id", "" + arrayList.get(postion).getId());
+                                getActivity().startActivity(intent);
+
+                            }
                         }
                     });
 
                 }
             });
 
-        }else {
-            if(status==REFRESH){
+        } else {
+            if (status == REFRESH) {
                 arrayList.clear();
-                arrayList=(ArrayList<LBZSbean.DataBean.ListBean>)lb.getData().getList();
-                System.out.println("集合的大小1"+arrayList.size()+"");
+                arrayList = (ArrayList<LBZSbean.DataBean.ListBean>) lb.getData().getList();
+                System.out.println("集合的大小1" + arrayList.size() + "");
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        myAdapter = new SPZSAdapter(getActivity(),arrayList);
+                        myAdapter = new SPZSAdapter(getActivity(), arrayList);
                         rv.setAdapter(myAdapter);//rv的点击事件
                         myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                             @Override
                             public void ItemClickListener(View view, int postion) {
-                                Toast.makeText(getActivity(),postion+"",Toast.LENGTH_SHORT).show();
-//                                Intent intent=new Intent(getActivity(),SPXQActivity.class);
-//                                System.out.println(arrayList.get(postion).getId());
-//                                intent.putExtra("id",""+arrayList.get(postion).getId());
-//                                getActivity().startActivity(intent);
+                                if (token.equals("")) {
+
+                                    Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+
+                                }else {
+
+                                    Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getActivity(), SPXQActivity.class);
+                                    System.out.println(arrayList.get(postion).getId());
+                                    intent.putExtra("id", "" + arrayList.get(postion).getId());
+                                    getActivity().startActivity(intent);
+
+                                }
 
 
                             }
@@ -271,25 +295,33 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
 
                     }
                 });
-            }else if(status==LOADMORE){
+            } else if (status == LOADMORE) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         int size = arrayList.size();
-                        ArrayList<LBZSbean.DataBean.ListBean> list1=(ArrayList<LBZSbean.DataBean.ListBean>)lb.getData().getList();
+                        ArrayList<LBZSbean.DataBean.ListBean> list1 = (ArrayList<LBZSbean.DataBean.ListBean>) lb.getData().getList();
                         arrayList.addAll(list1);
-                        System.out.println("集合的大小1"+arrayList.size()+"");
-                        myAdapter = new SPZSAdapter(getActivity(),arrayList);
+                        System.out.println("集合的大小1" + arrayList.size() + "");
+                        myAdapter = new SPZSAdapter(getActivity(), arrayList);
                         rv.setAdapter(myAdapter);//rv的点击事件
-                        rv.scrollToPosition(size-1);
+                        rv.scrollToPosition(size - 1);
                         myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                             @Override
                             public void ItemClickListener(View view, int postion) {
-                                Toast.makeText(getActivity(),postion+"",Toast.LENGTH_SHORT).show();
-//                                Intent intent=new Intent(getActivity(),SPXQActivity.class);
-//                                intent.putExtra("id",""+arrayList.get(postion).getId());
-//                                System.out.println(arrayList.get(postion).getId());
-//                                getActivity().startActivity(intent);
+                                if (token.equals("")) {
+
+                                    Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+
+                                }else {
+
+                                    Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getActivity(), SPXQActivity.class);
+                                    intent.putExtra("id", "" + arrayList.get(postion).getId());
+                                    System.out.println(arrayList.get(postion).getId());
+                                    getActivity().startActivity(intent);
+
+                                }
 
                             }
                         });

@@ -58,6 +58,22 @@ public class SPZSAdapter extends RecyclerView.Adapter<SPZSAdapter.MyViewHolder> 
         holder.sdv.setImageURI(uri);
         holder.time.setText(lb.getIssue_time());
         holder.price.setText(lb.getPrice() + "");
+        if(lb.getState()==1){
+            holder.state.setText("正常");
+
+        }else if(lb.getState()==0){
+            holder.state.setText("发布");
+
+        }else if(lb.getState()==9){
+            holder.state.setText("已下架");
+
+        }
+        else if(lb.getState()==3){
+            holder.state.setText("未审核");
+
+        }
+
+
         if (mListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -92,7 +108,7 @@ public class SPZSAdapter extends RecyclerView.Adapter<SPZSAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView price,title,time,gzsl;
+        TextView price,title,time,gzsl,state;
         SimpleDraweeView sdv;
         ImageView guanzhu;
 
@@ -103,6 +119,7 @@ public class SPZSAdapter extends RecyclerView.Adapter<SPZSAdapter.MyViewHolder> 
             title= (TextView) v.findViewById(R.id.tv_fbtitle);
             time= (TextView) v.findViewById(R.id.tv_fbtime);
             gzsl= (TextView) v.findViewById(R.id.tv_gzsl);
+            state= (TextView) v.findViewById(R.id.tv_state);
             guanzhu= (ImageView) v.findViewById(R.id.iv_guanzhu);
 
         }

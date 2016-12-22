@@ -2,7 +2,6 @@ package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +21,6 @@ import com.wxb.jianbao11.bean.LBZSbean;
 import com.wxb.jianbao11.contants.Contant;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -156,10 +154,10 @@ public class SSLBActivity extends Activity {
 
         sslb_rv.setLayoutManager(new LinearLayoutManager(SSLBActivity.this));
         //用了一个开源的devider,在github上搜了itemdecoration
-        HorizontalDividerItemDecoration horizontal = new HorizontalDividerItemDecoration.Builder(this)
-                .color(Color.YELLOW)//完成颜色的设置
-                .build();
-        sslb_rv.addItemDecoration(horizontal);
+//        HorizontalDividerItemDecoration horizontal = new HorizontalDividerItemDecoration.Builder(this)
+//                .color(Color.YELLOW)//完成颜色的设置
+//                .build();
+//        sslb_rv.addItemDecoration(horizontal);
 
         sslb_back = (ImageView) findViewById(R.id.sslb_back);
         refresh = (MaterialRefreshLayout) findViewById(R.id.refresh);
@@ -223,10 +221,10 @@ public class SSLBActivity extends Activity {
                             public void ItemClickListener(View view, int postion) {
                                 Toast.makeText(SSLBActivity.this, postion + "", Toast.LENGTH_SHORT).show();
 
-//                                Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
-//                                System.out.println("jhgbkjklml;k,';l" + arrayList.get(postion).getId());
-//                                intent.putExtra("id", "" + arrayList.get(postion).getId());
-//                                startActivity(intent);
+                                Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
+                                System.out.println("jhgbkjklml;k,';l" + arrayList.get(postion).getId());
+                                intent.putExtra("id", "" + arrayList.get(postion).getId());
+                                startActivity(intent);
 
                             }
                         });
@@ -256,10 +254,10 @@ public class SSLBActivity extends Activity {
                                 @Override
                                 public void ItemClickListener(View view, int postion) {
                                     Toast.makeText(SSLBActivity.this, postion + "", Toast.LENGTH_SHORT).show();
-//                                    Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
-//                                    System.out.println(arrayList.get(postion).getId());
-//                                    intent.putExtra("id", "" + arrayList.get(postion).getId());
-//                                    startActivity(intent);
+                                    Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
+                                    System.out.println(arrayList.get(postion).getId());
+                                    intent.putExtra("id", "" + arrayList.get(postion).getId());
+                                    startActivity(intent);
 
                                 }
                             });
@@ -289,10 +287,10 @@ public class SSLBActivity extends Activity {
                                 @Override
                                 public void ItemClickListener(View view, int postion) {
                                     Toast.makeText(SSLBActivity.this, postion + "", Toast.LENGTH_SHORT).show();
-//                                    Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
-//                                    intent.putExtra("id", "" + arrayList.get(postion).getId());
-//                                    System.out.println(arrayList.get(postion).getId());
-//                                    startActivity(intent);
+                                    Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
+                                    intent.putExtra("id", "" + arrayList.get(postion).getId());
+                                    System.out.println(arrayList.get(postion).getId());
+                                    startActivity(intent);
 
                                 }
                             });

@@ -9,12 +9,11 @@ public class GeRenXinxi {
     /**
      * status : 200
      * info : 成功
-     * data : {"id":2,"mobile":"13800138000","name":"钟移动","gender":"男","idcard":"","photo":"1424349642438.jpeg","last_time":"2016-12-06 11:09:02","state":0}
+     * data : {"id":100093,"mobile":"99999999999","name":"99","gender":"女","idcard":"99999999999_CARD.jpeg","photo":"99999999999_HEAD.jpg","qq":"","wechat":"","email":"","last_time":"2016-12-21 02:37:38","state":0,"normal":true}
      */
 
     private String status;
     private String info;
-
     private DataBean data;
 
     public String getStatus() {
@@ -43,14 +42,18 @@ public class GeRenXinxi {
 
     public static class DataBean {
         /**
-         * id : 2
-         * mobile : 13800138000
-         * name : 钟移动
-         * gender : 男
-         * idcard :
-         * photo : 1424349642438.jpeg
-         * last_time : 2016-12-06 11:09:02
+         * id : 100093
+         * mobile : 99999999999
+         * name : 99
+         * gender : 女
+         * idcard : 99999999999_CARD.jpeg
+         * photo : 99999999999_HEAD.jpg
+         * qq :
+         * wechat :
+         * email :
+         * last_time : 2016-12-21 02:37:38
          * state : 0
+         * normal : true
          */
 
         private int id;
@@ -59,8 +62,12 @@ public class GeRenXinxi {
         private String gender;
         private String idcard;
         private String photo;
+        private String qq;
+        private String wechat;
+        private String email;
         private String last_time;
         private int state;
+        private boolean normal;
 
         public int getId() {
             return id;
@@ -110,6 +117,30 @@ public class GeRenXinxi {
             this.photo = photo;
         }
 
+        public String getQq() {
+            return qq;
+        }
+
+        public void setQq(String qq) {
+            this.qq = qq;
+        }
+
+        public String getWechat() {
+            return wechat;
+        }
+
+        public void setWechat(String wechat) {
+            this.wechat = wechat;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
         public String getLast_time() {
             return last_time;
         }
@@ -124,6 +155,14 @@ public class GeRenXinxi {
 
         public void setState(int state) {
             this.state = state;
+        }
+
+        public boolean isNormal() {
+            return normal;
+        }
+
+        public void setNormal(boolean normal) {
+            this.normal = normal;
         }
     }
 }
