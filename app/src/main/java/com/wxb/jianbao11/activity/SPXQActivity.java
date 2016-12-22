@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class SPXQActivity extends Activity {
     private SharedPreferences sp;
     private String token;
     private SimpleDraweeView iv_head;
+    private LinearLayout ll_gz;
 
 
     @Override
@@ -90,7 +92,7 @@ public class SPXQActivity extends Activity {
 
 
         //收藏按钮
-        wpgzFollow.setOnClickListener(new View.OnClickListener() {
+        ll_gz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -224,6 +226,8 @@ public class SPXQActivity extends Activity {
         wpQQ = (TextView) findViewById(R.id.wuping_qq);
         wpWechat = (TextView) findViewById(R.id.wuping_weixin);
         wpEmail = (TextView) findViewById(R.id.wuping_email);
+
+        ll_gz = (LinearLayout) findViewById(R.id.ll_gz);
 
         dgsptp_rv = (RecyclerView) findViewById(R.id.dgsptp_rv);
 //        FullyGridLayoutManager manager=new FullyGridLayoutManager(SPXQActivity.this,3);
