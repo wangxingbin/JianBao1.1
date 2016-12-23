@@ -29,12 +29,12 @@ import java.util.Map;
  * Created by Administrator on 2016/12/19.
  */
 
-public class PublishedActivity extends Activity{
+public class PublishedActivity extends Activity {
     private TextView barName;
     private ImageView backImage;
     private RecyclerView recyclerview;
     private ImageView iv;
-    private ArrayList<CheckPublished.DataBean.ListBean> list=new ArrayList<CheckPublished.DataBean.ListBean
+    private ArrayList<CheckPublished.DataBean.ListBean> list = new ArrayList<CheckPublished.DataBean.ListBean
             >();
     private Handler mHandler = new Handler();
     private String token;
@@ -47,9 +47,10 @@ public class PublishedActivity extends Activity{
         SharedPreferences sp = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
         token = sp.getString("token", "");
         initView();
-       // initData();
+        // initData();
         initBack();
     }
+
     private void initBack() {
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,13 +59,14 @@ public class PublishedActivity extends Activity{
             }
         });
     }
+
     private void initData() {
         String curPage = "1";
         String PATH = Contant.CHECKPUBLISHED;
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
         map.put("curPage", curPage);
-        MyOkhttp.getInstance().doRequest(PublishedActivity.this,PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(PublishedActivity.this, PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
             @Override
             public void loading() {
 
@@ -85,7 +87,7 @@ public class PublishedActivity extends Activity{
                     CheckPublished published = (CheckPublished) o;
                     list.clear();
                     list.addAll((ArrayList) published.getData().getList());
-                    if (list!=null&&list.isEmpty()) {
+                    if (list != null && list.isEmpty()) {
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -112,31 +114,29 @@ public class PublishedActivity extends Activity{
             public void onError() {
 
             }
-        },CheckPublished.class);
+        }, CheckPublished.class);
 
     }
 
     private void initEvent() {
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        if (adapter==null){
-        adapter = new MyRecyclerAdapter(PublishedActivity.this, list);
+        if (adapter == null) {
+            adapter = new MyRecyclerAdapter(PublishedActivity.this, list);
             adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void ItemClickListener(View view, int position) {
                     //Toast.makeText(PublishedActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(PublishedActivity.this, SPXQActivity.class);
-                    intent.putExtra("id",list.get(position).getId()+"");
+                    intent.putExtra("id", list.get(position).getId() + "");
                     startActivity(intent);
                 }
             });
 
-        recyclerview.setAdapter(adapter);
+            recyclerview.setAdapter(adapter);
 
-        }
-        else
-        {
-        adapter.notifyDataSetChanged();
+        } else {
+            adapter.notifyDataSetChanged();
         }
 
     }
@@ -144,7 +144,7 @@ public class PublishedActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-       // list.clear();
+        // list.clear();
         initData();
 
     }
