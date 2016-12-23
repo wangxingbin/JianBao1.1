@@ -111,8 +111,10 @@ public class MessageActivity extends Activity {
     }
 
     public void setMessage(TextView tv, String str) {
-        if (str != "" && !str.isEmpty()) {
+        if (str != null ) {
             tv.setText(str);
+        }else{
+            tv.setText("暂无");
         }
     }
 

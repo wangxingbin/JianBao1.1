@@ -108,7 +108,9 @@ public class MineFragment extends Fragment {
         token = sp.getString("token", "");
         map = new HashMap<>();
         map.put("token", token);
-        initData();
+        if (token != null || token.isEmpty() || token.equals("")){
+            initData();
+        }
         facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
         return view;
     }
@@ -164,6 +166,7 @@ public class MineFragment extends Fragment {
             if (photoPopWin.isShowing()) {
                 photoPopWin.dismiss();
             }
+
             mineIvPhoto.setImageURI(imageFile.getAbsolutePath());
         }
         super.onActivityResult(requestCode, resultCode, data);
