@@ -1,6 +1,7 @@
 package com.wxb.jianbao11.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.CheckPublished;
 import com.wxb.jianbao11.contants.Contant;
+import com.wxb.jianbao11.utils.ImageTools;
 
 import java.util.ArrayList;
 /*
@@ -61,6 +63,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter <MyRecyclerAdapter.M
         holder.tv_title.setText(checkPublished.getTitle());
         holder.tv_time.setText(checkPublished.getIssue_time());
         holder.picture.setImageURI(image);
+        ImageTools.load(Uri.parse(image),holder.picture,120,120);
         switch (checkPublished.getState()){
             case 0:
                 holder.tv_state.setText("发布");

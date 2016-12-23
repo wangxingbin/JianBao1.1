@@ -119,7 +119,7 @@ public class AttentionActivity extends Activity {
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         MyRecyclerAdapter adapter = new MyRecyclerAdapter(AttentionActivity.this, list);
         recyclerview.setAdapter(adapter);
-        adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
+        adapter.setOnClickListener( new MyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void ItemClickListener(View view, int position) {
                 //Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();

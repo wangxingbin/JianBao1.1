@@ -1,6 +1,9 @@
 package com.wxb.jianbao11.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,7 +45,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     // 1.设置几个状态码方便我们进行状态的判断
     private static final int NORMAL = 1;
     //2.是刷新的状态
-     private static final int REFRESH = 2;
+    private static final int REFRESH = 2;
     //3.上啦刷新加载更多
     private static final int LOADMORE = 3;
     private int status = 1;
@@ -55,6 +58,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     private ImageView iv_sousuo;
     private String token;
     private SharedPreferences sp;
+    private RefashRerver receiver=new RefashRerver();
 
 
     @Nullable
@@ -65,11 +69,37 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
 
+        //注册广播-----：动态广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("cn.bgs.refash");
+        getActivity().registerReceiver(receiver, filter);
+
+
         initData();
         initView(view);
         initEvent();
         return view;
     }
+
+    //广播接收器
+    private class RefashRerver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //执行刷新的操作
+            Log.e("", "这个广播 " );
+            arrayList.clear();
+            curPage = 1;
+           initData();
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiver);
+    }
+
 
 
     private void initEvent() {
@@ -176,7 +206,8 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
 
         Log.e("sdhkfjsnl;kfdn", Contant.CHAXUN + "?curPage=" + curPage);
         //封装的okhttp工具类
-        myOkhttp.doRequest(GoodsFragment.this.getActivity(),Contant.CHAXUN + "?curPage=" + curPage,
+        myOkhttp.doRequest(getActivity(),
+                Contant.CHAXUN + "?curPage=" + curPage,
                 MyOkhttp.RequestType.GET,
                 null,
                 new MyCallBack2(),
