@@ -27,7 +27,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".activity.GuidePageActivity">
+        <activity android:name=".activity.GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +46,6 @@
         <activity android:name=".activity.SSLBActivity"/>
         <activity android:name=".activity.SPXQActivity"/>
         <activity android:name=".activity.PhotoViewD"/>
-
         <!--跳转发布界面-->
         <activity android:name=".activity.PublishActivity"></activity>
 
