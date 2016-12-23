@@ -76,6 +76,7 @@ public class SPXQActivity extends Activity {
     private String contact;
     private PopupWindow popupWindow;
     private String head;
+    private ArrayList<String> alist;
 
 
     @Override
@@ -494,6 +495,11 @@ public class SPXQActivity extends Activity {
                                     Intent intent = new Intent();
                                     intent.setAction("cn.bgs.refash");
                                     SPXQActivity.this.sendBroadcast(intent);
+//                                    bt_xiajia.setText("我要发布");
+//                                    Intent intent1=new Intent();
+//                                    Bundle mBundle = new Bundle();
+//                                    mBundle.putStringArrayList("list",alist);
+
 
                                 }
                                 else {
@@ -530,7 +536,7 @@ public class SPXQActivity extends Activity {
 
     private void tianjiatupian(SPXQ sp) {
 
-        final ArrayList<String> alist = (ArrayList<String>) sp.getData().getPhotos();
+        alist = (ArrayList<String>) sp.getData().getPhotos();
 
         if (alist.size() > 0) {
 
