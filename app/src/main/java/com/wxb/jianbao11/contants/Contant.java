@@ -25,6 +25,9 @@ public class Contant {
 
     public static  final String GUANZHU=MAIN+"/app/item/follow.json";
 
+    //商品变更
+    public static  final String BIANGENG=MAIN+"/app/item/modify.json";
+
     public static  final  String LAND=MAIN+"/app/common/login.json";
     public  static  final String RESGISTER=MAIN+"/app/common/register.json";
 }

@@ -144,7 +144,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:background="#fff">
 
@@ -160,62 +160,10 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="20dp"
                     android:textSize="18sp"
-                    android:layout_marginTop="5dp"
                     android:text="收藏人数：5"
                     />
 
             </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/wuping_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:background="#fff"
-                android:padding="3dp"
-                android:text="手机号：11111111111"
-                android:textIsSelectable="true"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/wuping_weixin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:background="#fff"
-                android:padding="3dp"
-                android:text="微信号：11111111111"
-                android:textIsSelectable="true"
-                android:textSize="18sp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/wuping_qq"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:background="#fff"
-                android:text=" Q   Q：11111111111"
-                android:textIsSelectable="true"
-                android:textSize="18sp"
-                android:padding="3dp"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/wuping_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:background="#fff"
-                android:text="Email：11111111111"
-                android:textIsSelectable="true"
-                android:textSize="20sp"
-                android:padding="3dp"
-                android:visibility="visible" />
 
 
 
@@ -235,6 +183,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/ll_gz"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -263,13 +212,32 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+        <Button
+            android:id="@+id/bt_xiajia"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="我要下架"
+            android:padding="3dp"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="#ff4520"
+            android:layout_marginBottom="3dp"
+            android:visibility="invisible"
+            />
+
 
         <Button
+            android:id="@+id/bt_xiangyao"
             android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
+            android:layout_margin="3dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
             android:text="我想要"
+            android:padding="3dp"
             android:gravity="center"
-            android:background="#f00"
+            android:background="#ff4520"
             />
 
 

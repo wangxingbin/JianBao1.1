@@ -1,6 +1,9 @@
 package com.wxb.jianbao11.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +23,7 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.google.gson.reflect.TypeToken;
 import com.wxb.jianbao11.R;
+import com.wxb.jianbao11.activity.Login;
 import com.wxb.jianbao11.activity.SPXQActivity;
 import com.wxb.jianbao11.activity.SousuoActivity;
 import com.wxb.jianbao11.adapter.SPZSAdapter;
@@ -54,6 +58,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     private ImageView iv_sousuo;
     private String token;
     private SharedPreferences sp;
+    private RefashRerver receiver=new RefashRerver();
 
 
     @Nullable
@@ -64,11 +69,37 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
 
+        //注册广播-----：动态广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("cn.bgs.refash");
+        getActivity().registerReceiver(receiver, filter);
+
+
         initData();
         initView(view);
         initEvent();
         return view;
     }
+
+    //广播接收器
+    private class RefashRerver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //执行刷新的操作
+            Log.e("", "这个广播 " );
+            arrayList.clear();
+            curPage = 1;
+           initData();
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiver);
+    }
+
 
 
     private void initEvent() {
@@ -175,7 +206,8 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
 
         Log.e("sdhkfjsnl;kfdn", Contant.CHAXUN + "?curPage=" + curPage);
         //封装的okhttp工具类
-        myOkhttp.doRequest(Contant.CHAXUN + "?curPage=" + curPage,
+        myOkhttp.doRequest(getActivity(),
+                Contant.CHAXUN + "?curPage=" + curPage,
                 MyOkhttp.RequestType.GET,
                 null,
                 new MyCallBack2(),
@@ -245,8 +277,10 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                         @Override
                         public void ItemClickListener(View view, int postion) {
                             if (token.equals("")) {
-                                Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-
+                                 Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), Login.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                getActivity().startActivity(intent);
                             }else {
 
                                 Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
@@ -278,7 +312,9 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                                 if (token.equals("")) {
 
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-
+                                    Intent intent = new Intent(getActivity(), Login.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    getActivity().startActivity(intent);
                                 }else {
 
                                     Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
@@ -312,7 +348,9 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                                 if (token.equals("")) {
 
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-
+                                    Intent intent = new Intent(getActivity(), Login.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    getActivity().startActivity(intent);
                                 }else {
 
                                     Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();

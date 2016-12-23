@@ -2,6 +2,7 @@ package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +17,6 @@ import android.widget.Toast;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.adapter.MyRecyclerAdapter;
 import com.wxb.jianbao11.bean.CheckPublished;
-import com.wxb.jianbao11.bean.Goods;
 import com.wxb.jianbao11.contants.Contant;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
@@ -34,9 +34,11 @@ public class PublishedActivity extends Activity{
     private ImageView backImage;
     private RecyclerView recyclerview;
     private ImageView iv;
-    private ArrayList<Goods> list;
+    private ArrayList<CheckPublished.DataBean.ListBean> list=new ArrayList<CheckPublished.DataBean.ListBean
+            >();
     private Handler mHandler = new Handler();
     private String token;
+    private MyRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class PublishedActivity extends Activity{
         SharedPreferences sp = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
         token = sp.getString("token", "");
         initView();
-        initData();
+       // initData();
         initBack();
     }
     private void initBack() {
@@ -62,7 +64,7 @@ public class PublishedActivity extends Activity{
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
         map.put("curPage", curPage);
-        MyOkhttp.getInstance().doRequest(PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(PublishedActivity.this,PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
             @Override
             public void loading() {
 
@@ -81,8 +83,10 @@ public class PublishedActivity extends Activity{
                 if (o != null && o instanceof CheckPublished) {
                     //iv.setVisibility(View.GONE);
                     CheckPublished published = (CheckPublished) o;
-                    list = (ArrayList) published.getData().getList();
+                    list.clear();
+                    list.addAll((ArrayList) published.getData().getList());
                     if (list!=null&&list.isEmpty()) {
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -115,25 +119,40 @@ public class PublishedActivity extends Activity{
     private void initEvent() {
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        MyRecyclerAdapter adapter = new MyRecyclerAdapter(PublishedActivity.this, list);
+        if (adapter==null){
+        adapter = new MyRecyclerAdapter(PublishedActivity.this, list);
+            adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
+                @Override
+                public void ItemClickListener(View view, int position) {
+                    //Toast.makeText(PublishedActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(PublishedActivity.this, SPXQActivity.class);
+                    intent.putExtra("id",list.get(position).getId()+"");
+                    startActivity(intent);
+                }
+            });
+
         recyclerview.setAdapter(adapter);
-        adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void ItemClickListener(View view, int position) {
-                //startActivity(new Intent(PublishedActivity.this, SoldActivity.class));
-                Toast.makeText(PublishedActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(PublishedActivity.this, SPXQActivity.class);
-                // intent.putExtra("id",list.get(position).getId()+"");
-                // startActivity(intent);
-            }
-        });
+
+        }
+        else
+        {
+        adapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // list.clear();
+        initData();
 
     }
 
     private void initView() {
         barName = (TextView) findViewById(R.id.bar_tv_name);
         backImage = (ImageView) findViewById(R.id.bar_iv_back);
-        barName.setText("我关注的");
+        barName.setText("我发布的");
         recyclerview = (RecyclerView) findViewById(R.id.fragment_fabu_recyclerview);
         iv = (ImageView) findViewById(R.id.fragment_fabu_iv);
     }

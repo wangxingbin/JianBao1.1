@@ -2,6 +2,7 @@ package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +34,7 @@ public class AttentionActivity extends Activity {
     private ImageView backImage;
     private RecyclerView recyclerview;
     private ImageView iv;
-    private ArrayList<CheckPublished> list;
+    private ArrayList<CheckPublished.DataBean.ListBean> list;
     private Handler mHandler = new Handler();
     private String token;
 
@@ -63,7 +64,7 @@ public class AttentionActivity extends Activity {
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
         map.put("curPage", curPage);
-        MyOkhttp.getInstance().doRequest(PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(AttentionActivity.this,PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
             @Override
             public void loading() {
 
@@ -104,15 +105,13 @@ public class AttentionActivity extends Activity {
                         });
                     }
                 }
-
             }
 
             @Override
             public void onError() {
 
             }
-        },CheckPublished.class);
-
+        }, CheckPublished.class);
     }
 
     private void initEvent() {
@@ -120,14 +119,13 @@ public class AttentionActivity extends Activity {
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         MyRecyclerAdapter adapter = new MyRecyclerAdapter(AttentionActivity.this, list);
         recyclerview.setAdapter(adapter);
-        adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
+        adapter.setOnClickListener( new MyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void ItemClickListener(View view, int position) {
-                //startActivity(new Intent(AttentionActivity.this, SoldActivity.class));
-                Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
-               // intent.putExtra("id",list.get(position).getId()+"");
-               // startActivity(intent);
+                //Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
+                intent.putExtra("id",list.get(position).getId()+"");
+                startActivity(intent);
             }
         });
 

@@ -2,9 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp">
+
+    <include layout="@layout/base_toolbar"
+        android:id="@+id/publish_include"/>
 
     <LinearLayout
+        android:layout_below="@+id/publish_include"
         android:id="@+id/ll_01"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -15,6 +20,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="9"
+            android:background="@null"
+            android:textSize="13dp"
             android:hint="标题" />
 
         <ImageView
@@ -26,6 +33,13 @@
             android:src="@mipmap/zzq_xxx" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/ll_01"/>
 
     <LinearLayout
         android:id="@+id/ll_et"
@@ -42,7 +56,9 @@
             android:layout_alignParentStart="true"
             android:layout_gravity="center"
             android:layout_weight="9"
-            android:hint="描述下你要拍卖的物品" />
+            android:background="@null"
+            android:hint="描述下你要拍卖的物品"
+            android:textSize="13dp"/>
 
         <ImageView
             android:id="@+id/im_et_x2"
@@ -53,6 +69,13 @@
             android:src="@mipmap/zzq_xxx" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c0c0c0"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/ll_et"/>
 
 
     <View
@@ -71,6 +94,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -90,6 +114,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
                 android:gravity="center"
+                android:background="@null"
+                android:textSize="13dp"
                 android:hint="输入你的宝贝的价钱" />
 
             <ImageView
@@ -99,11 +125,17 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:src="@mipmap/zzq_xxx" />
-
-
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c0c0c0"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/a"/>
+
         <LinearLayout
+            android:id="@+id/b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -121,6 +153,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
                 android:gravity="center"
+                android:background="@null"
+                android:textSize="13dp"
                 android:hint="输入你的电话号码" />
 
             <ImageView
@@ -133,7 +167,15 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c0c0c0"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/b"/>
+
         <LinearLayout
+            android:id="@+id/c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -151,6 +193,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
                 android:gravity="center"
+                android:background="@null"
+                android:textSize="13dp"
                 android:hint="QQ或微信或Email账号" />
 
             <ImageView
@@ -162,6 +206,13 @@
                 android:src="@mipmap/zzq_xxx" />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c0c0c0"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/c"/>
 
 
     </LinearLayout>
@@ -204,7 +255,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
-
                 android:src="@mipmap/zzq_pppp" />
 
             <ImageView
@@ -213,7 +263,6 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/zzq_xxh"
                 android:visibility="invisible" />
-
         </RelativeLayout>
 
 
@@ -304,21 +353,20 @@
 
 
             <ImageView
-                android:id="@+id/takephoto_picture5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:src="@mipmap/zzq_pppp"
-                android:visibility="invisible" />
-
-            <ImageView
                 android:id="@+id/im_x5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/zzq_xxh"
                 android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/takephoto_picture5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/zzq_pppp"
+                android:visibility="invisible"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
 
         </RelativeLayout>
 

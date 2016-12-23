@@ -17,88 +17,82 @@
             android:background="#ff4520"
             android:orientation="vertical">
 
-            <FrameLayout
+            <LinearLayout
+                android:id="@+id/mine_denglued"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_weight="1">
+                android:layout_height="160dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/mine_iv_photo"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+                    fresco:actualImageScaleType="centerCrop"
+                    fresco:backgroundImage="@mipmap/morentx"
+                    fresco:roundAsCircle="true"
+                    fresco:roundingBorderColor="#FE9182"
+                    fresco:roundingBorderWidth="2dp" />
 
                 <LinearLayout
-                    android:id="@+id/mine_denglued"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp">
+                    android:layout_height="160dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp">
 
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/mine_iv_photo"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="5dp"
-                        android:padding="10dp"
-                        fresco:actualImageScaleType="centerCrop"
-                        fresco:backgroundImage="@mipmap/morentx"
-                        fresco:roundAsCircle="true"
-                        fresco:roundingBorderColor="#FE9182"
-                        fresco:roundingBorderWidth="2dp" />
-
+                    <TextView
+                        android:id="@+id/mine_tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:paddingBottom="5dp"
+                        android:text="hahahahahaha"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
-                        android:orientation="vertical"
-                        android:paddingLeft="5dp">
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp">
 
                         <TextView
-                            android:id="@+id/mine_tv_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:gravity="bottom"
-                            android:paddingBottom="5dp"
-                            android:text="hahahahahaha"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="联系方式："
                             android:textColor="@color/white"
-                            android:textSize="20sp" />
+                            android:textSize="14sp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:paddingTop="5dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="联系方式："
-                                android:textColor="@color/white"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/mine_tv_phoneNum"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="123456789111"
-                                android:textColor="@color/white"
-                                android:textSize="16sp" />
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/mine_tv_phoneNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="123456789111"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
                     </LinearLayout>
-
                 </LinearLayout>
 
-                <LinearLayout
-                    android:visibility="gone"
-                    android:id="@+id/mine_denglu"
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mine_denglu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="亲，请点击此处登录"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="亲，请点击此处登录"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"/>
+            </LinearLayout>
 
-                </LinearLayout>
-            </FrameLayout>
         </LinearLayout>
 
         <View
@@ -133,12 +127,11 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:background="@mipmap/back_right"
+                android:clickable="true" />
 
         </LinearLayout>
 
@@ -175,12 +168,12 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:id="@+id/imageView2"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:background="@mipmap/back_right"
+                android:clickable="true" />
 
         </LinearLayout>
 
@@ -217,12 +210,11 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:background="@mipmap/back_right"
+                android:clickable="true" />
 
         </LinearLayout>
 
@@ -258,12 +250,11 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="50dp"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="20dp"
-                android:clickable="true"
-                android:src="@mipmap/d_login" />
+                android:background="@mipmap/back_right"
+                android:clickable="true" />
 
         </LinearLayout>
 
@@ -338,6 +329,13 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="2dp" />
+
+        <Button
+            android:id="@+id/mine_btn"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注销登录"/>
 
         <View
             android:layout_width="match_parent"
