@@ -1,6 +1,9 @@
 package com.wxb.jianbao11.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +57,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     private ImageView iv_sousuo;
     private String token;
     private SharedPreferences sp;
+    private RefashRerver receiver=new RefashRerver();
 
 
     @Nullable
@@ -64,11 +68,37 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
 
+        //注册广播-----：动态广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("cn.bgs.refash");
+        getActivity().registerReceiver(receiver, filter);
+
+
         initData();
         initView(view);
         initEvent();
         return view;
     }
+
+    //广播接收器
+    private class RefashRerver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //执行刷新的操作
+            Log.e("", "这个广播 " );
+            arrayList.clear();
+            curPage = 1;
+           initData();
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiver);
+    }
+
 
 
     private void initEvent() {

@@ -28,6 +28,7 @@ import com.wxb.jianbao11.bean.GuanZhu;
 import com.wxb.jianbao11.bean.SPXQ;
 import com.wxb.jianbao11.bean.XiaJia;
 import com.wxb.jianbao11.contants.Contant;
+import com.wxb.jianbao11.utils.ImageTools;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
 import com.wxb.jianbao11.view.FullyLinearLayoutManager;
@@ -164,7 +165,7 @@ public class SPXQActivity extends Activity {
 
 
         Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/"+ head);
-        sdv.setImageURI(uri);
+        ImageTools.load(uri,sdv,30,30);
 
         wuping_pel.setText(contact);
         if (TextUtils.isEmpty(mobile)) {
@@ -263,13 +264,13 @@ public class SPXQActivity extends Activity {
                                     follow = follow + 1;
                                     tv_follownumber.setText("关注人数："+follow);
 
+
                                 } else if (aa == 1) {
                                     Toast.makeText(SPXQActivity.this, "取消关注", Toast.LENGTH_SHORT).show();
                                     follow = follow - 1;
                                     tv_follownumber.setText("关注人数："+follow);
 
                                 }
-
 
                             }
                         });
@@ -415,7 +416,7 @@ public class SPXQActivity extends Activity {
                 tv_person.setText(contact);
 
                 Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/"+ head);
-                iv_head.setImageURI(uri);
+                ImageTools.load(uri,iv_head,50,50);
 
                 if (followed) {
                    wpgzFollow.setBackgroundResource(R.mipmap.scd);
@@ -489,6 +490,11 @@ public class SPXQActivity extends Activity {
                             public void run() {
                                 if(xj.getStatus().equals("200")){
                                     Toast.makeText(SPXQActivity.this, "下架成功", Toast.LENGTH_SHORT).show();
+                                    //发送广播
+                                    Intent intent = new Intent();
+                                    intent.setAction("cn.bgs.refash");
+                                    SPXQActivity.this.sendBroadcast(intent);
+
                                 }
                                 else {
 
