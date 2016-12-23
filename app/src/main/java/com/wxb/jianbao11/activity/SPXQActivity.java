@@ -491,10 +491,13 @@ public class SPXQActivity extends Activity {
                                     Intent intent = new Intent();
                                     intent.setAction("cn.bgs.refash");
                                     SPXQActivity.this.sendBroadcast(intent);
-//                                    bt_xiajia.setText("我要发布");
+                                    bt_xiajia.setText("我要发布");
 //                                    Intent intent1=new Intent();
 //                                    Bundle mBundle = new Bundle();
 //                                    mBundle.putStringArrayList("list",alist);
+//                                    mBundle.putString("","");
+
+
 
 
                                 } else {
