@@ -50,7 +50,7 @@ public class MyOkhttp {
     }
 
 
-    public void doRequest(String path, RequestType requestType, Map<String, String> map,
+    public void doRequest(Context context,String path, RequestType requestType, Map<String, String> map,
                           final MyCallBack mycallback, Type type) {
 
         Request.Builder builder = new Request.Builder();
@@ -68,13 +68,13 @@ public class MyOkhttp {
         }
         Request request = builder.build();
 
-        executeCall(request, mycallback, type);
+        executeCall(context,request, mycallback, type);
 
 
     }
 
 
-    private void executeCall(Request request, final MyCallBack mycallback, final Type type) {
+    private void executeCall(final Context context, Request request, final MyCallBack mycallback, final Type type) {
         okHttpClient = new OkHttpClient();
         Call call =  okHttpClient.newCall(request);
         mycallback.loading();
@@ -90,8 +90,10 @@ public class MyOkhttp {
                 if (response.isSuccessful()) {
                     String string = response.body().string();
                     if (type == null) {
+                        mycallback.checkIsLogin(context,string);
                         mycallback.onSuccess(string);
                     } else {
+                        mycallback.checkIsLogin(context,string);
                         Object o = gson.fromJson(string, type);
                         mycallback.onSuccess(o);
                     }

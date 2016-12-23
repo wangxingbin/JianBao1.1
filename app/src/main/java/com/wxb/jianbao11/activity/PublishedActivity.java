@@ -64,7 +64,7 @@ public class PublishedActivity extends Activity{
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
         map.put("curPage", curPage);
-        MyOkhttp.getInstance().doRequest(PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(PublishedActivity.this,PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
             @Override
             public void loading() {
 

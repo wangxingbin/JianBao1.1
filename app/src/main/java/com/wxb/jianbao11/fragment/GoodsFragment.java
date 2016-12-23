@@ -23,6 +23,7 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.google.gson.reflect.TypeToken;
 import com.wxb.jianbao11.R;
+import com.wxb.jianbao11.activity.Login;
 import com.wxb.jianbao11.activity.SPXQActivity;
 import com.wxb.jianbao11.activity.SousuoActivity;
 import com.wxb.jianbao11.adapter.SPZSAdapter;
@@ -205,7 +206,8 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
 
         Log.e("sdhkfjsnl;kfdn", Contant.CHAXUN + "?curPage=" + curPage);
         //封装的okhttp工具类
-        myOkhttp.doRequest(Contant.CHAXUN + "?curPage=" + curPage,
+        myOkhttp.doRequest(getActivity(),
+                Contant.CHAXUN + "?curPage=" + curPage,
                 MyOkhttp.RequestType.GET,
                 null,
                 new MyCallBack2(),
@@ -260,6 +262,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     //抽取的展示数据的方法
     private void displayData(LBZSbean o) {
         final LBZSbean lb = o;
+
         if (arrayList == null) {
 
             arrayList = (ArrayList<LBZSbean.DataBean.ListBean>) lb.getData().getList();
@@ -274,13 +277,10 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                         @Override
                         public void ItemClickListener(View view, int postion) {
                             if (token.equals("")) {
-                                Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-
-                            }
-                            else if(lb.getStatus().equals("301")){
-
-                                Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
-
+                                 Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), Login.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                getActivity().startActivity(intent);
                             }else {
 
                                 Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
@@ -312,11 +312,9 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                                 if (token.equals("")) {
 
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-
-                                } else if(lb.getStatus().equals("301")){
-
-                                    Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
-
+                                    Intent intent = new Intent(getActivity(), Login.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    getActivity().startActivity(intent);
                                 }else {
 
                                     Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
@@ -350,11 +348,9 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                                 if (token.equals("")) {
 
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-
-                                } else if(lb.getStatus().equals("301")){
-
-                                    Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
-
+                                    Intent intent = new Intent(getActivity(), Login.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    getActivity().startActivity(intent);
                                 }else {
 
                                     Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();

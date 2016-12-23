@@ -47,8 +47,8 @@ public class SPXQActivity extends Activity {
     private int vpheight;
     private ImageView wpgzFollow;
     private String id;
-    private TextView wpfbTime,wpPrice,wpTitle,wpDescription,wpMobile,wpQQ,
-            wpWechat,wpEmail,tv_follownumber,tv_person,wuping_pel;
+    private TextView wpfbTime, wpPrice, wpTitle, wpDescription, wpMobile, wpQQ,
+            wpWechat, wpEmail, tv_follownumber, tv_person, wuping_pel;
     private SimpleDraweeView draweeView;
     private ArrayList<ImageView> dian;
     private SharedPreferences sharedPreferences;
@@ -145,7 +145,6 @@ public class SPXQActivity extends Activity {
     }
 
 
-
     private void showPopupWindow() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(SPXQActivity.this);
@@ -153,7 +152,7 @@ public class SPXQActivity extends Activity {
         View v = LayoutInflater.from(SPXQActivity.this).inflate(
                 R.layout.pop, null);
 
-        SimpleDraweeView  sdv = (SimpleDraweeView) v.findViewById(R.id.sdv);
+        SimpleDraweeView sdv = (SimpleDraweeView) v.findViewById(R.id.sdv);
         wuping_pel = (TextView) v.findViewById(R.id.wuping_pel);
         wpMobile = (TextView) v.findViewById(R.id.wuping_phone);
         wpQQ = (TextView) v.findViewById(R.id.wuping_qq);
@@ -164,8 +163,8 @@ public class SPXQActivity extends Activity {
         TextView wpEmail1 = (TextView) v.findViewById(R.id.wuping_email1);
 
 
-        Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/"+ head);
-        ImageTools.load(uri,sdv,30,30);
+        Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/" + head);
+        ImageTools.load(uri, sdv, 30, 30);
 
         wuping_pel.setText(contact);
         if (TextUtils.isEmpty(mobile)) {
@@ -179,9 +178,9 @@ public class SPXQActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:"+ mobile));
+                intent.setData(Uri.parse("tel:" + mobile));
                 startActivity(intent);
 
 
@@ -201,8 +200,7 @@ public class SPXQActivity extends Activity {
             wpEmail.setText("");
             wpEmail1.setVisibility(View.GONE);
             wpEmail.setVisibility(View.GONE);
-            }
-        else {
+        } else {
             wpEmail.setVisibility(View.VISIBLE);
             wpEmail1.setVisibility(View.VISIBLE);
             wpEmail.setText(email);
@@ -218,7 +216,6 @@ public class SPXQActivity extends Activity {
         }
 
 
-
         builder.setView(v);//添加自定义View
         builder.create();
         builder.show();
@@ -231,7 +228,7 @@ public class SPXQActivity extends Activity {
         Type type = new TypeToken<GuanZhu>() {
         }.getType();
         String path = Contant.GUANZHU;
-        myOkhttp.doRequest(path,
+        myOkhttp.doRequest(SPXQActivity.this, path,
                 MyOkhttp.RequestType.POST,
                 map,
                 new MyCallBack() {
@@ -262,13 +259,13 @@ public class SPXQActivity extends Activity {
 //                                    Toast.makeText(SPXQActivity.this,"Success",Toast.LENGTH_SHORT).show();
                                     Toast.makeText(SPXQActivity.this, "关注成功", Toast.LENGTH_SHORT).show();
                                     follow = follow + 1;
-                                    tv_follownumber.setText("关注人数："+follow);
+                                    tv_follownumber.setText("关注人数：" + follow);
 
 
                                 } else if (aa == 1) {
                                     Toast.makeText(SPXQActivity.this, "取消关注", Toast.LENGTH_SHORT).show();
                                     follow = follow - 1;
-                                    tv_follownumber.setText("关注人数："+follow);
+                                    tv_follownumber.setText("关注人数：" + follow);
 
                                 }
 
@@ -304,10 +301,47 @@ public class SPXQActivity extends Activity {
         Log.e("商品详情网址", Contant.XIANGQING + "?id=" + id + "&token=" + token);
         Type type = new TypeToken<SPXQ>() {
         }.getType();
-        myOkhttp.doRequest(Contant.XIANGQING,
+        myOkhttp.doRequest(SPXQActivity.this, Contant.XIANGQING,
                 MyOkhttp.RequestType.POST,
                 map1,
-                new MyCallBack11(),
+                new MyCallBack() {
+                    @Override
+                    public void loading() {
+
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SPXQActivity.this, "network failure", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onSuccess(Object o) {
+                        displayData((SPXQ) o);
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SPXQActivity.this, "request params error", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                    }
+                },
                 type);
 
 
@@ -337,56 +371,17 @@ public class SPXQActivity extends Activity {
         bt_xiangyao = (Button) findViewById(R.id.bt_xiangyao);
 
 
-
     }
 
-    public class MyCallBack11 extends MyCallBack {
-
-
-        public void loading() {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
-        }
-
-        @Override
-        public void onFailure() {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(SPXQActivity.this, "network failure", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-        }
-
-        @Override
-        public void onSuccess(Object o) {
-
-            displayData((SPXQ) o);
-
-        }
-
-        @Override
-        public void onError() {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(SPXQActivity.this, "request params error", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-        }
-
-
-    }
 
     private void displayData(SPXQ o) {
         final SPXQ sp = o;
-        Log.e("", sp.toString());
+        if (sp != null) {
+            Log.e("", sp.toString());
+        }
+        if (sp.getData() == null) {
+            return;
+        }
         Log.e("", sp.getData().toString());
 
         final String title = sp.getData().getTitle();
@@ -398,8 +393,8 @@ public class SPXQActivity extends Activity {
         email = sp.getData().getEmail();
         wecat = sp.getData().getWechat();
         head = sp.getData().getHead();
-        final int state=sp.getData().getState();
-        final boolean owned=sp.getData().isOwned();
+        final int state = sp.getData().getState();
+        final boolean owned = sp.getData().isOwned();
         follow = sp.getData().getFollow();
         followed = sp.getData().isFollowed();
         contact = sp.getData().getContact();
@@ -411,20 +406,20 @@ public class SPXQActivity extends Activity {
                 wpfbTime.setText("" + time);
                 bar_tv_name.setText(title);
                 wpDescription.setText(description);
-                wpPrice.setText("¥"+price);
-                tv_follownumber.setText("关注人数:"+follow );
+                wpPrice.setText("¥" + price);
+                tv_follownumber.setText("关注人数:" + follow);
                 tv_person.setText(contact);
 
-                Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/"+ head);
-                ImageTools.load(uri,iv_head,50,50);
+                Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/" + head);
+                ImageTools.load(uri, iv_head, 50, 50);
 
                 if (followed) {
-                   wpgzFollow.setBackgroundResource(R.mipmap.scd);
+                    wpgzFollow.setBackgroundResource(R.mipmap.scd);
                 } else {
                     wpgzFollow.setBackgroundResource(R.mipmap.scm);
                 }
-                if(owned){
-                    if(state==1){
+                if (owned) {
+                    if (state == 1) {
                         bt_xiajia.setVisibility(View.VISIBLE);
                         bt_xiajia.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -434,14 +429,13 @@ public class SPXQActivity extends Activity {
                         });
 
 
-                    }else if(state==9||state==0||state==3){
+                    } else if (state == 9 || state == 0 || state == 3) {
                         bt_xiajia.setVisibility(View.GONE);
                     }
 
-                }else {
+                } else {
                     bt_xiajia.setVisibility(View.GONE);
                 }
-
 
 
                 tianjiatupian(sp);
@@ -456,12 +450,14 @@ public class SPXQActivity extends Activity {
 
         map2.put("id", id);
         map2.put("token", token);
-        map2.put("state",""+9);
+        map2.put("state", "" + 9);
 
         Type type = new TypeToken<XiaJia>() {
         }.getType();
 
-        myOkhttp.doRequest(Contant.BIANGENG,
+
+        myOkhttp.doRequest(SPXQActivity.this,
+                Contant.BIANGENG,
                 MyOkhttp.RequestType.POST,
                 map2,
                 new MyCallBack() {
@@ -484,19 +480,18 @@ public class SPXQActivity extends Activity {
 
                     @Override
                     public void onSuccess(Object o) {
-                        final XiaJia xj= (XiaJia) o;
+                        final XiaJia xj = (XiaJia) o;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if(xj.getStatus().equals("200")){
+                                if (xj.getStatus().equals("200")) {
                                     Toast.makeText(SPXQActivity.this, "下架成功", Toast.LENGTH_SHORT).show();
                                     //发送广播
                                     Intent intent = new Intent();
                                     intent.setAction("cn.bgs.refash");
                                     SPXQActivity.this.sendBroadcast(intent);
 
-                                }
-                                else {
+                                } else {
 
                                     Toast.makeText(SPXQActivity.this, "下架失败", Toast.LENGTH_SHORT).show();
 
@@ -518,12 +513,8 @@ public class SPXQActivity extends Activity {
                         });
 
                     }
-                },type);
-
-
-
-
-
+                }
+                , type);
 
 
     }
@@ -554,8 +545,6 @@ public class SPXQActivity extends Activity {
         }
 
     }
-
-
 
 }
 
