@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.RegisterBeen;
 import com.wxb.jianbao11.contants.Contant;
+import com.wxb.jianbao11.utils.PhotoNumberJudge;
 import com.wxb.jianbao11.utils.PhotoPostUtils;
 import com.wxb.jianbao11.utils.ShowToastUtils;
 import com.wxb.jianbao11.utils.TakePhotoPopWin;
@@ -75,6 +77,7 @@ public class Register extends Activity implements View.OnClickListener {
 
     private void initData() {
         yonghu = username.getText().toString().trim();
+
         mima = password.getText().toString().trim();
         xingming = name.getText().toString().trim();
         inivite_code = code.getText().toString().trim();
@@ -88,7 +91,13 @@ public class Register extends Activity implements View.OnClickListener {
         }
         map = new HashMap<>();
         map.put("code", inivite_code);
-        map.put("mobile", yonghu);
+        if (!PhotoNumberJudge.isPhoneNumberValid(yonghu)){
+            ShowToastUtils.showToast(Register.this,"手机格式不正确");
+            return;
+        }else {
+            map.put("mobile", yonghu);
+        }
+
         map.put("name", xingming);
         map.put("password", mima);
         map.put("gender", gender);
@@ -120,6 +129,7 @@ public class Register extends Activity implements View.OnClickListener {
             case R.id.register_button:
 
                 initData();
+
                 if (yonghu.equals("")||password.equals("")||name.equals("")||code.equals("")||gender.equals("")){
                     ShowToastUtils.showToast(Register.this,"请完善你的信息");
                    return;
