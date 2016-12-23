@@ -498,7 +498,7 @@ public class SPXQActivity extends Activity {
                                 }
                                 else {
 
-                                    Toast.makeText(SPXQActivity.this, "下架失败是", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SPXQActivity.this, "下架失败", Toast.LENGTH_SHORT).show();
 
                                 }
 
