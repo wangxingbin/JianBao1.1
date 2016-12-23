@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -376,13 +377,8 @@ public class PublishActivity extends Activity implements View.OnClickListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(PublishActivity.this, "发布失败请登录", Toast.LENGTH_SHORT).show();
-                            if ("301".equals(status)){
+                            Toast.makeText(PublishActivity.this, "发布失败", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(PublishActivity.this, Login.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                PublishActivity.this.startActivity(intent);
-                            }
 
 
                         }
@@ -407,9 +403,9 @@ public class PublishActivity extends Activity implements View.OnClickListener {
         map.put("price", str_jianbao_price);
         map.put("mobile", str_jianbao_number);
         map.put("email", str_jianbao_email);
-       /* SharedPreferences share = getSharedPreferences("TOKEN", MODE_PRIVATE);
-        String token = share.getString("token", "ll");*/
-        map.put("token", "3650BB5FD2234C688E2AC9EC1077928D");
+        SharedPreferences share = getSharedPreferences("TOKEN", MODE_PRIVATE);
+        String token = share.getString("token", "ll");
+        map.put("token", token);
 
     }
 
