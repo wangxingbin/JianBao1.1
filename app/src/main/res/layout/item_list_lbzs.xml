@@ -54,7 +54,7 @@
                     android:layout_height="20dp"
                     android:gravity="bottom"
                     android:text="¥1111"
-                    android:textColor="@color/black"
+                    android:textColor="#f00"
                     android:textSize="18sp" />
 
                 <View
@@ -69,6 +69,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="30dp"
                     android:padding="2dp"
+                    android:visibility="invisible"
                     android:src="@mipmap/ic_launcher" />
 
                 <TextView
@@ -78,6 +79,7 @@
                     android:layout_marginRight="20dp"
                     android:gravity="center_vertical"
                     android:text="12"
+                    android:visibility="invisible"
                     android:textSize="15sp" />
 
             </LinearLayout>
