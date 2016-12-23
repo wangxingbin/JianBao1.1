@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.LBZSbean;
+import com.wxb.jianbao11.utils.ImageTools;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,7 @@ public class SPZSAdapter extends RecyclerView.Adapter<SPZSAdapter.MyViewHolder> 
         Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/" + lb.getImage());
 
         holder.title.setText(lb.getTitle());
-        holder.sdv.setImageURI(uri);
+        ImageTools.load(uri,holder.sdv,120,120);
         holder.time.setText(lb.getIssue_time());
         holder.price.setText(lb.getPrice() + "");
         if(lb.getState()==1){

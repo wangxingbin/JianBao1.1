@@ -1,6 +1,9 @@
 package com.wxb.jianbao11.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +57,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     private ImageView iv_sousuo;
     private String token;
     private SharedPreferences sp;
+    private RefashRerver receiver=new RefashRerver();
 
 
     @Nullable
@@ -64,11 +68,37 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
 
+        //注册广播-----：动态广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("cn.bgs.refash");
+        getActivity().registerReceiver(receiver, filter);
+
+
         initData();
         initView(view);
         initEvent();
         return view;
     }
+
+    //广播接收器
+    private class RefashRerver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //执行刷新的操作
+            Log.e("", "这个广播 " );
+            arrayList.clear();
+            curPage = 1;
+           initData();
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiver);
+    }
+
 
 
     private void initEvent() {
@@ -230,7 +260,6 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     //抽取的展示数据的方法
     private void displayData(LBZSbean o) {
         final LBZSbean lb = o;
-
         if (arrayList == null) {
 
             arrayList = (ArrayList<LBZSbean.DataBean.ListBean>) lb.getData().getList();
@@ -246,6 +275,11 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                         public void ItemClickListener(View view, int postion) {
                             if (token.equals("")) {
                                 Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+
+                            }
+                            else if(lb.getStatus().equals("301")){
+
+                                Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
 
                             }else {
 
@@ -278,6 +312,10 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                                 if (token.equals("")) {
 
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+
+                                } else if(lb.getStatus().equals("301")){
+
+                                    Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
 
                                 }else {
 
@@ -312,6 +350,10 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                                 if (token.equals("")) {
 
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
+
+                                } else if(lb.getStatus().equals("301")){
+
+                                    Toast.makeText(getActivity(), "TOKEN失败", Toast.LENGTH_SHORT).show();
 
                                 }else {
 
