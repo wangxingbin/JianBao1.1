@@ -104,6 +104,12 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.inject(this, view);
+        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
         token = sp.getString("token", "");
         map = new HashMap<>();
@@ -112,7 +118,6 @@ public class MineFragment extends Fragment {
             initData();
         }
         facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
-        return view;
     }
 
     @Override
@@ -123,7 +128,7 @@ public class MineFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // 拍照后获取返回值，这里获取到的是原始图片。
+            // 拍照后获取返回值，这里获取到的是原始图片。
         if (requestCode == PHOTO_REQUEST_CAREMA && resultCode == Activity.RESULT_OK) {
             File file = new File(facePath);
             Uri uri = Uri.fromFile(file);
