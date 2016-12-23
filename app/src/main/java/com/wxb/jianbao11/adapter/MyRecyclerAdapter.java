@@ -1,6 +1,7 @@
 package com.wxb.jianbao11.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wxb.jianbao11.R;
-import com.wxb.jianbao11.bean.Goods;
+import com.wxb.jianbao11.bean.CheckPublished;
 import com.wxb.jianbao11.contants.Contant;
+import com.wxb.jianbao11.utils.ImageTools;
 
 import java.util.ArrayList;
 /*
@@ -49,19 +51,20 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter <MyRecyclerAdapter.M
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Object obj = list.get(position);
-        if (!(obj instanceof Goods.ListBean)){
+        if (!(obj instanceof CheckPublished.DataBean.ListBean)){
             return;
         }
-        Goods.ListBean good=(Goods.ListBean)obj;
+        CheckPublished.DataBean.ListBean checkPublished=(CheckPublished.DataBean.ListBean)obj;
         // 图片
-        String image = Contant.IMGQZ+good.getImage();
+        String image = Contant.IMGQZ+checkPublished.getImage();
         System.out.println("guaju"+image);
         // 讲获取到的数据放到相应的控件上
-        holder.tv_money.setText("¥ "+good.getPrice());
-        holder.tv_title.setText(good.getTitle());
-        holder.tv_time.setText(good.getIssue_time());
+        holder.tv_money.setText("¥ "+checkPublished.getPrice());
+        holder.tv_title.setText(checkPublished.getTitle());
+        holder.tv_time.setText(checkPublished.getIssue_time());
         holder.picture.setImageURI(image);
-        switch (good.getState()){
+        ImageTools.load(Uri.parse(image),holder.picture,120,120);
+        switch (checkPublished.getState()){
             case 0:
                 holder.tv_state.setText("发布");
                 break;

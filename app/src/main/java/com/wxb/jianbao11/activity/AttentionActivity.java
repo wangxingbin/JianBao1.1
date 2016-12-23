@@ -2,6 +2,7 @@ package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +34,7 @@ public class AttentionActivity extends Activity {
     private ImageView backImage;
     private RecyclerView recyclerview;
     private ImageView iv;
-    private ArrayList<CheckPublished> list;
+    private ArrayList<CheckPublished.DataBean.ListBean> list;
     private Handler mHandler = new Handler();
     private String token;
 
@@ -46,7 +47,6 @@ public class AttentionActivity extends Activity {
         initView();
         initData();
         initBack();
-        //测试
     }
 
     private void initBack() {
@@ -105,50 +105,13 @@ public class AttentionActivity extends Activity {
                         });
                     }
                 }
-
             }
 
             @Override
             public void onError() {
 
             }
-        },CheckPublished.class);
-
-
-        /*OkhttpUtils.setGetEntiydata(new OkhttpUtils.EntiyData() {
-            @Override
-            public void getEntiy(Object o) {
-                if (o == null) {
-                    Toast.makeText(AttentionActivity.this, "网络异常，请检查您的网络", Toast.LENGTH_SHORT).show();
-                }
-                if (o != null && o instanceof CheckPublished) {
-                    //iv.setVisibility(View.GONE);
-                    CheckPublished CheckPublished = (CheckPublished) o;
-                    list = (ArrayList) CheckPublished.getData().getList();
-                    if (list.isEmpty()) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                iv.setImageResource(R.mipmap.shoucang);
-                                iv.setVisibility(View.VISIBLE);
-                                recyclerview.setVisibility(View.GONE);
-                            }
-                        });
-                    } else {
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                initEvent();
-                                iv.setVisibility(View.GONE);
-                                recyclerview.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    }
-                }
-            }
-        });
-        OkhttpUtils.post(map, PATH, this, CheckPublished.class);*/
-
+        }, CheckPublished.class);
     }
 
     private void initEvent() {
@@ -156,14 +119,13 @@ public class AttentionActivity extends Activity {
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         MyRecyclerAdapter adapter = new MyRecyclerAdapter(AttentionActivity.this, list);
         recyclerview.setAdapter(adapter);
-        adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
+        adapter.setOnClickListener( new MyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void ItemClickListener(View view, int position) {
-                //startActivity(new Intent(AttentionActivity.this, SoldActivity.class));
-                Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
-               // intent.putExtra("id",list.get(position).getId()+"");
-               // startActivity(intent);
+                //Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
+                intent.putExtra("id",list.get(position).getId()+"");
+                startActivity(intent);
             }
         });
 

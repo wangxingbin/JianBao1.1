@@ -10,9 +10,9 @@
 
     <ImageView
         android:id="@+id/bar_iv_back"
-        android:layout_width="15dp"
-        android:layout_height="23dp"
-        android:layout_margin="5dp"
+        android:layout_width="12dp"
+        android:layout_height="20dp"
+        android:layout_margin="8dp"
         android:background="@mipmap/back_left"
         android:clickable="true"
         android:padding="5dp" />

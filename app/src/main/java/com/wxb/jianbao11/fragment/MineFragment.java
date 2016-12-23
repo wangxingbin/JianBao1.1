@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.activity.AttentionActivity;
+import com.wxb.jianbao11.activity.Login;
 import com.wxb.jianbao11.activity.MessageActivity;
 import com.wxb.jianbao11.activity.PublishedActivity;
 import com.wxb.jianbao11.activity.SettingsActivity;
@@ -35,7 +37,6 @@ import com.wxb.jianbao11.bean.CodeBeen;
 import com.wxb.jianbao11.bean.GeRenXinxi;
 import com.wxb.jianbao11.bean.Uphoto;
 import com.wxb.jianbao11.contants.Contant;
-import com.wxb.jianbao11.utils.CustomProgress;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
 import com.wxb.jianbao11.utils.PhotoPostUtils;
@@ -74,6 +75,12 @@ public class MineFragment extends Fragment {
     LinearLayout mineLlYindao;
     @InjectView(R.id.mine_tv_invitationCode)
     TextView mineTvInvitationCode;
+    @InjectView(R.id.mine_denglu)
+    LinearLayout mineDenglu;
+    @InjectView(R.id.mine_denglued)
+    LinearLayout mineDenglued;
+    @InjectView(R.id.mine_btn)
+    Button mineBtn;
     private String token;
     private TakePhotoPopWin photoPopWin;
     private String facePath;
@@ -101,8 +108,9 @@ public class MineFragment extends Fragment {
         token = sp.getString("token", "");
         map = new HashMap<>();
         map.put("token", token);
-        CustomProgress.getPrgressDolilog(getActivity(), "正在加载", "请稍后...");
-        initData();
+        if (token != null || token.isEmpty() || token.equals("")){
+            initData();
+        }
         facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
         return view;
     }
@@ -117,15 +125,10 @@ public class MineFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // 拍照后获取返回值，这里获取到的是原始图片。
         if (requestCode == PHOTO_REQUEST_CAREMA && resultCode == Activity.RESULT_OK) {
-  /*          mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {*/
             File file = new File(facePath);
             Uri uri = Uri.fromFile(file);
             mineIvPhoto.setImageURI(uri);
             upLoadFaceIcon(file);
-/*                }
-            }, 500);*/
         } else if (requestCode == PHOTO_REQUEST_GALLERY) {
             if (photoPopWin.isShowing()) {
                 photoPopWin.dismiss();
@@ -163,14 +166,19 @@ public class MineFragment extends Fragment {
             if (photoPopWin.isShowing()) {
                 photoPopWin.dismiss();
             }
+
             mineIvPhoto.setImageURI(imageFile.getAbsolutePath());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @OnClick({R.id.mine_iv_photo, R.id.mine_ll_message, R.id.mine_ll_publish, R.id.mine_ll_attend, R.id.mine_ll_settings, R.id.mine_ll_yindao, R.id.mine_tv_invitationCode})
+    @OnClick({R.id.mine_btn, R.id.mine_iv_photo, R.id.mine_ll_message, R.id.mine_ll_publish, R.id.mine_ll_attend, R.id.mine_ll_settings, R.id.mine_ll_yindao, R.id.mine_tv_invitationCode})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.mine_btn:
+                startActivity(new Intent(getActivity(), Login.class));
+                getActivity().finish();
+                break;
             case R.id.mine_iv_photo:
                 showPop(view);
                 break;
@@ -206,7 +214,6 @@ public class MineFragment extends Fragment {
 
             @Override
             public void loading() {
-                //ShowToastUtils.showToast(getActivity(),"");
 
             }
 
@@ -222,10 +229,6 @@ public class MineFragment extends Fragment {
                 }
 
                 GeRenXinxi geRenXinxi = (GeRenXinxi) o;
-                // progressbar dismiss
-                if (geRenXinxi.getStatus().equals("200")) {
-                    CustomProgress.dissPrgress();
-                }
                 mobile = geRenXinxi.getData().getMobile();
                 name = geRenXinxi.getData().getName();
                 photo = geRenXinxi.getData().getPhoto();
@@ -233,7 +236,7 @@ public class MineFragment extends Fragment {
                     @Override
                     public void run() {
                         if (photo == null || photo.isEmpty()) {
-                            mineIvPhoto.setImageResource(R.mipmap.ic_launcher);
+                            mineIvPhoto.setImageResource(R.mipmap.morentx);
                         } else if (!photo.isEmpty() || photo != null) {
                             String path = Contant.IMGQZ + photo;
                             Uri imgurl = Uri.parse(path);
@@ -299,8 +302,6 @@ public class MineFragment extends Fragment {
                     Uphoto o1 = (Uphoto) o;
                     String status = o1.getStatus();
                     if ("200".equals(status)) {
-                        //Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
-                        //System.out.println("上传成功");
                     }
                 }
             }
@@ -344,7 +345,7 @@ public class MineFragment extends Fragment {
     // 邀请码
     public void initIn() {
         String path = Contant.InvitationCode;
-        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack()  {
+        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
 
             private int state;
             private String code;
@@ -370,7 +371,7 @@ public class MineFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "获取邀请码成功", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getActivity(), "获取邀请码成功", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -417,7 +418,7 @@ public class MineFragment extends Fragment {
             public void onError() {
 
             }
-        },CodeBeen.class);
+        }, CodeBeen.class);
     }
 
 }

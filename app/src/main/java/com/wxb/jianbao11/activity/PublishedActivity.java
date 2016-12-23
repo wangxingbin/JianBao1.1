@@ -2,6 +2,7 @@ package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +17,6 @@ import android.widget.Toast;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.adapter.MyRecyclerAdapter;
 import com.wxb.jianbao11.bean.CheckPublished;
-import com.wxb.jianbao11.bean.Goods;
 import com.wxb.jianbao11.contants.Contant;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
@@ -34,7 +34,7 @@ public class PublishedActivity extends Activity{
     private ImageView backImage;
     private RecyclerView recyclerview;
     private ImageView iv;
-    private ArrayList<Goods> list;
+    private ArrayList<CheckPublished.DataBean.ListBean> list;
     private Handler mHandler = new Handler();
     private String token;
 
@@ -120,14 +120,12 @@ public class PublishedActivity extends Activity{
         adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void ItemClickListener(View view, int position) {
-                //startActivity(new Intent(PublishedActivity.this, SoldActivity.class));
-                Toast.makeText(PublishedActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(PublishedActivity.this, SPXQActivity.class);
-                // intent.putExtra("id",list.get(position).getId()+"");
-                // startActivity(intent);
+                //Toast.makeText(PublishedActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PublishedActivity.this, SPXQActivity.class);
+                 intent.putExtra("id",list.get(position).getId()+"");
+                 startActivity(intent);
             }
         });
-
     }
 
     private void initView() {
