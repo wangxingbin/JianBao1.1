@@ -37,6 +37,6 @@ public class SettingsActivity extends Activity {
     private void initView() {
         barName = (TextView) findViewById(R.id.bar_tv_name);
         backImage = (ImageView) findViewById(R.id.bar_iv_back);
-        barName.setText("设置");
+        barName.setText("关于我们");
     }
 }
