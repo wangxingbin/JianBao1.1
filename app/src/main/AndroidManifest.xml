@@ -27,6 +27,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
+        <!--引导页面-->
         <activity android:name=".activity.GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +47,8 @@
         <activity android:name=".activity.SSLBActivity"/>
         <activity android:name=".activity.SPXQActivity"/>
         <activity android:name=".activity.PhotoViewD"/>
+        <!--导航页-->
+        <activity android:name=".activity.LoginShow"/>
         <!--跳转发布界面-->
         <activity android:name=".activity.PublishActivity"></activity>
 

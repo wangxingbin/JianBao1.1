@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.adapter.GuideAdapter;
 import com.wxb.jianbao11.app.MInterface;
@@ -34,11 +33,13 @@ public class GuideActivity extends Activity {
     private ArrayList<View> mGuideViewList = new ArrayList<View>();
     private ImageView dots[] = new ImageView[imageList.size()];
     private Button btn;
+    boolean isFirstIn = false;
     @InjectView(R.id.vp)
     ViewPager vp;
     @InjectView(R.id.layout)
     LinearLayout layout;
     private String url;
+
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -102,7 +103,7 @@ public class GuideActivity extends Activity {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(GuideActivity.this,MainActivity.class));
+            startActivity(new Intent(GuideActivity.this,LoginShow.class));
         }
     };
 }
