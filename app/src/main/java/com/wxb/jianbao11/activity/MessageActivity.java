@@ -61,7 +61,7 @@ public class MessageActivity extends Activity {
 
     private void initData() {
         final String path = Contant.GeRenXinXi;
-        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(MessageActivity.this,path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
 
             private String email;
             private String wechat;
@@ -111,8 +111,12 @@ public class MessageActivity extends Activity {
     }
 
     public void setMessage(TextView tv, String str) {
-        if (str != "" && !str.isEmpty()) {
+        if (str!=null &&!("".equals(str))) {
             tv.setText(str);
+        }
+        else
+        {
+            tv.setText("暂无信息");
         }
     }
 

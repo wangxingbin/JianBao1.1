@@ -122,7 +122,7 @@ public class SPXQActivity extends Activity {
         Type type = new TypeToken<GuanZhu>() {
         }.getType();
         String path = Contant.GUANZHU;
-        myOkhttp.doRequest(path,
+        myOkhttp.doRequest(SPXQActivity.this,path,
                 MyOkhttp.RequestType.POST,
                 map,
                 new MyCallBack() {
@@ -195,7 +195,7 @@ public class SPXQActivity extends Activity {
         Log.e("商品详情网址", Contant.XIANGQING + "?id=" + id + "&token=" + token);
         Type type = new TypeToken<SPXQ>() {
         }.getType();
-        myOkhttp.doRequest(Contant.XIANGQING,
+        myOkhttp.doRequest(SPXQActivity.this,Contant.XIANGQING,
                 MyOkhttp.RequestType.POST,
                 map1,
                 new MyCallBack11(),
@@ -282,7 +282,11 @@ public class SPXQActivity extends Activity {
 
     private void displayData(SPXQ o) {
         final SPXQ sp = o;
-        Log.e("", sp.toString());
+        if (sp!=null){
+        Log.e("", sp.toString());}
+        if (sp.getData()==null){
+            return;
+        }
         Log.e("", sp.getData().toString());
 
         final String title = sp.getData().getTitle();

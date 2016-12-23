@@ -12,6 +12,9 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.activity.AttentionActivity;
 import com.wxb.jianbao11.activity.Login;
@@ -48,6 +52,8 @@ import java.util.HashMap;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by 诺古 on 2016/12/19.
@@ -98,19 +104,31 @@ public class MineFragment extends Fragment {
     private File imageFile;
     private String selecImaPath;
     private Uri originalUri;
+    private MainActivity activity;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.inject(this, view);
-        SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        activity = (MainActivity) getActivity();
+        fm = activity.getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
+        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
         map = new HashMap<>();
         map.put("token", token);
         initData();
-        facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
-        return view;
+
     }
 
     @Override
@@ -173,8 +191,17 @@ public class MineFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mine_btn:
-                startActivity(new Intent(getActivity(), Login.class));
-                getActivity().finish();
+                SharedPreferences share= getActivity().getSharedPreferences("TOKEN",MODE_PRIVATE);
+                SharedPreferences.Editor edit = share.edit();
+                edit.putString("token", "");
+                edit.putBoolean("isLogin",false);
+                edit.commit();
+                ft.hide(activity.mineFragment);
+                ft.show(activity.goodsFragment);
+                ft.commit();
+               // startActivity(new Intent(getActivity(), Login.class));
+               // getActivity().finish();
+
                 break;
             case R.id.mine_iv_photo:
                 showPop(view);
@@ -203,7 +230,7 @@ public class MineFragment extends Fragment {
     // 个人信息
     private void initData() {
         final String path = Contant.GeRenXinXi;
-        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(MineFragment.this.getActivity(),path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
 
             private String mobile;
             private String name;
@@ -226,6 +253,9 @@ public class MineFragment extends Fragment {
                 }
 
                 GeRenXinxi geRenXinxi = (GeRenXinxi) o;
+                if (geRenXinxi.getData()==null){
+                    return;
+                }
                 mobile = geRenXinxi.getData().getMobile();
                 name = geRenXinxi.getData().getName();
                 photo = geRenXinxi.getData().getPhoto();
@@ -342,7 +372,7 @@ public class MineFragment extends Fragment {
     // 邀请码
     public void initIn() {
         String path = Contant.InvitationCode;
-        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(MineFragment.this.getActivity(),path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
 
             private int state;
             private String code;
