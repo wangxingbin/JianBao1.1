@@ -182,6 +182,7 @@ public class MineFragment extends Fragment {
             if (photoPopWin.isShowing()) {
                 photoPopWin.dismiss();
             }
+
             mineIvPhoto.setImageURI(imageFile.getAbsolutePath());
         }
         super.onActivityResult(requestCode, resultCode, data);
