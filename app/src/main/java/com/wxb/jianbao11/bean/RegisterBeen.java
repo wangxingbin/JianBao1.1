@@ -4,7 +4,7 @@ package com.wxb.jianbao11.bean;
  * Created by 孙贝贝 on 2016/12/1.
  */
 
-public class RegisterBeen {
+public class  RegisterBeen {
 
     /**
      * status : 200
