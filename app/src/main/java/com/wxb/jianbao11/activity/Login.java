@@ -109,7 +109,10 @@ public class Login extends Activity implements View.OnClickListener{
         map.put("username", username);
         map.put("password", password);
         String path = Contant.LAND;
-        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(Login.this,path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+
+            private SharedPreferences tokenShare;
+
             @Override
             public void loading() {
 
@@ -134,7 +137,15 @@ public class Login extends Activity implements View.OnClickListener{
                         public void run() {
                             CustomProgress.dissPrgress();
                             ShowToastUtils.showToast(Login.this,"登陆成功");
-                            startActivity(new Intent(Login.this, MainActivity.class));
+
+                            tokenShare = getSharedPreferences("TOKEN",MODE_PRIVATE);
+                            SharedPreferences.Editor edit = tokenShare.edit();
+                             edit.putBoolean("isLogin",true);
+                            edit.commit();
+                             Intent intent = new Intent();
+                             intent.putExtra("info","成功");
+                             intent.setClass(Login.this,MainActivity.class);
+                             startActivity(intent);
                             finish();
                         }
                     });
@@ -170,8 +181,8 @@ public class Login extends Activity implements View.OnClickListener{
 
                 int state = data.getState();
                 token = landBeen.getToken();
-                SharedPreferences share= getSharedPreferences("TOKEN",MODE_PRIVATE);
-                SharedPreferences.Editor edit = share.edit();
+                tokenShare = getSharedPreferences("TOKEN",MODE_PRIVATE);
+                SharedPreferences.Editor edit = tokenShare.edit();
                 edit.putString("token", token);
                 edit.commit();
 

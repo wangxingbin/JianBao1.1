@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wxb.jianbao11.R;
+import com.wxb.jianbao11.utils.ImageTools;
 
 import java.util.ArrayList;
 
@@ -41,9 +42,8 @@ public class DGSPTPAdapter extends RecyclerView.Adapter<DGSPTPAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-
         Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/"+ list.get(position));
-        holder.id_sdv.setImageURI(uri);
+        ImageTools.load(uri,holder.id_sdv,300,300);
 
         if(mListener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,10 +1,10 @@
 package com.wxb.jianbao11.bean;
 
 /**
- * Created by 孙贝贝 on 2016/12/1.
+ * Created by ti on 2016/12/22.
  */
 
-public class  RegisterBeen {
+public class XiaJia {
 
     /**
      * status : 200
