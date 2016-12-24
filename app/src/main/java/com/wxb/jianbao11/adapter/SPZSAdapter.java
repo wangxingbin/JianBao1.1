@@ -58,7 +58,7 @@ public class SPZSAdapter extends RecyclerView.Adapter<SPZSAdapter.MyViewHolder> 
         holder.title.setText(lb.getTitle());
         ImageTools.load(uri,holder.sdv,120,120);
         holder.time.setText(lb.getIssue_time());
-        holder.price.setText(lb.getPrice() + "");
+        holder.price.setText("¥ "+lb.getPrice() + "");
         if(lb.getState()==1){
             holder.state.setText("正常");
 
