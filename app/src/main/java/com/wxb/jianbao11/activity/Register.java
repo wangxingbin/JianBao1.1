@@ -97,7 +97,6 @@ public class Register extends Activity implements View.OnClickListener {
         }else {
             map.put("mobile", yonghu);
         }
-
         map.put("name", xingming);
         map.put("password", mima);
         map.put("gender", gender);
