@@ -253,7 +253,6 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(), "successful", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             });
@@ -325,7 +324,6 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                             @Override
                             public void ItemClickListener(View view, int postion) {
                                 if (token.equals("")) {
-
                                     Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getActivity(), Login.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

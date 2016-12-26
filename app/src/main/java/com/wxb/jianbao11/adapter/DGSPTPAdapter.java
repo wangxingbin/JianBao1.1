@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wxb.jianbao11.R;
+import com.wxb.jianbao11.contants.Contant;
 import com.wxb.jianbao11.utils.ImageTools;
 
 import java.util.ArrayList;
@@ -42,7 +45,13 @@ public class DGSPTPAdapter extends RecyclerView.Adapter<DGSPTPAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-        Uri uri = Uri.parse("http://192.168.4.188/Goods/uploads/"+ list.get(position));
+        Uri uri = Uri.parse(Contant.IMGQZ+list.get(position));
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(uri)
+                .setAutoPlayAnimations(true)//设置自动播放，如果不设置，没有动画
+                .build();
+
+        holder.id_sdv.setController(controller);
         ImageTools.load(uri,holder.id_sdv,300,300);
 
         if(mListener!=null){
