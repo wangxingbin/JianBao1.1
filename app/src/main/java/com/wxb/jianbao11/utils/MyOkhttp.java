@@ -33,6 +33,7 @@ public class MyOkhttp {
     private Gson gson;
     private OkHttpClient okHttpClient;
 
+
     private MyOkhttp() {
         super();
         gson = new Gson();
@@ -59,7 +60,7 @@ public class MyOkhttp {
             builder.get();
         } else if (requestType == RequestType.POST) {
             FormBody.Builder fBuilder = new FormBody.Builder();
-            Set<Map.Entry<String, String>> entries = map.entrySet();
+            Set<Map.Entry<String, String>> entries =  map.entrySet();
             for (Map.Entry<String, String> e : entries) {
                 fBuilder.add(e.getKey(), e.getValue());
             }
@@ -169,6 +170,45 @@ public class MyOkhttp {
 
         });
     }
+    public interface GetEntityCallBack{
+        void getEntity(Object obj);
+    }
+    public static GetEntityCallBack callback;
+    public static void setGetEntityCallBack(GetEntityCallBack data1) {
+        callback = data1;
+    }
+    public static Object o;
+    /*
+        * get
+        * */
+    public static void getData(String path, final Class cla) {
+
+        OkHttpClient client = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(path)
+                .get()
+                .build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String json = response.body().string();
+
+                    Log.i(TAG, "onResponse: " + json);
+                    Gson gson = new Gson();
+                    o = gson.fromJson(json, cla);
+                    //4.
+                    callback.getEntity(o);
+                }
+            }
+        });
+    }
 
 
 
@@ -177,7 +217,6 @@ public class MyOkhttp {
     public enum RequestType {
         GET,
         POST,
-        UPLOADFILE
     }
 
 }

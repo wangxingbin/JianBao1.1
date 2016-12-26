@@ -79,7 +79,6 @@ public class Camera extends Activity implements View.OnClickListener {
         bar.setProgress(0);
         bar.setScrollBarFadeDuration(3000);
         layout = (LinearLayout) findViewById(R.id.liner);
-
         btn2 = (Button) findViewById(R.id.btn2);
         btn2.setOnClickListener(this);
     }

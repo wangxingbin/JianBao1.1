@@ -65,7 +65,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_goods, null);
+        View view = inflater.inflate(R.layout.fragment_goods,container, false);
 
         sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");

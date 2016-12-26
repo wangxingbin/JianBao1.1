@@ -1,8 +1,6 @@
 package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,19 +10,15 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.RegisterBeen;
 import com.wxb.jianbao11.contants.Contant;
 import com.wxb.jianbao11.utils.CustomProgress;
-import com.wxb.jianbao11.utils.MyCallBack;
-import com.wxb.jianbao11.utils.MyOkhttp;
 import com.wxb.jianbao11.utils.PhotoNumberJudge;
 import com.wxb.jianbao11.utils.PhotoPostUtils;
 import com.wxb.jianbao11.utils.ResgiterUtils;
 import com.wxb.jianbao11.utils.ShowToastUtils;
-import com.wxb.jianbao11.utils.TakePhotoPopWin;
 
 import java.io.File;
 import java.util.HashMap;

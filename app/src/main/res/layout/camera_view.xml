@@ -26,6 +26,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:layout_marginTop="50dp"
             android:id="@+id/image"
             android:layout_width="270dp"
             android:layout_height="270dp"
@@ -38,8 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:background="@drawable/button_back_land"
+            android:background="@drawable/btn_style_color"
             android:text="上传方式"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <Button
@@ -48,7 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:background="@drawable/button_back_land"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_style_color"
             android:text="开始上传"
             android:textSize="20sp" />
     </LinearLayout>

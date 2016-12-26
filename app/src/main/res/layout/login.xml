@@ -4,108 +4,99 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
-    <include layout="@layout/base_toolbar"></include>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_launcher"
-        android:layout_marginTop="30dp"/>
-    <RelativeLayout
+    android:background="@color/white"
+    android:orientation="vertical">
 
+    <include layout="@layout/base_toolbar" />
+
+    <RelativeLayout
         android:id="@+id/login_div"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="15dip"
-        android:layout_margin="15dip"
-        android:background="@drawable/background_login_div_bg" >
+        android:layout_margin="15dp"
+        android:background="@drawable/background_login_div_bg"
+        android:padding="15dp">
         <!-- 邀请码 -->
         <TextView
             android:id="@+id/login_user_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="5dp"
-            android:text="@string/login_label_username"
-            android:textSize="25sp"
             android:textColor="#020203"
-            />
+            android:textSize="25sp" />
+
         <EditText
             android:id="@+id/username_edit"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_below="@id/login_user_input"
-            android:singleLine="true"
-            android:inputType="text"
-            android:textSize="25sp"
+            android:drawableLeft="@mipmap/d_mine"
+            android:background="@drawable/btn_style"
             android:hint="@string/input_username"
-            android:background="@drawable/editback"/>
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="16sp" />
         <!-- 密码 text -->
         <TextView
             android:id="@+id/login_password_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/username_edit"
-            android:layout_marginTop="3dp"
-            android:text="@string/login_label_password"
-            android:textSize="25sp"
             android:textColor="#020203"
-           />
+            android:textSize="25sp" />
+
         <EditText
             android:id="@+id/password_edit"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
+            android:drawableLeft="@mipmap/d_dahui"
             android:layout_below="@id/login_password_input"
-            android:singleLine="true"
-            android:inputType="textPassword"
+            android:background="@drawable/btn_style"
             android:hint="@string/input_password"
-            android:textSize="25sp"
-            android:background="@drawable/editback"/>
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
         <CheckBox
             android:id="@+id/check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/rember"
             android:layout_below="@+id/password_edit"
-            android:textSize="15sp"
-            />
+            android:layout_marginTop="20dp"
+            android:text="@string/rember"
+            android:textSize="15sp" />
         <!-- 登录button -->
-        <Button
-            android:id="@+id/signin_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/password_edit"
-            android:layout_alignRight="@id/password_edit"
-            android:text="@string/login_label_signin"
-            android:background="@drawable/button_back_land"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            />
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/signin_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/password_edit"
+        android:layout_below="@id/password_edit"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_style_color"
+        android:text="@string/login_label_signin"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
     <LinearLayout
+        android:id="@+id/register"
+        android:paddingTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <TextView
-            android:text="@string/login_register_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:textColor="#888"
-            android:textSize="20sp"/>
-        <TextView
-            android:id="@+id/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/textlink"
-            android:textColor="#FF0066CC"
-            android:textSize="23sp"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>

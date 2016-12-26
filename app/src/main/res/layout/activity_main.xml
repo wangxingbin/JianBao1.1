@@ -34,9 +34,10 @@
 
             <ImageView
                 android:id="@+id/rb_goods"
-                android:layout_width="24dp"
+                android:layout_width="30dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_marginRight="20dp"
                 android:src="@drawable/comui_tab_home"
                 android:scaleType="centerInside"/>
 
@@ -51,9 +52,10 @@
 
             <ImageView
                 android:id="@+id/rb_mine"
-                android:layout_width="24dp"
+                android:layout_width="30dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="20dp"
                 android:src="@drawable/comui_tab_person_selected"
                 android:scaleType="centerInside"/>
 
@@ -64,7 +66,7 @@
     <!--第二个LinearLayout 内有凸起按钮-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="76dp"
+        android:layout_height="85dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
         android:gravity="center|top"
@@ -72,10 +74,10 @@
 
         <ImageView
             android:id="@+id/rb_add"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:onClick="onClickPublish"
-            android:src="@drawable/comui_tab_post"/>
+            android:src="@drawable/comui_tab_post_selected"/>
 
     </LinearLayout>
 
