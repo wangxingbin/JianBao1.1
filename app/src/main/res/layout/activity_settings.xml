@@ -28,14 +28,16 @@
         android:layout_height="1dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/line" />
+        android:background="@color/line"
+        android:layout_marginBottom="80dp"/>
 
-    <Button
+
+    <!--<Button
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:text="退出登录"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"/>-->
 
 </LinearLayout>
