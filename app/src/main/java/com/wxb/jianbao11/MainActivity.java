@@ -99,7 +99,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     Intent intent = new Intent(this, Login.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    this.finish();
+                    //this.finish();
                 }
                 break;
             case R.id.rb_add:
