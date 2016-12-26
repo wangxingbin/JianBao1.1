@@ -337,7 +337,6 @@ public class SPXQActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(SPXQActivity.this, "successful", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
                         });

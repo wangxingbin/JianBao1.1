@@ -231,7 +231,6 @@ public class SSLBActivity extends Activity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(SSLBActivity.this, "successful", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             });
