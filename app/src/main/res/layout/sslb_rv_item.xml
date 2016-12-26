@@ -19,7 +19,7 @@
             android:layout_margin="3dp"
             fresco:actualImageScaleType="fitXY"
             android:src="@mipmap/message_action_pic"
-            fresco:placeholderImage="@mipmap/message_action_pic"
+            fresco:placeholderImage="@mipmap/message_action_picgit "
             fresco:placeholderImageScaleType="fitCenter"
             />
 
