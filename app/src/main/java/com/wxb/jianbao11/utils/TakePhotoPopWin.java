@@ -5,10 +5,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.wxb.jianbao11.R;
 
 /**
@@ -20,7 +21,7 @@ public class TakePhotoPopWin extends PopupWindow {
 
     private View view;
     private TextView btn_take_photo, btn_pick_photo;
-    private Button  btn_cancel;
+    private ImageView  btn_cancel;
 
     public TakePhotoPopWin(Context mContext, View.OnClickListener itemsOnClick) {
 
@@ -28,7 +29,7 @@ public class TakePhotoPopWin extends PopupWindow {
 
         btn_take_photo = (TextView) view.findViewById(R.id.btn_take_photo);
         btn_pick_photo = (TextView) view.findViewById(R.id.btn_pick_photo);
-        btn_cancel = (Button) view.findViewById(R.id.btn_cancel);
+        btn_cancel = (ImageView) view.findViewById(R.id.btn_cancel);
         // 取消按钮
         btn_cancel.setOnClickListener(new View.OnClickListener() {
 
