@@ -2,9 +2,8 @@ package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.wxb.jianbao11.MainActivity;
@@ -19,9 +18,8 @@ import java.util.TimerTask;
  */
 
 public class LoginShow extends Activity {
-    private Button button;
     private TextView tv_timer;
-    private int num = 4;
+    private int num = 3;
     private Timer timer = new Timer();
     private boolean flag = true;
 
@@ -50,27 +48,33 @@ public class LoginShow extends Activity {
             }
         };
         timer.schedule(task, 1000, 1000);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginShow.this, MainActivity.class);
-                startActivity(intent);
-                intent.clone();
-            }
-        });
     }
+
     private void initView() {
-        button = (Button) findViewById(R.id.button);
         tv_timer = (TextView) findViewById(R.id.tv_timer);
     }
 
     private void initIntent() {
+
         String tag = (String) SharedPreferencesUtil.get(LoginShow.this, "tag", "");
-        startActivity(new Intent(LoginShow.this, MainActivity.class));
+
+        //定义一个setting记录APP是几次启动！！！
+        SharedPreferences setting = getSharedPreferences("count", 0);
+        Boolean user_first = setting.getBoolean("FIRST", true);
+        if (user_first) {// 第一次则跳转到欢迎页面
+            setting.edit().putBoolean("FIRST", false).commit();
+            startActivity(new Intent(LoginShow.this, GuideActivity.class));
+            finish();
+        } else {//如果是第二次启动则直接跳转到主页面
+            startActivity(new Intent(LoginShow.this, MainActivity.class));
+            LoginShow.this.finish();
+        }
     }
+
 
     public void onClilk() {
         flag = false;
         initIntent();
     }
+
 }

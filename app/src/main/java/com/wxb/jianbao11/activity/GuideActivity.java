@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.adapter.GuideAdapter;
 import com.wxb.jianbao11.app.MInterface;
@@ -50,13 +51,14 @@ public class GuideActivity extends Activity {
             }
         }
     };
+    private boolean isFirstRun;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
         ButterKnife.inject(this);
         initRequest();
-
     }
 
     private void initRequest() {
@@ -103,7 +105,8 @@ public class GuideActivity extends Activity {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(GuideActivity.this,LoginShow.class));
+            startActivity(new Intent(GuideActivity.this,MainActivity.class));
+           GuideActivity.this.finish();
         }
     };
 }

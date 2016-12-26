@@ -49,9 +49,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         fragmentTransaction = fragmentManager.beginTransaction();
 
 
-      //  fragmentTransaction.replace(R.id.main_container,new GoodsFragment());
-       // fragmentTransaction.commit();
-
         rb_goods.setOnClickListener(this);
         rb_add.setOnClickListener(this);
         rb_mine.setOnClickListener(this);
@@ -123,14 +120,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     }
     private void initGoods() {
-        rb_goods.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_home,null));
-        rb_mine.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_person_selected,null));
+        rb_goods.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_home_selected,null));
+        rb_mine.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_person,null));
         rb_add.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_post_selected,null));
     }
     private void initMine(){
-        rb_goods.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_home_selected,null));
+        rb_goods.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_home,null));
         rb_add.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_post_selected,null));
-        rb_mine.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_person,null));
+        rb_mine.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_person_selected,null));
     }
     private static boolean mBackKeyPressed = false;//记录是否有首次按键
     @Override

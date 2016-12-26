@@ -150,12 +150,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:gravity="bottom">
         <Button
             android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_back_land"
+            android:background="@drawable/btn_style_color"
             android:text="@string/register_string"
             android:textSize="16sp"
             android:textColor="#fff"
