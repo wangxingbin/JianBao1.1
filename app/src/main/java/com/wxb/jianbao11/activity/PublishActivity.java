@@ -77,7 +77,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
     private int idx;
     private Bitmap newBitmap;
     // 存放照片的路径
-   private ArrayList<String> mList = new ArrayList<String>();
+    private ArrayList<String> mList = new ArrayList<String>();
     // 存放照片的数组
     private ArrayList<Bitmap> mBitmapList = new ArrayList<Bitmap>();
     //照相机的图片视图（负责选择添加照片）
@@ -218,7 +218,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
                     mList.add(takePhotoPath);
                     mBitmapList.add(newBitmap);
 
-                     break;
+                    break;
 
                 case CHOOSE_PICTURE:
                     ContentResolver resolver = getContentResolver();
@@ -364,7 +364,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
             public void getEntiy(Object obj) {
 
                 publish_Bean publish_o1 = (publish_Bean) obj;
-                final String status = publish_o1.getStatus();
+                String status = publish_o1.getStatus();
                 if (status.equals("200")) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -376,15 +376,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(PublishActivity.this, "发布失败请登录", Toast.LENGTH_SHORT).show();
-                            if ("301".equals(status)){
-
-                                Intent intent = new Intent(PublishActivity.this, Login.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                PublishActivity.this.startActivity(intent);
-                            }
-
-
+                            Toast.makeText(PublishActivity.this, "发布失败", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -479,7 +471,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
     电信：133、153、180、189、（1349卫通）
     总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
     */
-        String et_jianbao_number = "[1][3587]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        String et_jianbao_number = "[1][358]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
         if (TextUtils.isEmpty(mobiles)) {
             return false;
         } else {
@@ -489,5 +481,3 @@ public class PublishActivity extends Activity implements View.OnClickListener {
 
 
 }
-
-
