@@ -50,10 +50,10 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    fresco:placeholderImage="@mipmap/ic_launcher"
+                    fresco:placeholderImage="@mipmap/message_action_pic"
                     fresco:placeholderImageScaleType="fitCenter"
                     fresco:actualImageScaleType="focusCrop"
-                    fresco:failureImage="@mipmap/ic_launcher"
+                    fresco:failureImage="@mipmap/message_action_pic"
                     fresco:failureImageScaleType="centerInside"
                     fresco:roundAsCircle="true"
                     />

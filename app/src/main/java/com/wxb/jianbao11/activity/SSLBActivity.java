@@ -1,7 +1,11 @@
 package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,6 +54,7 @@ public class SSLBActivity extends Activity {
     private String str;
     private SPZSAdapter myAdapter;
     private LinearLayout ll;
+    private RefashRerver receiver=new RefashRerver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +64,36 @@ public class SSLBActivity extends Activity {
         Intent intent = getIntent();
         str = intent.getStringExtra("etstr");
 
+        //注册广播-----：动态广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("cn.bgs.refash");
+        registerReceiver(receiver, filter);
+
         initData();
         initView();
         initEvent();
 
     }
+
+    //广播接收器
+    private class RefashRerver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //执行刷新的操作
+            Log.e("", "这个广播 " );
+            arrayList.clear();
+            curPage = 1;
+            initData();
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.unregisterReceiver(receiver);
+    }
+
 
     private void initData() {
 
@@ -164,10 +194,22 @@ public class SSLBActivity extends Activity {
 
     }
 
+    private ProgressDialog progressDialog;
     class MyCallBack3 extends MyCallBack {
 
         @Override
         public void loading() {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressDialog=new ProgressDialog(SSLBActivity.this);
+                    if (!progressDialog.isShowing()) {
+                        progressDialog.show();
+                    }
+
+                }
+            });
         }
 
         @Override
@@ -176,6 +218,7 @@ public class SSLBActivity extends Activity {
                 @Override
                 public void run() {
                     Toast.makeText(SSLBActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 
                 }
             });
@@ -185,6 +228,13 @@ public class SSLBActivity extends Activity {
         public void onSuccess(Object o) {
 
             displayData((LBZSbean) o);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(SSLBActivity.this, "successful", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            });
 
         }
 
@@ -194,6 +244,7 @@ public class SSLBActivity extends Activity {
                 @Override
                 public void run() {
                     Toast.makeText(SSLBActivity.this, "接口异常", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 
                 }
             });
