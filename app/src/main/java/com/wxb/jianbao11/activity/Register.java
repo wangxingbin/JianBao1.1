@@ -17,8 +17,12 @@ import android.widget.Toast;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.RegisterBeen;
 import com.wxb.jianbao11.contants.Contant;
+import com.wxb.jianbao11.utils.CustomProgress;
+import com.wxb.jianbao11.utils.MyCallBack;
+import com.wxb.jianbao11.utils.MyOkhttp;
 import com.wxb.jianbao11.utils.PhotoNumberJudge;
 import com.wxb.jianbao11.utils.PhotoPostUtils;
+import com.wxb.jianbao11.utils.ResgiterUtils;
 import com.wxb.jianbao11.utils.ShowToastUtils;
 import com.wxb.jianbao11.utils.TakePhotoPopWin;
 
@@ -81,14 +85,14 @@ public class Register extends Activity implements View.OnClickListener {
         mima = password.getText().toString().trim();
         xingming = name.getText().toString().trim();
         inivite_code = code.getText().toString().trim();
-        SharedPreferences sharepath = getSharedPreferences("PATH", MODE_PRIVATE);
-        path = sharepath.getString("path", "");
-        Log.i(TAG,path+"_______________________________+++++++++++++++++++++++++");
-        file = new File(path);
-
-        if (file == null) {
-          ShowToastUtils.showToast(Register.this,"请另选一张图片");
-        }
+//        SharedPreferences sharepath = getSharedPreferences("PATH", MODE_PRIVATE);
+//        path = sharepath.getString("path", "");
+//        Log.i(TAG,path+"_______________________________+++++++++++++++++++++++++");
+//        file = new File(path);
+//
+//        if (file == null) {
+//          ShowToastUtils.showToast(Register.this,"请另选一张图片");
+//        }
         map = new HashMap<>();
         map.put("code", inivite_code);
         if (!PhotoNumberJudge.isPhoneNumberValid(yonghu)){
@@ -115,16 +119,16 @@ public class Register extends Activity implements View.OnClickListener {
         group = (RadioGroup) findViewById(R.id.grop);
         register_btn = (Button) findViewById(R.id.register_button);
         register_btn.setOnClickListener(this);
-        upload = (Button) findViewById(R.id.upload_photo);
-        upload.setOnClickListener(this);
+//        upload = (Button) findViewById(R.id.upload_photo);
+//        upload.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.upload_photo:
-                startActivity(new Intent(Register.this, Camera.class));
-                break;
+//            case R.id.upload_photo:
+//                startActivity(new Intent(Register.this, Camera.class));
+//                break;
             case R.id.register_button:
 
                 initData();
@@ -136,6 +140,7 @@ public class Register extends Activity implements View.OnClickListener {
                     ShowToastUtils.showToast(Register.this,"请填写你的用户信息");
                     return;
                 }
+                CustomProgress.getPrgressDolilog(Register.this,"正在注册","请稍等....");
                 upLoadPhoto();
                 break;
             case R.id.bar_iv_back:
@@ -148,43 +153,45 @@ public class Register extends Activity implements View.OnClickListener {
 
     private void upLoadPhoto() {
         String path = Contant.RESGISTER;
-        PhotoPostUtils.upLoad(file, this, path,"card", map, RegisterBeen.class);
-        PhotoPostUtils.getData(new PhotoPostUtils.GetRegisterData() {
-            @Override
-            public void setRegisterData(Object o) {
-                RegisterBeen data = (RegisterBeen) o;
-                status = data.getStatus();
+       ResgiterUtils.getData(new PhotoPostUtils.GetRegisterData() {
+           @Override
+           public void setRegisterData(Object o) {
+               RegisterBeen data = (RegisterBeen) o;
+               status = data.getStatus();
 
-              if (status.equals("200")) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ShowToastUtils.showToast(Register.this, "注册成功");
-                            finish();
+               if (status.equals("200")) {
+                   runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           CustomProgress.dissPrgress();
+                           ShowToastUtils.showToast(Register.this, "注册成功");
+                           finish();
 
-                        }
-                    });
-                }else if(status.equals("201")){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ShowToastUtils.showToast(Register.this,"此号码已注册请换号");
-                        }
-                    });
-                    return;
-                }else if(status.equals("206")){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ShowToastUtils.showToast(Register.this,"邀请码已使用");
-                        }
-                    });
-                    return;
-                }
+                       }
+                   });
+               }else if(status.equals("201")){
+                   runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           CustomProgress.dissPrgress();
+                           ShowToastUtils.showToast(Register.this,"此号码已注册请换号");
+                       }
+                   });
+                   return;
+               }else if(status.equals("206")){
+                   runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           CustomProgress.dissPrgress();
+                           ShowToastUtils.showToast(Register.this,"邀请码已使用");
+                       }
+                   });
+                   return;
+               }
 
-
-            }
-        });
+           }
+       });
+        ResgiterUtils.upLoad(this,path,map,RegisterBeen.class);
     }
 
 
