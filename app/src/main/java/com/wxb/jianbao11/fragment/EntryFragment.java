@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wxb.jianbao11.MainActivity;
-import com.wxb.jianbao11.activity.GuidePageActivity;
 import com.wxb.jianbao11.R;
+import com.wxb.jianbao11.activity.GuidePageActivity;
 import com.wxb.jianbao11.activity.Login;
 
 /**
