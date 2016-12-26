@@ -364,7 +364,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
             public void getEntiy(Object obj) {
 
                 publish_Bean publish_o1 = (publish_Bean) obj;
-                String status = publish_o1.getStatus();
+                final String status = publish_o1.getStatus();
                 if (status.equals("200")) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -376,7 +376,15 @@ public class PublishActivity extends Activity implements View.OnClickListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(PublishActivity.this, "发布失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PublishActivity.this, "发布失败请登录", Toast.LENGTH_SHORT).show();
+                            if ("301".equals(status)){
+
+                                Intent intent = new Intent(PublishActivity.this, Login.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                PublishActivity.this.startActivity(intent);
+                            }
+
+
                         }
                     });
                 }

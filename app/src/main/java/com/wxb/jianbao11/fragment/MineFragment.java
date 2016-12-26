@@ -1,7 +1,6 @@
 package com.wxb.jianbao11.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -12,10 +11,13 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.activity.AttentionActivity;
 import com.wxb.jianbao11.activity.MessageActivity;
@@ -46,6 +49,8 @@ import java.util.HashMap;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by 诺古 on 2016/12/19.
@@ -77,6 +82,8 @@ public class MineFragment extends Fragment {
     LinearLayout mineDenglu;
     @InjectView(R.id.mine_denglued)
     LinearLayout mineDenglued;
+    @InjectView(R.id.mine_btn)
+    Button mineBtn;
     private String token;
     private TakePhotoPopWin photoPopWin;
     private String facePath;
@@ -94,19 +101,31 @@ public class MineFragment extends Fragment {
     private File imageFile;
     private String selecImaPath;
     private Uri originalUri;
+    private MainActivity activity;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.inject(this, view);
-        SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        activity = (MainActivity) getActivity();
+        fm = activity.getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
+        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SharedPreferences sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
         map = new HashMap<>();
         map.put("token", token);
         initData();
-        facePath = Environment.getExternalStorageDirectory() + "/face.jpg";
-        return view;
+
     }
 
     @Override
@@ -114,6 +133,7 @@ public class MineFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.reset(this);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // 拍照后获取返回值，这里获取到的是原始图片。
@@ -159,15 +179,27 @@ public class MineFragment extends Fragment {
             if (photoPopWin.isShowing()) {
                 photoPopWin.dismiss();
             }
+
             mineIvPhoto.setImageURI(imageFile.getAbsolutePath());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @OnClick({R.id.mine_denglu, R.id.mine_iv_photo, R.id.mine_ll_message, R.id.mine_ll_publish, R.id.mine_ll_attend, R.id.mine_ll_settings, R.id.mine_ll_yindao, R.id.mine_tv_invitationCode})
+    @OnClick({R.id.mine_btn, R.id.mine_iv_photo, R.id.mine_ll_message, R.id.mine_ll_publish, R.id.mine_ll_attend, R.id.mine_ll_settings, R.id.mine_ll_yindao, R.id.mine_tv_invitationCode})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.mine_denglu:
+            case R.id.mine_btn:
+                SharedPreferences share= getActivity().getSharedPreferences("TOKEN",MODE_PRIVATE);
+                SharedPreferences.Editor edit = share.edit();
+                edit.putString("token", "");
+                edit.putBoolean("isLogin",false);
+                edit.commit();
+                ft.hide(activity.mineFragment);
+                ft.show(activity.goodsFragment);
+                ft.commit();
+               // startActivity(new Intent(getActivity(), Login.class));
+               // getActivity().finish();
+
                 break;
             case R.id.mine_iv_photo:
                 showPop(view);
@@ -191,12 +223,12 @@ public class MineFragment extends Fragment {
                 initIn();
                 break;
         }
-    }
+    }           
 
     // 个人信息
     private void initData() {
         final String path = Contant.GeRenXinXi;
-        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(MineFragment.this.getActivity(),path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
 
             private String mobile;
             private String name;
@@ -219,6 +251,9 @@ public class MineFragment extends Fragment {
                 }
 
                 GeRenXinxi geRenXinxi = (GeRenXinxi) o;
+                if (geRenXinxi.getData()==null){
+                    return;
+                }
                 mobile = geRenXinxi.getData().getMobile();
                 name = geRenXinxi.getData().getName();
                 photo = geRenXinxi.getData().getPhoto();
@@ -335,7 +370,7 @@ public class MineFragment extends Fragment {
     // 邀请码
     public void initIn() {
         String path = Contant.InvitationCode;
-        MyOkhttp.getInstance().doRequest(path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(MineFragment.this.getActivity(),path, MyOkhttp.RequestType.POST, map, new MyCallBack() {
 
             private int state;
             private String code;

@@ -73,7 +73,7 @@ public class SSLBActivity extends Activity {
 
         Log.e("sdhkfjsnl;kfdn", Contant.CHAXUN + "?curPage=" + curPage + "&title=" + str);
         //封装的okhttp工具类
-        myOkhttp.doRequest(Contant.CHAXUN + "?curPage=" + curPage + "&title=" + str,
+        myOkhttp.doRequest(SSLBActivity.this,Contant.CHAXUN + "?curPage=" + curPage + "&title=" + str,
                 MyOkhttp.RequestType.GET,
                 null,
                 new MyCallBack3(),

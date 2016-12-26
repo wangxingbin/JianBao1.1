@@ -25,7 +25,7 @@ public class EntryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 GuidePageActivity activity = (GuidePageActivity) getActivity();
-                Intent intent = new Intent(activity,Login.class);
+                Intent intent = new Intent(activity,MainActivity.class);
                 startActivity(intent);
                 activity.entryApp();
             }

@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import com.squareup.picasso.Picasso;
 import com.wxb.jianbao11.R;
+
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -28,7 +30,6 @@ public class PhotoViewD extends Activity {
 
         iv_photo2 = (PhotoView) findViewById(R.id.iv_photo2);
         Picasso.with(this).load("http://192.168.4.188/Goods/uploads/"+ photo).into(iv_photo2);
-
 
         iv_photo2.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
             @Override
