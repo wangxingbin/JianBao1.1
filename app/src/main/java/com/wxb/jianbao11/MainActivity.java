@@ -1,6 +1,5 @@
 package com.wxb.jianbao11;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import com.wxb.jianbao11.activity.Login;
 import com.wxb.jianbao11.activity.PublishActivity;
 import com.wxb.jianbao11.fragment.GoodsFragment;
 import com.wxb.jianbao11.fragment.MineFragment;
+import com.wxb.jianbao11.utils.ShowToastUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,7 +37,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         info = intent.getStringExtra("info");
 
         initView();
-        SharedPreferences sp = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
     }
 
@@ -108,6 +108,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     startActivity(new Intent(MainActivity.this,PublishActivity.class));
                 }
                 else{
+                    ShowToastUtils.showToast(MainActivity.this,"请登录");
                     Intent intent = new Intent(this, Login.class);
                     startActivity(intent);
                 }

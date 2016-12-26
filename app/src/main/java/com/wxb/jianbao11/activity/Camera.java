@@ -267,6 +267,7 @@ public class Camera extends Activity implements View.OnClickListener {
                 try {
                     // 获得图片的uri
                     Uri originalUri = data.getData();
+                    crop(originalUri);
                     String[] proj = {MediaStore.Images.Media.DATA};
                     Cursor cursor = managedQuery(originalUri, proj, null, null, null);
                     //按我个人理解 这个是获得用户选择的图片的索引值
@@ -276,7 +277,7 @@ public class Camera extends Activity implements View.OnClickListener {
                     //最后根据索引值获取图片路径
                     String path = cursor.getString(column_index);
 
-                    crop(originalUri);
+
                     chosepath = originalUri.toString();
 
                     edit.putString("path",path);

@@ -88,7 +88,7 @@
     <!--第二个LinearLayout 内有凸起按钮-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="86dp"
+        android:layout_height="78dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
         android:gravity="center|top"
@@ -98,8 +98,7 @@
             android:id="@+id/btn_cancel"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/poplayer_close_btn"
+            android:background="@drawable/card_image_icon_del"
             android:textStyle="bold" />
 
     </LinearLayout>

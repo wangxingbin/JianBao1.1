@@ -17,8 +17,8 @@
             android:layout_height="120dp"
             android:layout_marginLeft="5dp"
             android:padding="5dp"
-            android:src="@mipmap/ic_launcher"
-            fresco:failureImage="@mipmap/ic_launcher"
+            android:src="@mipmap/message_action_pic"
+            fresco:failureImage="@mipmap/message_action_pic"
             fresco:failureImageScaleType="centerInside" />
 
         <LinearLayout

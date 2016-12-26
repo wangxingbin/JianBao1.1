@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ff4520"
+        android:background="@color/croci"
         >
 
         <LinearLayout
