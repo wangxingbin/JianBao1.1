@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -24,7 +23,6 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.google.gson.reflect.TypeToken;
 import com.wxb.jianbao11.R;
-import com.wxb.jianbao11.activity.Login;
 import com.wxb.jianbao11.activity.SPXQActivity;
 import com.wxb.jianbao11.activity.SousuoActivity;
 import com.wxb.jianbao11.adapter.SPZSAdapter;
@@ -35,8 +33,6 @@ import com.wxb.jianbao11.utils.MyOkhttp;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by 诺古 on 2016/12/19.
@@ -58,17 +54,13 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     private EditText et_sousuo;
     private ImageView iv_sousuo;
     private String token;
-    private SharedPreferences sp;
-    private RefashRerver receiver=new RefashRerver();
+    private RefashRerver receiver = new RefashRerver();
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_goods,container, false);
-
-        sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
-        token = sp.getString("token", "");
+        View view = inflater.inflate(R.layout.fragment_goods, container, false);
 
         //注册广播-----：动态广播
         IntentFilter filter = new IntentFilter();
@@ -87,10 +79,10 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             //执行刷新的操作
-            Log.e("", "这个广播 " );
+            Log.e("", "这个广播 ");
             arrayList.clear();
             curPage = 1;
-           initData();
+            initData();
 
         }
     }
@@ -100,7 +92,6 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         super.onDestroy();
         getActivity().unregisterReceiver(receiver);
     }
-
 
 
     private void initEvent() {
@@ -216,7 +207,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
 
     }
 
-        private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     //不是通过接口回调的方式写的回调方法,而是通过抽象类的方式写的.
     public class MyCallBack2 extends MyCallBack {
@@ -225,14 +216,14 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                   progressDialog=new ProgressDialog(getActivity());
+                    progressDialog = new ProgressDialog(getActivity());
                     if (!progressDialog.isShowing()) {
                         progressDialog.show();
                     }
 
                 }
             });
-    }
+        }
 
         @Override
         public void onFailure() {
@@ -253,7 +244,6 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(), "successful", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             });
@@ -291,20 +281,12 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                     myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                         @Override
                         public void ItemClickListener(View view, int postion) {
-                            if (token.equals("")) {
-                                 Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getActivity(), Login.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                getActivity().startActivity(intent);
-                            }else {
+                            Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getActivity(), SPXQActivity.class);
+                            System.out.println("jhgbkjklml;k,';l" + arrayList.get(postion).getId());
+                            intent.putExtra("id", "" + arrayList.get(postion).getId());
+                            getActivity().startActivity(intent);
 
-                                Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getActivity(), SPXQActivity.class);
-                                System.out.println("jhgbkjklml;k,';l" + arrayList.get(postion).getId());
-                                intent.putExtra("id", "" + arrayList.get(postion).getId());
-                                getActivity().startActivity(intent);
-
-                            }
                         }
                     });
 
@@ -324,21 +306,12 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                         myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                             @Override
                             public void ItemClickListener(View view, int postion) {
-                                if (token.equals("")) {
 
-                                    Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getActivity(), Login.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    getActivity().startActivity(intent);
-                                }else {
-
-                                    Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getActivity(), SPXQActivity.class);
-                                    System.out.println(arrayList.get(postion).getId());
-                                    intent.putExtra("id", "" + arrayList.get(postion).getId());
-                                    getActivity().startActivity(intent);
-
-                                }
+                                Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), SPXQActivity.class);
+                                System.out.println(arrayList.get(postion).getId());
+                                intent.putExtra("id", "" + arrayList.get(postion).getId());
+                                getActivity().startActivity(intent);
 
 
                             }
@@ -360,21 +333,13 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                         myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                             @Override
                             public void ItemClickListener(View view, int postion) {
-                                if (token.equals("")) {
 
-                                    Toast.makeText(getActivity(), "请登录", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getActivity(), Login.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    getActivity().startActivity(intent);
-                                }else {
+                                Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), SPXQActivity.class);
+                                intent.putExtra("id", "" + arrayList.get(postion).getId());
+                                System.out.println(arrayList.get(postion).getId());
+                                getActivity().startActivity(intent);
 
-                                    Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getActivity(), SPXQActivity.class);
-                                    intent.putExtra("id", "" + arrayList.get(postion).getId());
-                                    System.out.println(arrayList.get(postion).getId());
-                                    getActivity().startActivity(intent);
-
-                                }
 
                             }
                         });

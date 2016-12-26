@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.wxb.jianbao11.MainActivity;
@@ -19,7 +20,7 @@ import java.util.TimerTask;
 
 public class LoginShow extends Activity {
     private TextView tv_timer;
-    private int num = 3;
+    private int num = 4;
     private Timer timer = new Timer();
     private boolean flag = true;
 
@@ -28,6 +29,16 @@ public class LoginShow extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_show);
         initView();
+        //点击跳转，第一次的话跳转到引导页，不是第一次跳到商品页面
+        tv_timer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClilk();
+            }
+        });
+        initTimer();
+    }
+    private void initTimer(){
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -37,7 +48,7 @@ public class LoginShow extends Activity {
                         @Override
                         public void run() {
                             num--;
-                            tv_timer.setText("跳转" + num + "秒");
+                            tv_timer.setText("点击跳转" + num + "秒");
                             if (num <= 0) {
                                 timer.cancel();
                                 initIntent();

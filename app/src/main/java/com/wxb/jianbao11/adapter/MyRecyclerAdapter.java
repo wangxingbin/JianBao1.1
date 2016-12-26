@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.CheckPublished;
@@ -62,7 +64,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter <MyRecyclerAdapter.M
         holder.tv_money.setText("¥ "+checkPublished.getPrice());
         holder.tv_title.setText(checkPublished.getTitle());
         holder.tv_time.setText(checkPublished.getIssue_time());
-        holder.picture.setImageURI(image);
+
+
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(Uri.parse(image))
+                .setAutoPlayAnimations(true)//设置自动播放，如果不设置，没有动画
+                .build();
+        holder.picture.setController(controller);
+        //holder.picture.setImageURI(image);
         ImageTools.load(Uri.parse(image),holder.picture,120,120);
         switch (checkPublished.getState()){
             case 0:
