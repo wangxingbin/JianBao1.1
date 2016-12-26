@@ -113,6 +113,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     startActivity(new Intent(MainActivity.this,PublishActivity.class));
                 }
                 else{
+                    ShowToastUtils.showToast(MainActivity.this,"请登录");
                     Intent intent = new Intent(this, Login.class);
                     startActivity(intent);
                 }

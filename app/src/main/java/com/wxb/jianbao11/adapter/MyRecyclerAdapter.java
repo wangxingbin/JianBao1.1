@@ -66,10 +66,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter <MyRecyclerAdapter.M
         ImageTools.load(Uri.parse(image),holder.picture,120,120);
         switch (checkPublished.getState()){
             case 0:
-                holder.tv_state.setText("发布");
+                holder.tv_state.setText("发布中");
                 break;
             case 1:
-                holder.tv_state.setText("正常");
+                holder.tv_state.setText("正  常");
                 break;
             case 3:
                 holder.tv_state.setText("未过审");

@@ -124,13 +124,6 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/upload_photo"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/uploadphoto"
-                android:text="@string/upload_pictures"
-                android:textSize="15sp" />
 
 
             />

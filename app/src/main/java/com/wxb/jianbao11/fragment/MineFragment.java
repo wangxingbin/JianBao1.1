@@ -1,7 +1,6 @@
 package com.wxb.jianbao11.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -12,7 +11,6 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
@@ -33,7 +31,6 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.activity.AttentionActivity;
-import com.wxb.jianbao11.activity.Login;
 import com.wxb.jianbao11.activity.MessageActivity;
 import com.wxb.jianbao11.activity.PublishedActivity;
 import com.wxb.jianbao11.activity.SettingsActivity;
@@ -226,7 +223,7 @@ public class MineFragment extends Fragment {
                 initIn();
                 break;
         }
-    }
+    }           
 
     // 个人信息
     private void initData() {
