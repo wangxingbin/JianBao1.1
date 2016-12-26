@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,16 +15,13 @@ import com.wxb.jianbao11.activity.Login;
 import com.wxb.jianbao11.activity.PublishActivity;
 import com.wxb.jianbao11.fragment.GoodsFragment;
 import com.wxb.jianbao11.fragment.MineFragment;
-import com.wxb.jianbao11.utils.ShowToastUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static android.R.id.edit;
 
-
-public class MainActivity extends FragmentActivity implements View.OnClickListener{
-    private ImageView rb_goods,rb_add,rb_mine;
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
+    private ImageView rb_goods, rb_add, rb_mine;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private String token;
@@ -55,14 +51,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         /*
         默认页面:GoodsFragment(商品)
          */
-      //  fragmentTransaction.replace(R.id.main_container,new GoodsFragment());
-       // fragmentTransaction.commit();
+        //  fragmentTransaction.replace(R.id.main_container,new GoodsFragment());
+        // fragmentTransaction.commit();
 
         rb_goods.setOnClickListener(this);
         rb_add.setOnClickListener(this);
         rb_mine.setOnClickListener(this);
         goodsFragment = new GoodsFragment();
-        fragmentTransaction.add(R.id.main_container,goodsFragment);
+        fragmentTransaction.add(R.id.main_container, goodsFragment);
         fragmentTransaction.show(goodsFragment);
         fragmentTransaction.commit();
         initGoods();
@@ -73,46 +69,45 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.rb_goods:
                 initGoods();
-                if (goodsFragment ==null) {
+                if (goodsFragment == null) {
                     goodsFragment = new GoodsFragment();
                     fragmentTransaction.add(R.id.main_container, goodsFragment);
                 }
-                if (mineFragment!=null){
+                if (mineFragment != null) {
                     fragmentTransaction.hide(mineFragment);
                 }
                 fragmentTransaction.show(goodsFragment);
                 break;
             case R.id.rb_mine:
-                SharedPreferences token =  getSharedPreferences("TOKEN", MODE_PRIVATE);
+                SharedPreferences token = getSharedPreferences("TOKEN", MODE_PRIVATE);
                 boolean isLogin = token.getBoolean("isLogin", false);
-                if (isLogin){
+                if (isLogin) {
                     initMine();
-                    if (mineFragment==null) {
+                    if (mineFragment == null) {
                         mineFragment = new MineFragment();
                         fragmentTransaction.add(R.id.main_container, mineFragment);
                     }
-                    if (goodsFragment !=null){
+                    if (goodsFragment != null) {
                         fragmentTransaction.hide(goodsFragment);
                     }
                     fragmentTransaction.show(mineFragment);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "请登录", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, Login.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    this.finish();
                 }
                 break;
             case R.id.rb_add:
-                SharedPreferences token2 =  getSharedPreferences("TOKEN", MODE_PRIVATE);
+                SharedPreferences token2 = getSharedPreferences("TOKEN", MODE_PRIVATE);
                 boolean isLogin2 = token2.getBoolean("isLogin", false);
-                if (isLogin2){
-                    startActivity(new Intent(MainActivity.this,PublishActivity.class));
-                }
-                else{
+                if (isLogin2) {
+                    startActivity(new Intent(MainActivity.this, PublishActivity.class));
+                } else {
                     Intent intent = new Intent(this, Login.class);
                     startActivity(intent);
                 }
@@ -124,33 +119,36 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     }
+
     private void initGoods() {
-        rb_goods.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_home,null));
-        rb_mine.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_person_selected,null));
-        rb_add.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_post_selected,null));
+        rb_goods.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_home, null));
+        rb_mine.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_person_selected, null));
+        rb_add.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_post_selected, null));
     }
-    private void initMine(){
-        rb_goods.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_home_selected,null));
-        rb_add.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_post_selected,null));
-        rb_mine.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_person,null));
+
+    private void initMine() {
+        rb_goods.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_home_selected, null));
+        rb_add.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_post_selected, null));
+        rb_mine.setImageDrawable(getResources().getDrawable(R.drawable.comui_tab_person, null));
     }
+
     private static boolean mBackKeyPressed = false;//记录是否有首次按键
+
     @Override
     public void onBackPressed() {
-        if(!mBackKeyPressed){
-                    Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-                    mBackKeyPressed = true;
-                    new Timer().schedule(new TimerTask() {//延时两秒，如果超出则擦错第一次按键记录
-                    @Override
-                        public void run() {
+        if (!mBackKeyPressed) {
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            mBackKeyPressed = true;
+            new Timer().schedule(new TimerTask() {//延时两秒，如果超出则擦错第一次按键记录
+                @Override
+                public void run() {
                     mBackKeyPressed = false;
-                    }
-                }, 2000);
-            }
-        else{
+                }
+            }, 2000);
+        } else {
             //退出程序
-                this.finish();
+            this.finish();
             // System.exit(0);
-            }
+        }
     }
 }
