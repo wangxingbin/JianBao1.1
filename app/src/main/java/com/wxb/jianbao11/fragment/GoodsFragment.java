@@ -1,5 +1,6 @@
 package com.wxb.jianbao11.fragment;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -64,7 +65,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_goods, null);
+        View view = inflater.inflate(R.layout.fragment_goods,container, false);
 
         sp = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
@@ -215,6 +216,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
 
     }
 
+        private ProgressDialog progressDialog;
 
     //不是通过接口回调的方式写的回调方法,而是通过抽象类的方式写的.
     public class MyCallBack2 extends MyCallBack {
@@ -223,10 +225,14 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                   progressDialog=new ProgressDialog(getActivity());
+                    if (!progressDialog.isShowing()) {
+                        progressDialog.show();
+                    }
 
                 }
             });
-        }
+    }
 
         @Override
         public void onFailure() {
@@ -234,6 +240,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                 @Override
                 public void run() {
                     Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 
                 }
             });
@@ -243,6 +250,13 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
         public void onSuccess(Object o) {
 
             displayData((LBZSbean) o);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), "successful", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+            });
 
         }
 
@@ -252,6 +266,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                 @Override
                 public void run() {
                     Toast.makeText(getActivity(), "接口异常", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
 
                 }
             });

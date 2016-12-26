@@ -1,6 +1,7 @@
 package com.wxb.jianbao11.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -308,6 +309,11 @@ public class SPXQActivity extends Activity {
                 new MyCallBack() {
                     @Override
                     public void loading() {
+                        progressDialog=new ProgressDialog(SPXQActivity.this);
+                        if (!progressDialog.isShowing()) {
+                            progressDialog.show();
+                        }
+
 
                     }
 
@@ -318,6 +324,7 @@ public class SPXQActivity extends Activity {
                             @Override
                             public void run() {
                                 Toast.makeText(SPXQActivity.this, "network failure", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
 
                             }
                         });
@@ -327,6 +334,13 @@ public class SPXQActivity extends Activity {
                     @Override
                     public void onSuccess(Object o) {
                         displayData((SPXQ) o);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SPXQActivity.this, "successful", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+                        });
 
                     }
 
@@ -337,7 +351,7 @@ public class SPXQActivity extends Activity {
                             @Override
                             public void run() {
                                 Toast.makeText(SPXQActivity.this, "request params error", Toast.LENGTH_SHORT).show();
-
+                                progressDialog.dismiss();
                             }
                         });
 
@@ -446,6 +460,8 @@ public class SPXQActivity extends Activity {
 
 
     }
+
+    private ProgressDialog progressDialog;
 
     private void xiajia() {
 
