@@ -18,6 +18,7 @@ import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.adapter.MyRecyclerAdapter;
 import com.wxb.jianbao11.bean.CheckPublished;
 import com.wxb.jianbao11.contants.Contant;
+import com.wxb.jianbao11.utils.CustomProgress;
 import com.wxb.jianbao11.utils.MyCallBack;
 import com.wxb.jianbao11.utils.MyOkhttp;
 
@@ -46,6 +47,7 @@ public class PublishedActivity extends Activity {
         setContentView(R.layout.activity_mine_all_base);
         SharedPreferences sp = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
         token = sp.getString("token", "");
+        CustomProgress.getPrgressDolilog(PublishedActivity.this,"正在缓冲","请稍后");
         initView();
         // initData();
         initBack();
@@ -79,6 +81,13 @@ public class PublishedActivity extends Activity {
 
             @Override
             public void onSuccess(Object o) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CustomProgress.dissPrgress();
+
+                    }
+                });
                 if (o == null) {
                     Toast.makeText(PublishedActivity.this, "网络异常，请检查您的网络", Toast.LENGTH_SHORT).show();
                 }
