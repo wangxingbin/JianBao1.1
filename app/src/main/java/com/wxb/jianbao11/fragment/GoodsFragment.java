@@ -281,7 +281,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                     myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                         @Override
                         public void ItemClickListener(View view, int postion) {
-                            Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(getActivity(), SPXQActivity.class);
                             System.out.println("jhgbkjklml;k,';l" + arrayList.get(postion).getId());
                             intent.putExtra("id", "" + arrayList.get(postion).getId());
@@ -307,7 +307,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                             @Override
                             public void ItemClickListener(View view, int postion) {
 
-                                Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+
                                 Intent intent = new Intent(getActivity(), SPXQActivity.class);
                                 System.out.println(arrayList.get(postion).getId());
                                 intent.putExtra("id", "" + arrayList.get(postion).getId());
@@ -334,7 +334,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                             @Override
                             public void ItemClickListener(View view, int postion) {
 
-                                Toast.makeText(getActivity(), postion + "", Toast.LENGTH_SHORT).show();
+
                                 Intent intent = new Intent(getActivity(), SPXQActivity.class);
                                 intent.putExtra("id", "" + arrayList.get(postion).getId());
                                 System.out.println(arrayList.get(postion).getId());

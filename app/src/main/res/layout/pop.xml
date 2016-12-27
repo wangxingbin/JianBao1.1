@@ -43,7 +43,7 @@
             android:layout_marginLeft="3dp"
             android:text="手机号：11111111111"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="@dimen/mytextsize" />
 
     </LinearLayout>
 
@@ -68,7 +68,7 @@
             android:layout_gravity="center_vertical"
             android:text="手机号:"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="@dimen/mytextsize" />
         <TextView
             android:id="@+id/wuping_phone"
             android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_marginLeft="3dp"
             android:text="手机号：11111111111"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="@dimen/mytextsize" />
 
     </LinearLayout>
 
@@ -109,7 +109,7 @@
             android:layout_marginBottom="@dimen/mymargin"
             android:visibility="visible"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="@dimen/mytextsize" />
         <TextView
             android:id="@+id/wuping_weixin"
             android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
             android:layout_marginLeft="3dp"
             android:text="微信号：11111111111"
             android:textIsSelectable="true"
-            android:textSize="18sp"
+            android:textSize="@dimen/mytextsize"
             android:layout_marginTop="@dimen/mymargin"
             android:layout_marginBottom="@dimen/mymargin"
             android:layout_gravity="center_vertical"
@@ -150,14 +150,14 @@
             android:layout_gravity="center_vertical"
             android:visibility="visible"
             android:textIsSelectable="true"
-            android:textSize="18sp" />
+            android:textSize="@dimen/mytextsize" />
         <TextView
             android:id="@+id/wuping_qq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Q   Q：11111111111"
             android:textIsSelectable="true"
-            android:textSize="18sp"
+            android:textSize="@dimen/mytextsize"
             android:padding="3dp"
             android:layout_marginTop="@dimen/mymargin"
             android:layout_marginBottom="@dimen/mymargin"
@@ -191,14 +191,14 @@
             android:layout_marginBottom="@dimen/mymargin"
             android:textIsSelectable="true"
             android:visibility="visible"
-            android:textSize="18sp" />
+            android:textSize="@dimen/mytextsize" />
         <TextView
             android:id="@+id/wuping_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email：11111111111"
             android:textIsSelectable="true"
-            android:textSize="20sp"
+            android:textSize="@dimen/mytextsize"
             android:padding="3dp"
             android:layout_marginTop="@dimen/mymargin"
             android:layout_marginBottom="@dimen/mymargin"

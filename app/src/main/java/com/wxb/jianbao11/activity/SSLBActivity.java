@@ -269,7 +269,6 @@ public class SSLBActivity extends Activity {
                         myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                             @Override
                             public void ItemClickListener(View view, int postion) {
-                                Toast.makeText(SSLBActivity.this, postion + "", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
                                 System.out.println("jhgbkjklml;k,';l" + arrayList.get(postion).getId());
@@ -303,7 +302,7 @@ public class SSLBActivity extends Activity {
                             myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                                 @Override
                                 public void ItemClickListener(View view, int postion) {
-                                    Toast.makeText(SSLBActivity.this, postion + "", Toast.LENGTH_SHORT).show();
+
                                     Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
                                     System.out.println(arrayList.get(postion).getId());
                                     intent.putExtra("id", "" + arrayList.get(postion).getId());
@@ -336,7 +335,7 @@ public class SSLBActivity extends Activity {
                             myAdapter.setOnClickListener(new SPZSAdapter.OnItemClickListener() {
                                 @Override
                                 public void ItemClickListener(View view, int postion) {
-                                    Toast.makeText(SSLBActivity.this, postion + "", Toast.LENGTH_SHORT).show();
+
                                     Intent intent = new Intent(SSLBActivity.this, SPXQActivity.class);
                                     intent.putExtra("id", "" + arrayList.get(postion).getId());
                                     System.out.println(arrayList.get(postion).getId());
