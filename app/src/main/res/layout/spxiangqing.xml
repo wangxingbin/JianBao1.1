@@ -220,6 +220,7 @@
             android:padding="3dp"
             android:layout_margin="3dp"
             android:gravity="center"
+            android:textColor="@color/white"
             android:layout_gravity="center"
             android:background="#ff4520"
             android:layout_marginBottom="3dp"
