@@ -22,7 +22,7 @@
         android:layout_marginLeft="10dp"
         android:gravity="center"
         android:paddingLeft="5dp"
-        android:text="检查更新" />
+        android:text="@string/check_for_updates" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

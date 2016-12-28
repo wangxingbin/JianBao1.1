@@ -21,8 +21,9 @@
             android:layout_height="match_parent"
             android:layout_weight="9"
             android:background="@null"
-            android:textSize="13dp"
-            android:hint="标题" />
+            android:textSize="13sp"
+
+            android:hint="@string/title" />
 
         <ImageView
             android:id="@+id/im_et_x1"
@@ -58,7 +59,7 @@
             android:layout_weight="9"
             android:background="@null"
             android:hint="描述下你要拍卖的物品"
-            android:textSize="13dp"/>
+            android:textSize="13sp"/>
 
         <ImageView
             android:id="@+id/im_et_x2"
@@ -115,7 +116,9 @@
                 android:layout_weight="7"
                 android:gravity="center"
                 android:background="@null"
-                android:textSize="13dp"
+                android:textSize="13sp"
+                android:inputType="number"
+                android:digits="0123456789"
                 android:hint="输入你的宝贝的价钱" />
 
             <ImageView
@@ -154,7 +157,9 @@
                 android:layout_weight="7"
                 android:gravity="center"
                 android:background="@null"
-                android:textSize="13dp"
+                android:textSize="13sp"
+                android:inputType="number"
+                android:digits="0123456789"
                 android:hint="输入你的电话号码" />
 
             <ImageView
@@ -194,7 +199,9 @@
                 android:layout_weight="7"
                 android:gravity="center"
                 android:background="@null"
-                android:textSize="13dp"
+                android:textSize="13sp"
+                android:inputType="number"
+                android:digits="0123456789"
                 android:hint="QQ或微信或Email账号" />
 
             <ImageView

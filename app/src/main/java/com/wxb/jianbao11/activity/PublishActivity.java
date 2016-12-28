@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -78,7 +79,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
     private int idx;
     private Bitmap newBitmap;
     // 存放照片的路径
-   private ArrayList<String> mList = new ArrayList<String>();
+    private ArrayList<String> mList = new ArrayList<String>();
     // 存放照片的数组
     private ArrayList<Bitmap> mBitmapList = new ArrayList<Bitmap>();
     //照相机的图片视图（负责选择添加照片）
@@ -96,6 +97,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
         initPhoto();
         intitButton();
     }
+
 
     //初始化控件
     private void initView() {
@@ -219,12 +221,12 @@ public class PublishActivity extends Activity implements View.OnClickListener {
                     mList.add(takePhotoPath);
                     mBitmapList.add(newBitmap);
 
-                     break;
+                    break;
 
                 case CHOOSE_PICTURE:
                     ContentResolver resolver = getContentResolver();
                     //照片的原始资源地址
-                    if (data==null){
+                    if (data == null) {
                         return;
                     }
                     originalUri = data.getData();
@@ -356,6 +358,10 @@ public class PublishActivity extends Activity implements View.OnClickListener {
 
     }
 
+    private void initTv() {
+        tv_jianbao_fabu.setTextColor(Color.parseColor("#a9b7b7"));
+    }
+
     // 上传数据
     private void initUploading() {
         //intiData();
@@ -370,15 +376,17 @@ public class PublishActivity extends Activity implements View.OnClickListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            initTv();
                             Toast.makeText(PublishActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), PublishedActivity.class));
                         }
                     });
-                }else {
+                } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(PublishActivity.this, "发布失败请登录", Toast.LENGTH_SHORT).show();
-                            if ("301".equals(status)){
+                            if ("301".equals(status)) {
 
                                 Intent intent = new Intent(PublishActivity.this, Login.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -430,6 +438,7 @@ public class PublishActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(PublishActivity.this, "亲，留下电话方便联系呦", Toast.LENGTH_SHORT).show();
                 } else {
                     initUploading();
+                    tv_jianbao_fabu.setOnClickListener(null);
                 }
             }
         });
@@ -458,13 +467,9 @@ public class PublishActivity extends Activity implements View.OnClickListener {
             Log.d("TAG", "afterTextChanged    " + "str=" + s.toString());
             int len = et_jianbao_biaoti.getText().toString().length();
             int len2 = et_jianbao_miaoshu.getText().toString().length();
-            if (len >= 9) {
-                Toast.makeText(PublishActivity.this, "亲,最多输入10个字呦", Toast.LENGTH_SHORT).show();
-                et_jianbao_biaoti.setFilters(new InputFilter[]{new InputFilter.LengthFilter(10)}); //最多输入10的字符
-            }
-            if (len >= 29) {
+            if (len >= 10) {
                 Toast.makeText(PublishActivity.this, "亲,最多输入30个字呦", Toast.LENGTH_SHORT).show();
-                et_jianbao_miaoshu.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)}); //最多输入30的字符
+                et_jianbao_biaoti.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)}); //最多输入10的字符
             }
         }
     };

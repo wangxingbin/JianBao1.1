@@ -21,7 +21,7 @@
             android:layout_margin="40dp"
             android:drawableLeft="@mipmap/camera"
             android:gravity="center"
-            android:text="拍照"
+            android:text="@string/photograph"
             android:textSize="18sp" />
 
         <TextView
@@ -34,7 +34,6 @@
             android:text="相册"
             android:textSize="18sp" />
     </LinearLayout>
-    `
 
     <TextView
         android:id="@+id/textView2"

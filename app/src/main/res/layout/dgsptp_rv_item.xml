@@ -8,15 +8,16 @@
 
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="1dp"
         android:id="@+id/id_sdv"
-        android:layout_width="300dp"
+        android:layout_width="360dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
         fresco:actualImageScaleType="fitXY"
         fresco:placeholderImage="@mipmap/message_action_pic"
         fresco:placeholderImageScaleType="fitCenter"
         />
-
+0
 
 </LinearLayout>

@@ -31,6 +31,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.activity.AttentionActivity;
+import com.wxb.jianbao11.activity.GuideActivity;
 import com.wxb.jianbao11.activity.MessageActivity;
 import com.wxb.jianbao11.activity.PublishedActivity;
 import com.wxb.jianbao11.activity.SettingsActivity;
@@ -217,7 +218,7 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 break;
             case R.id.mine_ll_yindao:
-                //startActivity(new Intent(getActivity(),));
+                startActivity(new Intent(getActivity(), GuideActivity.class));
                 break;
             case R.id.mine_tv_invitationCode:
                 initIn();

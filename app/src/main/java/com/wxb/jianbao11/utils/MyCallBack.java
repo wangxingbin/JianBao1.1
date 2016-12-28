@@ -4,20 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.activity.Login;
-import com.wxb.jianbao11.fragment.MineFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by ti on 2016/12/1.

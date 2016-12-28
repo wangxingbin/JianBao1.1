@@ -104,17 +104,14 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
 
             }
         });
-
         //搜索的点击事件
         iv_sousuo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SousuoActivity.class);
                 getActivity().startActivity(intent);
-
             }
         });
-
 
         refresh.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -133,9 +130,7 @@ public class GoodsFragment extends android.support.v4.app.Fragment {
                     }
                 }, 1000);
 
-
             }
-
             @Override
             public void onRefreshLoadMore(final MaterialRefreshLayout materialRefreshLayout) {
                 super.onRefreshLoadMore(materialRefreshLayout);

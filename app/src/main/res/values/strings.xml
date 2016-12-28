@@ -16,4 +16,8 @@
     <string name="string">（正反两张）</string>
     <string name="register_string">注册</string>
     <string name="rember">记住账号和密码</string>
+    <string name="immediately">立即体验</string>
+    <string name="photograph">拍照</string>
+    <string name="check_for_updates">检查更新</string>
+    <string name="title">标题</string>
 </resources>

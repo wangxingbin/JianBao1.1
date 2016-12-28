@@ -18,7 +18,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="70dp"
         android:visibility="gone"
-        android:text="立即体验"
+        android:text="@string/immediately"
         android:textColor="@color/white"
         android:background="@drawable/btn_style_color"
         android:textSize="18sp" />
