@@ -18,7 +18,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -118,7 +117,6 @@ public class PublishActivity extends Activity implements View.OnClickListener {
         et_jianbao_email = (EditText) findViewById(R.id.et_jianbao_email); //社交软件
         tv_jianbao_fabu = (TextView) findViewById(R.id.tv_jianbao_fabu); // 发布按钮
         et_jianbao_biaoti.addTextChangedListener(textWatcher);
-        et_jianbao_miaoshu.addTextChangedListener(textWatcher);
         im_et_cha = (ImageView) findViewById(R.id.im_et_x1); // x EditText
         im_et_cha2 = (ImageView) findViewById(R.id.im_et_x4); // x
         im_et_cha3 = (ImageView) findViewById(R.id.im_et_x3); // x
@@ -215,12 +213,13 @@ public class PublishActivity extends Activity implements View.OnClickListener {
                     //TODO
                     pictureList.get(idx).setImageBitmap(newBitmap);
                     pictureList.get(idx).setVisibility(View.VISIBLE); // 图片显示
-                    // relativeLayoutList.get(idx).setVisibility(View.VISIBLE); // 整个控件显示
                     xPictureList.get(idx).setVisibility(View.VISIBLE); // x显示
-                    addMore();
                     mList.add(takePhotoPath);
                     mBitmapList.add(newBitmap);
-
+                    if (mBitmapList.size() < IMAGE_SIZE) {
+                        //添加图片控件后移
+                        addMore();
+                    }
                     break;
 
                 case CHOOSE_PICTURE:
@@ -464,12 +463,10 @@ public class PublishActivity extends Activity implements View.OnClickListener {
         @Override
         public void afterTextChanged(Editable s) {
 
-            Log.d("TAG", "afterTextChanged    " + "str=" + s.toString());
             int len = et_jianbao_biaoti.getText().toString().length();
-            int len2 = et_jianbao_miaoshu.getText().toString().length();
-            if (len >= 10) {
+            if (len > 30) {
                 Toast.makeText(PublishActivity.this, "亲,最多输入30个字呦", Toast.LENGTH_SHORT).show();
-                et_jianbao_biaoti.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)}); //最多输入10的字符
+                et_jianbao_biaoti.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)}); //最多输入30的字符
             }
         }
     };

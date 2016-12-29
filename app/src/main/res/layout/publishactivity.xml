@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginLeft="5dp">
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <include layout="@layout/base_toolbar"
         android:id="@+id/publish_include"/>
@@ -262,7 +263,6 @@
                 android:id="@+id/takephoto_picture"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
                 android:src="@mipmap/zzq_pppp" />
 
             <ImageView
@@ -285,9 +285,6 @@
                 android:id="@+id/takephoto_picture2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:src="@mipmap/zzq_pppp"
                 android:visibility="invisible" />
 
@@ -297,6 +294,10 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/zzq_xxh"
                 android:visibility="invisible" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="90dp"
+                android:background="#fff"/>
 
         </RelativeLayout>
 
@@ -312,7 +313,6 @@
                 android:id="@+id/takephoto_picture3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
                 android:src="@mipmap/zzq_pppp"
                 android:visibility="invisible" />
 
@@ -322,6 +322,11 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/zzq_xxh"
                 android:visibility="invisible" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="90dp"
+                android:background="#fff"/>
 
 
         </RelativeLayout>
@@ -337,9 +342,6 @@
                 android:id="@+id/takephoto_picture4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:src="@mipmap/zzq_pppp"
                 android:visibility="invisible" />
 
@@ -350,6 +352,11 @@
                 android:src="@mipmap/zzq_xxh"
                 android:visibility="invisible" />
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="90dp"
+                android:background="#fff"/>
+
         </RelativeLayout>
 
 
@@ -358,23 +365,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-
-
-            <ImageView
-                android:id="@+id/im_x5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/zzq_xxh"
-                android:visibility="invisible" />
-
             <ImageView
                 android:id="@+id/takephoto_picture5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@mipmap/zzq_pppp"
                 android:visibility="invisible"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                />
+            <ImageView
+                android:id="@+id/im_x5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/zzq_xxh"
+                android:visibility="invisible" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="90dp"
+                android:background="#fff"/>
 
         </RelativeLayout>
 

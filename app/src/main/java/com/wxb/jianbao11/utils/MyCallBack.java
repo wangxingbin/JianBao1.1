@@ -42,6 +42,7 @@ public abstract class MyCallBack {
                         Intent intent = new Intent(act, Login.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         act.startActivity(intent);
+                        act.finish();
                     }
                 });
 

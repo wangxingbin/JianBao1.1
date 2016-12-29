@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wxb.jianbao11.MainActivity;
 import com.wxb.jianbao11.R;
 import com.wxb.jianbao11.bean.LandBeen;
 import com.wxb.jianbao11.contants.Contant;
@@ -142,10 +141,10 @@ public class Login extends Activity implements View.OnClickListener{
                             SharedPreferences.Editor edit = tokenShare.edit();
                              edit.putBoolean("isLogin",true);
                             edit.commit();
-                             Intent intent = new Intent();
-                             intent.putExtra("info","成功");
-                             intent.setClass(Login.this,MainActivity.class);
-                             startActivity(intent);
+//                             Intent intent = new Intent();
+//                             intent.putExtra("info","成功");
+//                             intent.setClass(Login.this,MainActivity.class);
+//                             startActivity(intent);
                             finish();
                         }
                     });

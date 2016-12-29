@@ -99,12 +99,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     Intent intent = new Intent(this, Login.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+
                 }
                 break;
             case R.id.rb_add:
                 SharedPreferences token2 =  getSharedPreferences("TOKEN", MODE_PRIVATE);
                 boolean isLogin2 = token2.getBoolean("isLogin", false);
                 if (isLogin2){
+                    //跳转到发布界面
                     startActivity(new Intent(MainActivity.this,PublishActivity.class));
                 }
                 else{
@@ -133,20 +135,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private static boolean mBackKeyPressed = false;//记录是否有首次按键
     @Override
     public void onBackPressed() {
-        if(!mBackKeyPressed){
-                    Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-                    mBackKeyPressed = true;
-                    new Timer().schedule(new TimerTask() {//延时两秒，如果超出则擦错第一次按键记录
-                    @Override
-                        public void run() {
+        if (!mBackKeyPressed) {
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            mBackKeyPressed = true;
+            new Timer().schedule(new TimerTask() {//延时两秒，如果超出则擦错第一次按键记录
+                @Override
+                public void run() {
                     mBackKeyPressed = false;
-                    }
-                }, 2000);
-            }
-        else{
+                }
+            }, 2000);
+        } else {
             //退出程序
-                this.finish();
+            this.finish();
             // System.exit(0);
-            }
+        }
     }
 }
