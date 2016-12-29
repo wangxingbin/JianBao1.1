@@ -194,6 +194,7 @@ public class MineFragment extends Fragment {
                 edit.putString("token", "");
                 edit.putBoolean("isLogin",false);
                 edit.commit();
+                ft=fm.beginTransaction();
                 ft.hide(activity.mineFragment);
                 ft.show(activity.goodsFragment);
                 ft.commit();

@@ -34,9 +34,11 @@ public class AttentionActivity extends Activity {
     private ImageView backImage;
     private RecyclerView recyclerview;
     private ImageView iv;
-    private ArrayList<CheckPublished.DataBean.ListBean> list;
+    private ArrayList<CheckPublished.DataBean.ListBean> list = new ArrayList<CheckPublished.DataBean.ListBean
+            >();
     private Handler mHandler = new Handler();
     private String token;
+    private MyRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class AttentionActivity extends Activity {
         SharedPreferences sp = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
         token = sp.getString("token", "");
         initView();
-        initData();
+        //initData();
         initBack();
     }
 
@@ -64,7 +66,7 @@ public class AttentionActivity extends Activity {
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
         map.put("curPage", curPage);
-        MyOkhttp.getInstance().doRequest(AttentionActivity.this,PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
+        MyOkhttp.getInstance().doRequest(AttentionActivity.this, PATH, MyOkhttp.RequestType.POST, map, new MyCallBack() {
             @Override
             public void loading() {
 
@@ -83,9 +85,10 @@ public class AttentionActivity extends Activity {
                 if (o != null && o instanceof CheckPublished) {
                     //iv.setVisibility(View.GONE);
                     CheckPublished checkPublished = (CheckPublished) o;
-
-                    list = (ArrayList) checkPublished.getData().getList();
-                    if (list.isEmpty()) {
+                    list.clear();
+                    list.addAll((ArrayList) checkPublished.getData().getList());
+                    //list = (ArrayList) checkPublished.getData().getList();
+                    if (list != null && list.isEmpty()) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -117,18 +120,30 @@ public class AttentionActivity extends Activity {
     private void initEvent() {
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        MyRecyclerAdapter adapter = new MyRecyclerAdapter(AttentionActivity.this, list);
-        recyclerview.setAdapter(adapter);
-        adapter.setOnClickListener( new MyRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void ItemClickListener(View view, int position) {
-                //Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
-                intent.putExtra("id",list.get(position).getId()+"");
-                startActivity(intent);
-            }
-        });
+        if (adapter == null) {
+            adapter = new MyRecyclerAdapter(AttentionActivity.this, list);
+            adapter.setOnClickListener(new MyRecyclerAdapter.OnItemClickListener() {
+                @Override
+                public void ItemClickListener(View view, int position) {
+                    //Toast.makeText(AttentionActivity.this, "你点击了" + position, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AttentionActivity.this, SPXQActivity.class);
+                    intent.putExtra("id", list.get(position).getId() + "");
+                    startActivity(intent);
+                }
+            });
 
+            recyclerview.setAdapter(adapter);
+
+        } else {
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void initView() {
