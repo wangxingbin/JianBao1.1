@@ -516,7 +516,7 @@ public class SPXQActivity extends Activity {
                                     Intent intent = new Intent();
                                     intent.setAction("cn.bgs.refash");
                                     SPXQActivity.this.sendBroadcast(intent);
-                                    bt_xiajia.setText("我要发布");
+                                   // bt_xiajia.setText("我要发布");
 
 //                                    Intent intent1=new Intent();
 //                                    Bundle mBundle = new Bundle();
@@ -528,7 +528,7 @@ public class SPXQActivity extends Activity {
                                         @Override
                                         public void onClick(View view) {
 
-                                           // Toast.makeText(SPXQActivity.this, "已经下架过了", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(SPXQActivity.this, "已经下架过了", Toast.LENGTH_SHORT).show();
 //                                            HashMap<String,String> mm=new HashMap<String,String>();
 //                                            mm.put("title",title);
 //                                            mm.put("description",description);
