@@ -78,6 +78,10 @@ public class SPXQActivity extends Activity {
     private PopupWindow popupWindow;
     private String head;
     private ArrayList<String> alist;
+    private String title;
+    private String time;
+    private String description;
+    private String price;
 
 
     @Override
@@ -92,12 +96,16 @@ public class SPXQActivity extends Activity {
         sp = getSharedPreferences("TOKEN", MODE_PRIVATE);
         token = sp.getString("token", "");
 
+
+
         initData();
 
         initEvent();
 
 
     }
+
+
 
 
     private void initEvent() {
@@ -145,6 +153,8 @@ public class SPXQActivity extends Activity {
         });
 
     }
+
+
 
 
     private void showPopupWindow() {
@@ -398,10 +408,10 @@ public class SPXQActivity extends Activity {
         }
         Log.e("", sp.getData().toString());
 
-        final String title = sp.getData().getTitle();
-        final String time = sp.getData().getIssue_time();
-        final String description = sp.getData().getDescription();
-        final String price = sp.getData().getPrice();
+        title = sp.getData().getTitle();
+        time = sp.getData().getIssue_time();
+        description = sp.getData().getDescription();
+        price = sp.getData().getPrice();
         mobile = sp.getData().getMobile();
         qq = sp.getData().getQq();
         email = sp.getData().getEmail();
@@ -507,17 +517,78 @@ public class SPXQActivity extends Activity {
                                     intent.setAction("cn.bgs.refash");
                                     SPXQActivity.this.sendBroadcast(intent);
                                     bt_xiajia.setText("我要发布");
+
 //                                    Intent intent1=new Intent();
 //                                    Bundle mBundle = new Bundle();
 //                                    mBundle.putStringArrayList("list",alist);
 //                                    mBundle.putString("","");
 
 
+                                    bt_xiajia.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                           // Toast.makeText(SPXQActivity.this, "已经下架过了", Toast.LENGTH_SHORT).show();
+//                                            HashMap<String,String> mm=new HashMap<String,String>();
+//                                            mm.put("title",title);
+//                                            mm.put("description",description);
+//                                            mm.put("price",price);
+//                                            mm.put("mobile",mobile);
+//                                            mm.put("token",token);
+//                                            if (!TextUtils.isEmpty(qq)) {
+//                                                mm.put("qq",qq);
+//                                            }
+//                                            if (!TextUtils.isEmpty(email)) {
+//                                                mm.put("email",email);
+//
+//                                            }
+//                                            if (!TextUtils.isEmpty(wecat)) {
+//                                                mm.put("wecat",wecat);
+//                                            }
+//
+//                                            //alist
+//
+//                                            myOkhttp.setGetEntiydata(new MyOkhttp.EntiyData() {
+//                                                @Override
+//                                                public void getEntiy(Object obj) {
+//
+//                                                    publish_Bean publish_o1 = (publish_Bean) obj;
+//                                                    final String status = publish_o1.getStatus();
+//                                                    if (status.equals("200")) {
+//                                                        runOnUiThread(new Runnable() {
+//                                                            @Override
+//                                                            public void run() {
+//                                                                Toast.makeText(SPXQActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+//                                                            }
+//                                                        });
+//                                                    }else {
+//                                                        runOnUiThread(new Runnable() {
+//                                                            @Override
+//                                                            public void run() {
+//                                                                Toast.makeText(SPXQActivity.this, "发布失败请登录", Toast.LENGTH_SHORT).show();
+//
+//                                                            }
+//                                                        });
+//                                                    }
+//                                                }
+//                                            });
+//
+//
+//
+//                                            myOkhttp.postMuti(mm, "http://192.168.4.188/Goods/"
+//                                                    + "app/item/issue.json", SPXQActivity.this, publish_Bean.class,alist);
+
+
+
+                                        }
+                                    });
 
 
                                 } else {
 
                                     Toast.makeText(SPXQActivity.this, "下架失败", Toast.LENGTH_SHORT).show();
+
+
 
                                 }
 
@@ -542,6 +613,8 @@ public class SPXQActivity extends Activity {
 
 
     }
+
+
 
     private void tianjiatupian(SPXQ sp) {
 
